@@ -46,7 +46,7 @@ img{max-width:100%}
 .wrap{max-width:1168px;margin:0 auto;padding-left:var(--gut-l);padding-right:var(--gut-r)}
 
 /* header */
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--hdr);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;transition:transform .28s ease;background:var(--hdr);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .hd{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;min-height:64px;padding-block:8px}
 .logo{display:inline-flex;align-items:center;min-height:44px;color:var(--fg);text-decoration:none}
 .mark{display:block;height:17px;width:auto;fill:currentColor}
@@ -65,8 +65,10 @@ nav.main a[aria-current="page"]{color:var(--fg);background:var(--card)}
 .pill.sm{padding:9px 20px;font-size:14px;min-height:40px}
 .pill.light{background:var(--photo-ink);color:#111111}
 .pill.on-inv{background:var(--on-inv);color:var(--inv)}
+.pill.ai{background:#ffffff;color:#111111;box-shadow:inset 0 0 0 1px #d4d4d4}
+.pill.ai:hover{box-shadow:inset 0 0 0 1px #111111}
 .tlink{display:inline-flex;align-self:flex-start;gap:6px;font-size:15px;font-weight:600;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px;line-height:1.6}
-@media (max-width:720px){.hd{padding-block:10px}nav.main{order:3;width:100%;margin:0;justify-content:space-between}nav.main a{padding:8px 10px}.hd .pill{margin-left:auto}}
+@media (max-width:720px){header.tuck{transform:translateY(calc(-1 * var(--hd-shift,0px)))}.hd{padding-block:10px}nav.main{order:3;width:100%;margin:0;justify-content:space-between}nav.main a{padding:8px 10px}.hd .pill.ai{margin-left:auto}.hd .pill.sm{padding:8px 15px;font-size:13.5px;min-height:38px}.hd{gap:6px 8px}}
 
 /* pages */
 main{display:block}
@@ -105,7 +107,7 @@ main[hidden]{display:none}
 .cards.c4{grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr))}
 .cards.tight{margin-top:16px}
 .cards.sol{grid-template-columns:repeat(2,minmax(0,1fr))}
-@media (max-width:560px){.cards.sol{grid-template-columns:1fr}}
+@media (max-width:560px){.cards.sol{grid-template-columns:1fr}.cards.sol .card.bg.wide{aspect-ratio:4/5}}
 .cmp .to-list{flex:1.2 1 320px}
 .inv.cta .cta-2l{max-width:none;font-size:min(18px,calc((100vw - 96px) / 20.5))}.cta-2l span{white-space:nowrap}
 .marquee{overflow:hidden;margin-top:20px;-webkit-mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent)}.mq-track{display:flex;width:max-content;margin:0;padding:0;list-style:none;animation:mq 32s linear infinite}.mq-track li{flex:0 0 auto;display:flex;align-items:center;justify-content:center;height:72px;padding:0 clamp(24px,3.5vw,44px)}.mq-track img{display:block;max-height:44px;max-width:170px;width:auto;height:auto;object-fit:contain}@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}@media (prefers-reduced-motion:reduce){.mq-track{animation:none;flex-wrap:wrap;width:auto}.mq-track li[aria-hidden]{display:none}}@media (max-width:560px){.mq-track li{height:60px;padding:0 22px}.mq-track img{max-height:34px;max-width:130px}}
@@ -113,7 +115,8 @@ main[hidden]{display:none}
 
 #sol-gallery{grid-template-columns:repeat(4,minmax(0,1fr))}
 @media (max-width:1000px){#sol-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:560px){#sol-gallery{grid-template-columns:1fr}}
+@media (max-width:560px){#sol-gallery{grid-template-columns:1fr}.cards.voices{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:32px}.cards.voices .card.bg.tall{aspect-ratio:3/4;border-radius:18px;clip-path:inset(0 round 18px)}.cards.voices .card.bg .t{padding:14px}.cards.voices .quote{font-size:15px;line-height:1.45}}
+@media (max-width:720px){#sol-gallery{display:none}}
 .card{background:var(--card);border-radius:24px;padding:clamp(24px,3vw,36px);display:flex;flex-direction:column;gap:10px;min-width:0}
 .card.wide{grid-column:1/-1}
 .card h3{font-size:22px;font-weight:700;line-height:1.4;letter-spacing:-.02em}
@@ -283,7 +286,7 @@ footer .logo{display:inline-block;margin-bottom:12px;color:var(--fg)}
 footer nav{display:flex;flex-wrap:wrap;gap:4px 18px}
 footer nav a{text-decoration:none;color:var(--fg)}
 footer small{display:block;margin-top:28px;color:var(--muted)}
-.card.bg{position:relative;overflow:hidden;padding:0;background:#111111;color:#ffffff;aspect-ratio:4/3;justify-content:flex-end;isolation:isolate}
+.card.bg{position:relative;overflow:visible;clip-path:inset(0 round 24px);padding:0;background:#111111;color:#ffffff;aspect-ratio:4/3;justify-content:flex-end;isolation:isolate}
 .card.bg.tall{aspect-ratio:4/5}
 .card.bg.wide{aspect-ratio:16/9}
 .card.bg>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
@@ -299,7 +302,9 @@ footer small{display:block;margin-top:28px;color:var(--muted)}
 .sub-label{margin-top:56px;font-size:15px;font-weight:600;color:var(--muted)}
 .yoohuu{display:inline-flex;align-items:center;min-height:44px}
 .yoohuu img{display:block;height:30px;width:auto}
-.fab{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:40;box-shadow:0 6px 24px rgba(0,0,0,.2)}
+.fab{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:40;padding-left:20px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.22))}
+.fab::after{content:"";position:absolute;right:16px;bottom:-8px;width:16px;height:12px;background:inherit;clip-path:polygon(0 0,100% 0,100% 100%)}
+.fab svg{width:17px;height:17px;fill:currentColor;flex:none}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.feat .slide{transition:none}}
 
 /* work detail */
@@ -477,8 +482,8 @@ a.card:not(.photo):not(.bg){transition:transform .2s ease}a.card:not(.photo):not
       <a href="#portfolio" data-page="portfolio">포트폴리오</a>
       <a href="#about" data-page="about">회사소개</a>
     </nav>
+    <a class="pill sm ai" href="https://ai.yoohuu.kr" target="_blank" rel="noopener" aria-label="AI 빈집 분석 (새 탭)">AI 빈집 분석</a>
     <a class="pill sm" href="#contact">상담하기</a>
-    <a class="yoohuu" href="https://yoohuu.kr" target="_blank" rel="noopener" aria-label="유휴 홈페이지 (새 탭)"><img src="photos/e62ed628f4aa.webp" alt="yoohuu" width="50" height="30"></a>
   </div>
 </header>
 <noscript><style>html body main[hidden]:not(.x){display:block!important}#fab{display:none}</style></noscript>
@@ -615,7 +620,7 @@ a.card:not(.photo):not(.bg){transition:transform .2s ease}a.card:not(.photo):not
       <h2>고치는 건 어렵지 않습니다.<br>어려운 건 그다음입니다.</h2>
       <p class="lead">고쳐서 무엇을 할지, 누가 찾아올지, 어떻게 꾸려 갈지. 이 질문에 답이 없으면 공간은 고친 뒤에도 다시 비어 갑니다.</p>
     </div>
-    <div class="cards c4">
+    <div class="cards c4 voices">
       <div class="card bg tall"><img src="photos/f63b59c001aa.webp" alt="풀에 덮인 기와 단층 빈집" loading="lazy"><div class="t"><p class="quote">“시골에 빈집이 있어요. 세금만 내고 있어요.”</p></div></div>
       <div class="card bg tall"><img src="photos/3fbab4857b4a.webp" alt="모퉁이 1층의 비어 있는 상가" loading="lazy"><div class="t"><p class="quote">“상가를 채우고 싶은데 무엇을 넣어야 할지 모르겠어요.”</p></div></div>
       <div class="card bg tall"><img src="photos/191d0f224bd1.webp" alt="골목 모퉁이의 비어 있는 3층 건물" loading="lazy"><div class="t"><p class="quote">“우리 지역의 비어 있는 건물을 살리고 싶어요.”</p></div></div>
@@ -1050,7 +1055,7 @@ a.card:not(.photo):not(.bg){transition:transform .2s ease}a.card:not(.photo):not
     <small>ⓒ 2026 BLANK. 모든 권리 보유.</small>
   </div>
 </footer>
-<a class="pill fab" id="fab" href="#contact">상담하기</a>
+<a class="pill fab" id="fab" href="#contact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 7h-3l-2 4v6h6v-6h-3zM10 7H7l-2 4v6h6v-6H8z"/></svg>상담하기</a>
 
 <script>
 (function(){
@@ -1365,4 +1370,25 @@ if(DATA_URL){
 })();
 </script>
 
+<script>
+/* 휴대폰: 아래로 스크롤하면 로고 줄을 접고 메뉴 줄만 남김, 위로 스크롤하면 다시 펼침 */
+(function(){
+  const hd=document.querySelector('header'),nav=hd&&hd.querySelector('nav.main');if(!hd||!nav)return;
+  const mq=matchMedia('(max-width:720px)');
+  let last=scrollY,ticking=false;
+  const measure=()=>hd.style.setProperty('--hd-shift',Math.max(0,nav.offsetTop-4)+'px');
+  const tuck=on=>hd.classList.toggle('tuck',on);
+  function onScroll(){
+    ticking=false;
+    const y=scrollY,dy=y-last;
+    if(!mq.matches||y<hd.offsetHeight){tuck(false);last=y;return}
+    if(Math.abs(dy)<6)return;
+    tuck(dy>0);last=y;
+  }
+  addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(onScroll)}},{passive:true});
+  addEventListener('resize',measure);mq.addEventListener('change',()=>{measure();tuck(false)});
+  hd.addEventListener('focusin',()=>tuck(false));
+  measure();
+})();
+</script>
 </body></html>
