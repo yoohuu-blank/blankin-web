@@ -302,9 +302,9 @@ footer small{display:block;margin-top:28px;color:var(--muted)}
 .sub-label{margin-top:56px;font-size:15px;font-weight:600;color:var(--muted)}
 .yoohuu{display:inline-flex;align-items:center;min-height:44px}
 .yoohuu img{display:block;height:30px;width:auto}
-.fab{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:40;padding-left:20px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.22))}
-.fab::after{content:"";position:absolute;right:16px;bottom:-8px;width:16px;height:12px;background:inherit;clip-path:polygon(0 0,100% 0,100% 100%)}
-.fab svg{width:17px;height:17px;fill:currentColor;flex:none}
+.fab{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(26px + env(safe-area-inset-bottom,0px));z-index:40;width:60px;height:60px;padding:0;filter:drop-shadow(0 6px 14px rgba(0,0,0,.22))}
+.fab::after{content:"";position:absolute;right:8px;bottom:-9px;width:18px;height:14px;background:inherit;clip-path:polygon(0 0,100% 0,100% 100%)}
+.fab svg{width:30px;height:30px;fill:currentColor;flex:none}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.feat .slide{transition:none}}
 
 /* work detail */
@@ -1055,7 +1055,7 @@ a.card:not(.photo):not(.bg){transition:transform .2s ease}a.card:not(.photo):not
     <small>ⓒ 2026 BLANK. 모든 권리 보유.</small>
   </div>
 </footer>
-<a class="pill fab" id="fab" href="#contact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 7h-3l-2 4v6h6v-6h-3zM10 7H7l-2 4v6h6v-6H8z"/></svg>상담하기</a>
+<a class="pill fab" id="fab" href="#contact" aria-label="상담하기" title="상담하기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 7h-3l-2 4v6h6v-6h-3zM10 7H7l-2 4v6h6v-6H8z"/></svg></a>
 
 <script>
 (function(){
