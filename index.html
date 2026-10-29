@@ -1367,8 +1367,7 @@ function renderWorkNew(w,el){
   const rel=w.rel.map(id=>ALLW.find(x=>x.id===id)).filter(Boolean);
   const facts=w.facts.map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${inline(v)}</dd></div>`).join('')+
     (rel.length?`<div><dt>연결 작업</dt><dd>${rel.map(x=>`<a class="wn-rel" href="${hrefOf(x)}">${esc(x.t)}${x.yr?` (${esc(x.yr)})`:''} →</a>`).join('<br>')}</dd></div>`:'');
-  const max=w.mode==='링크'?6:12;
-  const gal=w.gal.filter(u=>u!==hero).slice(0,max);
+  const gal=w.gal.filter(u=>u!==hero);
   const galHtml=gal.length?`<div class="wn-gal" data-n="${gal.length}">${gal.map((u,i)=>`<img src="${esc(srcOf(u))}" alt="${esc(w.t)} 사진 ${i+1}" loading="lazy" referrerpolicy="no-referrer">`).join('')}</div>`:'';
   const src=brunchOf(w);
   let log='';
