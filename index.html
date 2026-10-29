@@ -276,6 +276,12 @@ main[hidden]{display:none}
 form{display:grid;gap:12px}
 form textarea{resize:vertical}
 .form-note{font-size:14px;color:var(--muted);min-height:1.5em}
+.form-note.err{color:var(--fg)}
+.card form input:not([type=checkbox]),.card form textarea{background:var(--bg)}
+form .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+form .consent{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.5;color:var(--muted);cursor:pointer}
+form .consent input{min-height:0;width:18px;height:18px;margin:2px 0 0;padding:0;flex:none;accent-color:var(--fg)}
+form button[disabled]{opacity:.5;cursor:wait}
 .info dt{font-size:14px;font-weight:600;color:var(--muted)}
 .info dd{margin:2px 0 18px;font-size:16px}
 
@@ -831,7 +837,7 @@ a.card:not(.photo):not(.bg){transition:transform .2s ease}a.card:not(.photo):not
     <div class="faq">
       <details open><summary>무엇을 할지 아직 정하지 못했는데 상담해도 되나요?</summary><p>네, 그 단계에서 오시는 분이 가장 많습니다. 공간의 위치와 상태, 지금의 고민만 알려 주시면 그 자리에 어울리는 쓰임을 함께 찾는 것부터 시작합니다.</p></details>
       <details><summary>지방에 있는 빈집도 상담할 수 있나요?</summary><p>네. 블랭크는 서울과 경북 영주에 본사를 두고 춘천, 동해, 거창, 공주, 세종 등 여러 지역의 공간을 맡아 왔습니다. 빈집 상담만 필요하시다면 빈집큐레이션 플랫폼 유휴에서도 도움을 받으실 수 있습니다.</p></details>
-      <details><summary>상담은 어떻게 진행되나요?</summary><p>상담하기 페이지에 공간의 위치와 고민을 남겨 주시면 블랭크가 연락드립니다. 이야기를 나눈 뒤 필요하면 현장을 함께 둘러보고, 어떤 쓰임과 범위가 맞을지 제안드립니다.</p></details>
+      <details><summary>상담은 어떻게 진행되나요?</summary><p>상담하기 페이지에 문의 내용을 남겨 주시면 블랭크가 연락드립니다. 이야기를 나눈 뒤 필요하면 현장을 함께 둘러보고, 어떤 쓰임과 범위가 맞을지 제안드립니다.</p></details>
       <details><summary>비용과 기간은 어느 정도 드나요?</summary><p>공간의 규모와 상태, 맡기시는 범위에 따라 달라 상담 전에 정해 드리기는 어렵습니다. 첫 상담에서 필요한 단계를 정리하면서 대략의 비용과 일정을 함께 안내해 드립니다. 빈집 리모델링이라면 상담하기 페이지의 빈집 AI 견적으로 먼저 가늠해 보실 수 있습니다.</p></details>
       <details><summary>기획만, 또는 설계만 맡겨도 되나요?</summary><p>네. 기획, 설계·공사, 운영 중 필요한 단계만 맡기실 수 있습니다. 다만 처음부터 끝까지 한 팀이 맡으면 단계 사이에서 생기는 설계 변경과 추가 비용을 줄일 수 있습니다.</p></details>
       <details><summary>공사는 블랭크가 직접 하나요?</summary><p>시공은 공간의 성격에 맞는 전문 시공 파트너와 함께하고, 블랭크는 건축사사무소로서 업체 선정부터 현장 소통과 감리까지 맡습니다. 여러 업체를 따로 찾아 조율하실 필요가 없습니다.</p></details>
@@ -1089,10 +1095,10 @@ a.card:not(.photo):not(.bg){transition:transform .2s ease}a.card:not(.photo):not
         <form id="cf" novalidate>
           <label class="k" for="cf-name">이름 / 단체명</label><input id="cf-name" type="text" autocomplete="name" required>
           <label class="k" for="cf-contact">연락처 또는 이메일</label><input id="cf-contact" type="text" autocomplete="email" required>
-          <label class="k" for="cf-type">필요한 도움</label>
-          <select id="cf-type"><option>아직 잘 모르겠어요</option><option>쓰임을 찾고 싶어요 (기획)</option><option>설계와 공사가 필요해요</option><option>운영이 필요해요</option><option>연구용역 · 교육을 의뢰하고 싶어요</option><option>임팩트 사업을 함께하고 싶어요</option></select>
-          <label class="k" for="cf-msg">공간의 위치와 고민</label><textarea id="cf-msg" rows="6"></textarea>
-          <div><button class="pill" type="submit">상담 신청하기</button></div>
+          <label class="k" for="cf-msg">문의하고 싶으신 내용을 적어주세요</label><textarea id="cf-msg" rows="6" maxlength="5000" placeholder="어떤 일이든 편하게 적어주세요. 아직 정해진 게 없어도 괜찮아요."></textarea>
+          <input class="hp" id="cf-website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <label class="consent"><input id="cf-agree" type="checkbox"> 상담 연락을 위해 이름과 연락처를 수집하는 데 동의합니다. 상담이 끝나면 1년 안에 파기합니다.</label>
+          <div><button class="pill" id="cf-submit" type="submit">상담 신청하기</button></div>
           <p class="form-note" id="cf-note" aria-live="polite"></p>
         </form>
       </div>
@@ -1455,11 +1461,22 @@ document.addEventListener('click',e=>{
   const n=e.target.closest('a[data-noop]');if(n)e.preventDefault();
 });
 
-/* contact form (demo) */
-$('#cf').addEventListener('submit',e=>{
-  e.preventDefault();const f=e.target,note=$('#cf-note');
-  if(!$('#cf-name').value.trim()||!$('#cf-contact').value.trim()){note.textContent='이름과 연락처를 입력해 주세요.';return}
-  note.textContent='상담 신청 내용이 준비되었습니다. 시안이라 실제로 전송되지는 않습니다.';f.reset();
+/* contact form: 상담 신청 → 구글 시트 (Apps Script 웹 앱). 주소는 웹 앱을 배포하면 나오는 /exec 주소 */
+const CONTACT_URL='';
+$('#cf').addEventListener('submit',async e=>{
+  e.preventDefault();const f=e.target,note=$('#cf-note'),btn=$('#cf-submit');
+  const say=(t,err)=>{note.textContent=t;note.classList.toggle('err',!!err)};
+  const name=$('#cf-name').value.trim(),contact=$('#cf-contact').value.trim(),msg=$('#cf-msg').value.trim();
+  if(!name||!contact){say('이름과 연락처를 입력해 주세요.',1);return}
+  if(!$('#cf-agree').checked){say('개인정보 수집에 동의해 주세요.',1);return}
+  if(!CONTACT_URL){say('상담 신청 접수가 아직 연결되지 않았습니다. 잠시 후 다시 시도해 주세요.',1);return}
+  btn.disabled=true;say('보내는 중입니다…');
+  try{
+    const r=await fetch(CONTACT_URL,{method:'POST',body:new URLSearchParams({name,contact,msg,website:$('#cf-website').value,page:location.href})});
+    const j=await r.json();if(!j.ok)throw new Error(j.error||'fail');
+    f.reset();say('상담 신청이 접수되었습니다. 블랭크가 확인 후 연락드릴게요.');
+  }catch(err){say('전송하지 못했습니다. 잠시 후 다시 시도해 주세요.',1)}
+  finally{btn.disabled=false}
 });
 
 /* routing: #home #solution #impact #portfolio #about #contact #w-<작업 ID> (주소가 없으면 홈) */
