@@ -1320,6 +1320,8 @@ function renderWork(w){
   const own=w.cover||(IMG_BY_ID[w.id]&&IMG[IMG_BY_ID[w.id]])||'';
   const bodyHasImg=/!\[[^\]]*\]\(https?:/.test(w.body);
   const hero=own&&!(w.cover&&w.body.includes(w.cover))?`<img class="media wk-hero" src="${esc(srcOf(own))}" alt="${esc(w.t)}" referrerpolicy="no-referrer">`:(bodyHasImg?'':`<div class="slot wk-hero"><b>대표 사진</b><small>준비 중</small></div>`);
+  const extra=(w.gal||[]).filter(u=>u!==own&&!w.body.includes(u));
+  const galHtml=extra.length?`<div class="wn-gal" data-n="${extra.length}" style="margin-top:40px">${extra.map((u,i)=>`<img src="${esc(srcOf(u))}" alt="${esc(w.t)} 사진 ${i+1}" loading="lazy" referrerpolicy="no-referrer">`).join('')}</div>`:'';
   const tags=String(w.tag||'').split(/[\s,]+/).filter(Boolean);
   const list=sorted(WORKS.slice()),k=list.indexOf(w);
   const prev=list[k-1],next=list[k+1];
@@ -1336,6 +1338,7 @@ function renderWork(w){
   ${hero?`<div class="wrap wk-hero-wrap">${hero}</div>`:''}
   <section class="wrap">
     ${w.body.trim()?`<article class="art">${md(w.body)}</article>`:`<div class="card wk-empty"><p class="k">상세 소개 준비 중</p><p>이 작업의 자세한 이야기는 곧 올라옵니다. 궁금한 점은 상담하기로 물어봐 주세요.</p></div>`}
+    ${galHtml}
     ${w.link||tags.length?`<div class="wk-foot">${w.link?`<a class="tlink" href="${esc(w.link)}" target="_blank" rel="noopener">관련 링크 ↗</a>`:''}${tags.length?`<div class="wk-tags">${tags.map(t=>`<a href="#portfolio" data-search="${esc(t)}">#${esc(t)}</a>`).join('')}</div>`:''}</div>`:''}
     <nav class="wk-pn" aria-label="이전·다음 작업">
       ${prev?`<a href="${hrefOf(prev)}"><small>← 이전 작업</small><b>${esc(prev.t)}</b></a>`:'<span></span>'}
