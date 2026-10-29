@@ -1252,6 +1252,9 @@ function md(src){
 /* 외부 사진을 못 불러오면 같은 자리에 빈 슬롯 */
 document.addEventListener('error',e=>{
   const im=e.target;if(!im||im.tagName!=='IMG'||im.dataset.dead)return;
+  /* 관리 도구에서 막 올린 사진은 홈페이지 주소에 1~2분 뒤 생김 → 그동안 저장소 원본 주소로 */
+  const gh=(im.getAttribute('src')||'').match(/^(?:https:\/\/yoohuu-blank\.github\.io\/blankin-web\/)?(photos\/.+)$/);
+  if(gh&&!im.dataset.raw){im.dataset.raw='1';im.src='https://raw.githubusercontent.com/yoohuu-blank/blankin-web/main/'+gh[1];return}
   im.dataset.dead='1';
   const s=document.createElement('div');s.className='slot'+(im.classList.contains('media')?'':' in');
   s.innerHTML='<b>사진</b><small>불러오지 못했어요</small>';
@@ -1543,13 +1546,15 @@ if('IntersectionObserver' in window&&!reduce){
 }
 
 function renderAll(){renderTabs();renderWorks();renderFeat();renderSol()}
-setData(SNAPSHOT);renderAll();setPlay(playing);
+let cached=null;try{const c=localStorage.getItem('blank-data');if(c){const r=parseCSV(c);if(r.length>20)cached=r}}catch(e){}
+setData(cached||SNAPSHOT);renderAll();setPlay(playing);
 addEventListener('hashchange',route);route();
 
 /* 시트(공개용 CSV)에서 최신 목록 읽기 */
 if(DATA_URL){
-  fetch(DATA_URL,{cache:'no-cache'}).then(r=>{if(!r.ok)throw new Error(r.status);return r.text()}).then(t=>{
+  fetch(DATA_URL+'&t='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(r.status);return r.text()}).then(t=>{
     const rows=parseCSV(t);if(!rows.length)return;
+    try{localStorage.setItem('blank-data',t)}catch(e){}
     setData(rows);renderAll();if(location.hash.startsWith('#w-'))route();
   }).catch(()=>{});
 }
