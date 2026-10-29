@@ -481,6 +481,8 @@ a.card:not(.photo):not(.bg){transition:transform .2s ease}a.card:not(.photo):not
 .wn-meta i{font-style:normal;font-weight:500;color:var(--muted);margin-right:8px}
 .wn-intro{max-width:760px;margin-top:clamp(40px,5vw,64px);font-size:18px;line-height:1.85;color:var(--body)}
 .wn-intro p+p{margin-top:1em}
+.wn-intro.art{margin-top:clamp(40px,5vw,64px)}
+.wn-intro.art>*{margin-left:0;margin-right:0;max-width:760px}
 .wn-facts{display:grid;grid-template-columns:200px minmax(0,1fr);gap:24px;margin-top:clamp(48px,6vw,72px);padding-top:22px;border-top:2px solid var(--fg)}
 .wn-facts h2{font-size:18px;letter-spacing:-.02em}
 .wn-facts dl{margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:32px}
@@ -1156,7 +1158,7 @@ const slugOf=id=>/^[A-Za-z0-9._~-]+$/.test(id)?id:'x'+[...id].reduce((h,c)=>Math
 const hrefOf=w=>'#w-'+slugOf(w.id);
 
 /* 시트 한 줄 → 작업 */
-const HEAD={'ID':'id','등록일':'date','공개':'pub','대표작':'feat','정렬':'ord','제목':'t','영문명':'e','분류':'c','용도':'use','연도':'yr','요약':'sum','본문':'body','대표이미지':'cover','검색어':'tag','링크':'link','원문':'src','발주처':'client','유형':'type','배지':'badge','역할':'roles','지역':'region','소개':'intro','개요':'facts','연결 작업':'rel','갤러리':'gal','글쓴이':'author','기록 표시':'mode'};
+const HEAD={'ID':'id','등록일':'date','공개':'pub','대표작':'feat','정렬':'ord','제목':'t','영문명':'e','분류':'c','용도':'use','연도':'yr','요약':'sum','본문':'body','상세 내용':'body','대표이미지':'cover','검색어':'tag','링크':'link','원문':'src','발주처':'client','유형':'type','배지':'badge','역할':'roles','지역':'region','소개':'intro','설명':'intro','개요':'facts','연결 작업':'rel','갤러리':'gal','글쓴이':'author','기록 표시':'mode'};
 const truthy=v=>v===true||/^(true|1|y|o)$/i.test(String(v).trim());
 function norm(r){
   const ord=parseFloat(r.ord);
@@ -1185,7 +1187,8 @@ function setData(rows){
   ARCH=all.filter(w=>w.mode==='목록');
   WORKS=all.filter(w=>w.c&&w.mode!=='목록');
   ALLW=WORKS.concat(ARCH);
-  FEAT=WORKS.filter(w=>w.feat).sort((a,b)=>a.ord-b.ord).slice(0,8);
+  /* 상단 노출 작업은 들어올 때마다 무작위 순서 */
+  FEAT=WORKS.filter(w=>w.feat).map(w=>[Math.random(),w]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]).slice(0,8);
 }
 
 /* ── 본문(마크다운) → HTML. 글자는 모두 이스케이프 ── */
@@ -1394,24 +1397,22 @@ function renderWorkNew(w,el){
   const meta=[['연도',w.yr],['지역',w.region],['용도',w.use]].filter(x=>x[1]).map(x=>`<span><i>${x[0]}</i>${esc(x[1])}</span>`).join('');
   const hero=picOf(w);
   const src=brunchOf(w);
-  /* 브런치 글: 글 사이 사진은 작업 기록에 그대로, 갤러리엔 본문에 없는 사진만.
-     그 외 글: 본문은 글만, 사진은 갤러리 한곳에 모두. 소개보다 본문 글이 길면 본문을 보여줌 */
-  const txt=src?'':(w.facts.length?dropCred(bodyText(w.body)):bodyText(w.body));
-  const useBody=!src&&txt.length>w.intro.trim().length;
-  const intro=useBody?md(txt):w.intro.split(/\n\s*\n/).map(p=>p.trim()).filter(Boolean).map(p=>`<p>${inline(p).replace(/\n/g,'<br>')}</p>`).join('');
+  /* 설명 = 사이트에 보이는 글. 브런치 글이면 그 아래 상세 내용(원문)을 소제목별로 이어서 보여줌 */
+  const intro=md(w.intro);
   const rel=w.rel.map(id=>ALLW.find(x=>x.id===id)).filter(Boolean);
   const facts=w.facts.map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${inline(v)}</dd></div>`).join('')+
     (rel.length?`<div><dt>연결 작업</dt><dd>${rel.map(x=>`<a class="wn-rel" href="${hrefOf(x)}">${esc(x.t)}${x.yr?` (${esc(x.yr)})`:''} →</a>`).join('<br>')}</dd></div>`:'');
   const inLog=src&&w.mode==='전문'&&w.body.trim();
+  /* 같은 사진은 한 번만: 대표사진·상세 내용에 나온 사진은 갤러리에서 뺌 */
   const gal=inLog?uniqPics(w.gal,[hero,...bodyImgs(w.body)]):uniqPics([...w.gal,...(src?[]:bodyImgs(w.body))],[hero]);
   const galHtml=galImg(w,gal);
   let log='';
   if(inLog){
     const secs=logSections(w.body),seen=new Set([hero].filter(Boolean).map(srcOf));
-    log=`<section class="wn-log"><div class="wn-log-head"><h2>작업 기록</h2><p>${w.author?`<span>글 ${esc(w.author)}</span>`:''}${src?`<a href="${esc(src)}" target="_blank" rel="noopener">브런치 원문 ↗</a>`:''}</p></div>
+    log=`<section class="wn-log"><div class="wn-log-head"><h2>상세 내용</h2><p>${w.author?`<span>글 ${esc(w.author)}</span>`:''}${src?`<a href="${esc(src)}" target="_blank" rel="noopener">브런치 원문 ↗</a>`:''}</p></div>
       ${secs.map(s=>`<div class="wn-sec"><h3>${esc(s.h)}</h3><div class="art">${md(dropSeen(s.md,seen))}</div></div>`).join('')}</section>`;
   }else if(src){
-    log=`<section class="wn-log"><div class="wn-log-head"><h2>작업 기록</h2><p><a href="${esc(src)}" target="_blank" rel="noopener">브런치 원문 보기 ↗</a></p></div></section>`;
+    log=`<section class="wn-log"><div class="wn-log-head"><h2>상세 내용</h2><p><a href="${esc(src)}" target="_blank" rel="noopener">브런치 원문 보기 ↗</a></p></div></section>`;
   }
   const tags=String(w.tag||'').split(/[\s,]+/).filter(Boolean);
   const list=sorted(WORKS.slice()),k=list.indexOf(w);
@@ -1427,7 +1428,7 @@ function renderWorkNew(w,el){
   </section>
   ${hero?`<div class="wrap wk-hero-wrap"><img class="media wk-hero" src="${esc(srcOf(hero))}" alt="${esc(w.t)}" referrerpolicy="no-referrer"></div>`:''}
   <section class="wrap wn">
-    <div class="wn-intro${useBody?' art':''}">${intro}</div>
+    <div class="wn-intro art">${intro}</div>
     ${facts?`<div class="wn-facts"><h2>개요</h2><dl>${facts}</dl></div>`:''}
   </section>
   ${log?`<div class="wrap wn">${log}</div>`:''}
