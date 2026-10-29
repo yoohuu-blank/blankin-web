@@ -1320,8 +1320,10 @@ function renderWork(w){
   const own=w.cover||(IMG_BY_ID[w.id]&&IMG[IMG_BY_ID[w.id]])||'';
   const bodyHasImg=/!\[[^\]]*\]\(https?:/.test(w.body);
   const hero=own&&!(w.cover&&w.body.includes(w.cover))?`<img class="media wk-hero" src="${esc(srcOf(own))}" alt="${esc(w.t)}" referrerpolicy="no-referrer">`:(bodyHasImg?'':`<div class="slot wk-hero"><b>대표 사진</b><small>준비 중</small></div>`);
-  const extra=(w.gal||[]).filter(u=>u!==own&&!w.body.includes(u));
-  const galHtml=extra.length?`<div class="wn-gal" data-n="${extra.length}" style="margin-top:40px">${extra.map((u,i)=>`<img src="${esc(srcOf(u))}" alt="${esc(w.t)} 사진 ${i+1}" loading="lazy" referrerpolicy="no-referrer">`).join('')}</div>`:'';
+  const isB=!!brunchOf(w),heroOn=own&&!(w.cover&&w.body.includes(w.cover));
+  const artMd=isB?w.body:bodyText(w.body);
+  const extra=isB?uniqPics(w.gal||[],[own,...bodyImgs(w.body)]):uniqPics([...(w.gal||[]),...bodyImgs(w.body)],[heroOn?own:'']);
+  const galHtml=galImg(w,extra,' style="margin-top:40px"');
   const tags=String(w.tag||'').split(/[\s,]+/).filter(Boolean);
   const list=sorted(WORKS.slice()),k=list.indexOf(w);
   const prev=list[k-1],next=list[k+1];
@@ -1337,7 +1339,7 @@ function renderWork(w){
   </section>
   ${hero?`<div class="wrap wk-hero-wrap">${hero}</div>`:''}
   <section class="wrap">
-    ${w.body.trim()?`<article class="art">${md(w.body)}</article>`:`<div class="card wk-empty"><p class="k">상세 소개 준비 중</p><p>이 작업의 자세한 이야기는 곧 올라옵니다. 궁금한 점은 상담하기로 물어봐 주세요.</p></div>`}
+    ${artMd.trim()?`<article class="art">${md(artMd)}</article>`:extra.length?'':`<div class="card wk-empty"><p class="k">상세 소개 준비 중</p><p>이 작업의 자세한 이야기는 곧 올라옵니다. 궁금한 점은 상담하기로 물어봐 주세요.</p></div>`}
     ${galHtml}
     ${w.link||tags.length?`<div class="wk-foot">${w.link?`<a class="tlink" href="${esc(w.link)}" target="_blank" rel="noopener">관련 링크 ↗</a>`:''}${tags.length?`<div class="wk-tags">${tags.map(t=>`<a href="#portfolio" data-search="${esc(t)}">#${esc(t)}</a>`).join('')}</div>`:''}</div>`:''}
     <nav class="wk-pn" aria-label="이전·다음 작업">
@@ -1350,7 +1352,14 @@ function renderWork(w){
 }
 
 /* ── 작업 상세 (새 양식: A·B) ── */
-const brunchOf=w=>(w.src.split(/\s+/).find(u=>/brunch\.co\.kr/.test(u))||'');
+const brunchOf=w=>(String(w.src||'').split(/\s+/).find(u=>/brunch\.co\.kr/.test(u))||'');
+/* 본문에서 사진 뽑기 / 사진 뺀 글만 남기기 */
+const IMG_RE=/!\[[^\]]*\]\(\s*(\S+?)(?:\s+"[^"]*")?\s*\)|<img[^>]*src="([^"]+)"[^>]*>/g;
+const bodyImgs=b=>[...String(b||'').matchAll(IMG_RE)].map(m=>m[1]||m[2]);
+const bodyText=b=>String(b||'').replace(IMG_RE,'').replace(/\n{3,}/g,'\n\n').trim();
+/* 같은 사진은 한 번만 */
+const uniqPics=(list,skip)=>{const seen=new Set((skip||[]).filter(Boolean).map(srcOf));return list.filter(u=>{const k=srcOf(u);if(!u||seen.has(k))return false;seen.add(k);return true})};
+const galImg=(w,list,extra)=>list.length?`<div class="wn-gal" data-n="${list.length}"${extra||''}>${list.map((u,i)=>`<img src="${esc(srcOf(u))}" alt="${esc(w.t)} 사진 ${i+1}" loading="lazy" referrerpolicy="no-referrer">`).join('')}</div>`:'';
 /* 원문 본문을 소제목 단위로 나눔: "## 제목", "> 제목" 한 줄 */
 function logSections(body){
   const L=String(body||'').replace(/\r\n?/g,'\n').split('\n');
@@ -1366,15 +1375,20 @@ function renderWorkNew(w,el){
   const chips=[w.type?`<span class="wn-chip on">${esc(w.type)}</span>`:'',w.badge?`<span class="wn-chip line">${esc(w.badge)}</span>`:'',...w.roles.map(r=>`<span class="wn-chip">${esc(r)}</span>`)].join('');
   const meta=[['연도',w.yr],['지역',w.region],['용도',w.use]].filter(x=>x[1]).map(x=>`<span><i>${x[0]}</i>${esc(x[1])}</span>`).join('');
   const hero=picOf(w);
-  const intro=w.intro.split(/\n\s*\n/).map(p=>p.trim()).filter(Boolean).map(p=>`<p>${inline(p).replace(/\n/g,'<br>')}</p>`).join('');
+  const src=brunchOf(w);
+  /* 브런치 글: 글 사이 사진은 작업 기록에 그대로, 갤러리엔 본문에 없는 사진만.
+     그 외 글: 본문은 글만, 사진은 갤러리 한곳에 모두. 소개보다 본문 글이 길면 본문을 보여줌 */
+  const txt=src?'':bodyText(w.body);
+  const useBody=!src&&txt.length>w.intro.trim().length;
+  const intro=useBody?md(txt):w.intro.split(/\n\s*\n/).map(p=>p.trim()).filter(Boolean).map(p=>`<p>${inline(p).replace(/\n/g,'<br>')}</p>`).join('');
   const rel=w.rel.map(id=>ALLW.find(x=>x.id===id)).filter(Boolean);
   const facts=w.facts.map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${inline(v)}</dd></div>`).join('')+
     (rel.length?`<div><dt>연결 작업</dt><dd>${rel.map(x=>`<a class="wn-rel" href="${hrefOf(x)}">${esc(x.t)}${x.yr?` (${esc(x.yr)})`:''} →</a>`).join('<br>')}</dd></div>`:'');
-  const gal=w.gal.filter(u=>u!==hero);
-  const galHtml=gal.length?`<div class="wn-gal" data-n="${gal.length}">${gal.map((u,i)=>`<img src="${esc(srcOf(u))}" alt="${esc(w.t)} 사진 ${i+1}" loading="lazy" referrerpolicy="no-referrer">`).join('')}</div>`:'';
-  const src=brunchOf(w);
+  const inLog=src&&w.mode==='전문'&&w.body.trim();
+  const gal=inLog?uniqPics(w.gal,[hero,...bodyImgs(w.body)]):uniqPics([...w.gal,...(src?[]:bodyImgs(w.body))],[hero]);
+  const galHtml=galImg(w,gal);
   let log='';
-  if(w.mode==='전문'&&w.body.trim()){
+  if(inLog){
     const secs=logSections(w.body);
     log=`<section class="wn-log"><div class="wn-log-head"><h2>작업 기록</h2><p>${w.author?`<span>글 ${esc(w.author)}</span>`:''}${src?`<a href="${esc(src)}" target="_blank" rel="noopener">브런치 원문 ↗</a>`:''}</p></div>
       ${secs.map(s=>`<div class="wn-sec"><h3>${esc(s.h)}</h3><div class="art">${md(s.md)}</div></div>`).join('')}</section>`;
@@ -1395,11 +1409,11 @@ function renderWorkNew(w,el){
   </section>
   ${hero?`<div class="wrap wk-hero-wrap"><img class="media wk-hero" src="${esc(srcOf(hero))}" alt="${esc(w.t)}" referrerpolicy="no-referrer"></div>`:''}
   <section class="wrap wn">
-    <div class="wn-intro">${intro}</div>
+    <div class="wn-intro${useBody?' art':''}">${intro}</div>
     ${facts?`<div class="wn-facts"><h2>개요</h2><dl>${facts}</dl></div>`:''}
   </section>
-  ${galHtml?`<section class="wrap wn">${galHtml}</section>`:''}
   ${log?`<div class="wrap wn">${log}</div>`:''}
+  ${galHtml?`<section class="wrap wn">${galHtml}</section>`:''}
   <section class="wrap">
     ${w.link||tags.length?`<div class="wk-foot">${w.link?`<a class="tlink" href="${esc(w.link)}" target="_blank" rel="noopener">관련 링크 ↗</a>`:''}${tags.length?`<div class="wk-tags">${tags.map(t=>`<a href="#portfolio" data-search="${esc(t)}">#${esc(t)}</a>`).join('')}</div>`:''}</div>`:''}
     <nav class="wk-pn" aria-label="이전·다음 작업">
