@@ -1321,7 +1321,7 @@ function renderWork(w){
   const bodyHasImg=/!\[[^\]]*\]\(https?:/.test(w.body);
   const hero=own&&!(w.cover&&w.body.includes(w.cover))?`<img class="media wk-hero" src="${esc(srcOf(own))}" alt="${esc(w.t)}" referrerpolicy="no-referrer">`:(bodyHasImg?'':`<div class="slot wk-hero"><b>대표 사진</b><small>준비 중</small></div>`);
   const isB=!!brunchOf(w),heroOn=own&&!(w.cover&&w.body.includes(w.cover));
-  const artMd=isB?w.body:bodyText(w.body);
+  const artMd=isB?dropSeen(w.body,new Set(heroOn?[srcOf(own)]:[])):bodyText(w.body);
   const extra=isB?uniqPics(w.gal||[],[own,...bodyImgs(w.body)]):uniqPics([...(w.gal||[]),...bodyImgs(w.body)],[heroOn?own:'']);
   const galHtml=galImg(w,extra,' style="margin-top:40px"');
   const tags=String(w.tag||'').split(/[\s,]+/).filter(Boolean);
@@ -1359,6 +1359,8 @@ const bodyImgs=b=>[...String(b||'').matchAll(IMG_RE)].map(m=>m[1]||m[2]);
 const bodyText=b=>String(b||'').replace(IMG_RE,'').replace(/\n{3,}/g,'\n\n').trim();
 /* 같은 사진은 한 번만 */
 const uniqPics=(list,skip)=>{const seen=new Set((skip||[]).filter(Boolean).map(srcOf));return list.filter(u=>{const k=srcOf(u);if(!u||seen.has(k))return false;seen.add(k);return true})};
+/* 이미 나온 사진(과 바로 밑 캡션 줄)은 본문에서 빼기 */
+const dropSeen=(m,seen)=>String(m||'').replace(/!\[[^\]]*\]\(\s*(\S+?)(?:\s+"[^"]*")?\s*\)(?:\n_[^\n]*_)?/g,(all,u)=>{const k=srcOf(u);if(seen.has(k))return '';seen.add(k);return all});
 const galImg=(w,list,extra)=>list.length?`<div class="wn-gal" data-n="${list.length}"${extra||''}>${list.map((u,i)=>`<img src="${esc(srcOf(u))}" alt="${esc(w.t)} 사진 ${i+1}" loading="lazy" referrerpolicy="no-referrer">`).join('')}</div>`:'';
 /* 원문 본문을 소제목 단위로 나눔: "## 제목", "> 제목" 한 줄 */
 function logSections(body){
@@ -1389,9 +1391,9 @@ function renderWorkNew(w,el){
   const galHtml=galImg(w,gal);
   let log='';
   if(inLog){
-    const secs=logSections(w.body);
+    const secs=logSections(w.body),seen=new Set([hero].filter(Boolean).map(srcOf));
     log=`<section class="wn-log"><div class="wn-log-head"><h2>작업 기록</h2><p>${w.author?`<span>글 ${esc(w.author)}</span>`:''}${src?`<a href="${esc(src)}" target="_blank" rel="noopener">브런치 원문 ↗</a>`:''}</p></div>
-      ${secs.map(s=>`<div class="wn-sec"><h3>${esc(s.h)}</h3><div class="art">${md(s.md)}</div></div>`).join('')}</section>`;
+      ${secs.map(s=>`<div class="wn-sec"><h3>${esc(s.h)}</h3><div class="art">${md(dropSeen(s.md,seen))}</div></div>`).join('')}</section>`;
   }else if(src){
     log=`<section class="wn-log"><div class="wn-log-head"><h2>작업 기록</h2><p><a href="${esc(src)}" target="_blank" rel="noopener">브런치 원문 보기 ↗</a></p></div></section>`;
   }
