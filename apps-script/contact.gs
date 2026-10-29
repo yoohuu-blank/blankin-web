@@ -16,7 +16,7 @@
  */
 
 // 알림 받을 주소. 여러 명이면 쉼표로 구분. 비워 두면 배포한 사람에게 갑니다.
-const NOTIFY_TO = '';
+const NOTIFY_TO = 'help@blankin.net';
 const SHEET_NAME = '상담 신청';
 const HEADERS = ['접수 시각', '이름 / 단체명', '연락처 또는 이메일', '문의 내용', '보낸 페이지', '처리 상태', '메모'];
 

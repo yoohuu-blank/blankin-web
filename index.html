@@ -277,7 +277,7 @@ form{display:grid;gap:12px}
 form textarea{resize:vertical}
 .form-note{font-size:14px;color:var(--muted);min-height:1.5em}
 .form-note.err{color:var(--fg)}
-.card form input:not([type=checkbox]),.card form textarea{background:var(--bg)}
+.card form input:not([type=checkbox]),.card form textarea{background:var(--bg);border-color:var(--line)}
 form .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 form .consent{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.5;color:var(--muted);cursor:pointer}
 form .consent input{min-height:0;width:18px;height:18px;margin:2px 0 0;padding:0;flex:none;accent-color:var(--fg)}
@@ -1105,11 +1105,13 @@ a.card:not(.photo):not(.bg){transition:transform .2s ease}a.card:not(.photo):not
       <div class="card info">
         <h3>다른 방법으로 문의하기</h3>
         <dl style="margin:8px 0 0">
-          <dt>빈집 AI 견적</dt><dd>빈집 리모델링 비용을 AI로 먼저 가늠해 보세요. [페이지 연결 예정]</dd>
+          <dt>빈집 AI 견적</dt><dd>빈집 리모델링 비용을 AI로 먼저 가늠해 보세요.<br><a class="tlink" href="https://ai.yoohuu.kr" target="_blank" rel="noopener">AI 빈집 분석 ↗</a></dd>
           <dt>빈집 상담이 목적이라면</dt><dd><a class="tlink" href="https://yoohuu.kr/consult" target="_blank" rel="noopener">유휴 상담 페이지 ↗</a></dd>
-          <dt>서울 본사</dt><dd>서울특별시 동작구 상도로15길 3, 2층</dd>
+          <dt>전화 (HQ)</dt><dd><a class="tlink" href="tel:+82-70-7743-3270">070 7743 3270</a></dd>
+          <dt>팩스</dt><dd>02 3280 4270</dd>
+          <dt>이메일</dt><dd><a class="tlink" href="mailto:help@blankin.net">help@blankin.net</a></dd>
+          <dt>워크인 상도</dt><dd>서울 동작구 상도로15길 3, 2층 (상도동)</dd>
           <dt>영주 본사</dt><dd>경상북도 영주시 대학로86번길 14, 2층</dd>
-          <dt>이메일 · 전화</dt><dd>[메일 주소] · [전화번호]</dd>
         </dl>
       </div>
     </div>
