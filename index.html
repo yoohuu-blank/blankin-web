@@ -1402,9 +1402,10 @@ function renderWorkNew(w,el){
   const rel=w.rel.map(id=>ALLW.find(x=>x.id===id)).filter(Boolean);
   const facts=w.facts.map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${inline(v)}</dd></div>`).join('')+
     (rel.length?`<div><dt>연결 작업</dt><dd>${rel.map(x=>`<a class="wn-rel" href="${hrefOf(x)}">${esc(x.t)}${x.yr?` (${esc(x.yr)})`:''} →</a>`).join('<br>')}</dd></div>`:'');
-  const inLog=src&&w.mode==='전문'&&w.body.trim();
+  /* 상세 내용: 브런치 글이든 아니든, 내용이 있으면 설명·개요 아래에 이어서 보여줌 */
+  const inLog=w.mode!=='목록'&&w.body.trim();
   /* 같은 사진은 한 번만: 대표사진·상세 내용에 나온 사진은 갤러리에서 뺌 */
-  const gal=inLog?uniqPics(w.gal,[hero,...bodyImgs(w.body)]):uniqPics([...w.gal,...(src?[]:bodyImgs(w.body))],[hero]);
+  const gal=inLog?uniqPics(w.gal,[hero,...bodyImgs(w.body)]):uniqPics(w.gal,[hero]);
   const galHtml=galImg(w,gal);
   let log='';
   if(inLog){
