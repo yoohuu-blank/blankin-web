@@ -545,6 +545,43 @@ a.card:not(.photo):not(.bg){transition:transform .2s ease}a.card:not(.photo):not
   .arch-list>li>a,.arch-list>li>div{grid-template-columns:52px minmax(0,1fr);gap:4px 12px}
   .arch-list .ac,.arch-list .at{grid-column:2}
 }
+
+/* ── 모바일 타이포 정리 (2026-11, 메인 페이지 한정) ──────────────
+   크기 리듬: 히어로 40 > 선언형 제목 30(철학·CTA) > 정보형 제목 26 > 중간 제목 20
+   br.m = 모바일에서만 줄바꿈 */
+br.m{display:none}
+footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
+@media (max-width:767px){
+  br.m{display:inline}
+  /* 히어로 */
+  #p-home .hhero h1{font-size:40px;line-height:1.2;letter-spacing:-.035em;text-shadow:0 1px 14px rgba(0,0,0,.35)}
+  #p-home .hh-body>p{font-weight:500;text-shadow:0 1px 14px rgba(0,0,0,.35)}
+  /* 철학 섹션 */
+  #p-home .hband .hq{font-size:17px;font-weight:600;line-height:1.5;letter-spacing:-.01em}
+  #p-home .hband .ha{margin-top:14px;font-size:30px;font-weight:700;line-height:1.38;letter-spacing:-.02em}
+  #p-home .hband .hlead{margin-top:28px;font-size:15px;line-height:1.7}
+  #p-home .hbel{margin-top:56px;gap:36px}
+  #p-home .hbel li{border-top:1px solid color-mix(in srgb,var(--on-inv) 20%,var(--inv));padding-top:28px}
+  #p-home .hbel .n{font-size:13px}
+  #p-home .hbel h3{margin-top:6px;font-size:19px;font-weight:600;line-height:1.4;letter-spacing:-.01em}
+  #p-home .hbel p{margin-top:10px;font-size:15px;line-height:1.6;color:color-mix(in srgb,var(--on-inv) 64%,var(--inv))}
+  /* 블랭크가 하는 일 */
+  #p-home .hstate h2{margin-top:10px;font-size:26px;font-weight:700;line-height:1.38;letter-spacing:-.02em}
+  #p-home .hstate .lead{font-size:16px;line-height:1.7}
+  #p-home .home-h{font-size:20px;font-weight:700;line-height:1.4;letter-spacing:-.02em}
+  #p-home .home-work .card h3{font-size:21px;font-weight:700;line-height:1.4}
+  #p-home .home-work .card p{line-height:1.5}
+  /* 마지막 CTA */
+  #p-home .hcta h2{font-size:30px;font-weight:700;line-height:1.38;letter-spacing:-.02em}
+  #p-home .hc-set{font-size:1.3em;vertical-align:-.12em;margin:0 .1em}
+  /* 푸터: 플로팅 상담 버튼에 가리지 않게 */
+  footer{padding-bottom:120px}
+}
+@media (max-width:370px){
+  #p-home .hhero h1{font-size:36px}
+  #p-home .hband .ha,#p-home .hcta h2{font-size:28px}
+  #p-home .hstate h2{font-size:24px}
+}
 </style>
 
 <header>
@@ -575,7 +612,7 @@ a.card:not(.photo):not(.bg){transition:transform .2s ease}a.card:not(.photo):not
     <div class="wrap hh-top"><div class="hh-set" aria-hidden="true"><span>{</span><i></i><span>}</span></div></div>
     <div class="wrap hh-body">
       <h1>비어 있는 공간에서<br>새로운 가능성을 발견합니다.</h1>
-      <p>빈 집, 빈 건물, 빈 동네의<br>지속 가능한 솔루션을 제안하는 블랭크입니다.</p>
+      <p>빈 집, 빈 건물, 빈 동네의<br>쓰임을 다시 찾는 블랭크입니다.</p>
       <div class="hh-foot">
         <a class="hh-cap" id="hh-cap" href="#w-site-01"><b>충남 소통협력공간</b><span>아산 · 2025</span></a>
         <div class="hh-bars" id="hh-bars" aria-label="사진 고르기"></div>
@@ -587,21 +624,21 @@ a.card:not(.photo):not(.bg){transition:transform .2s ease}a.card:not(.photo):not
     <div class="wrap">
       <div class="rv">
         <p class="hq">빈 공간, 어떻게 바꿔야 할까요?</p>
-        <h2 class="ha">블랭크는 공간을 사용할 사람과<br>동네를 깊이 들여다봅니다.</h2>
-        <p class="hlead">2013년 서울 상도동에서 빈 공간을 직접 고치고 운영했던 현장 경험을 바탕으로 새로운 공간의 가치를 만들어 냅니다.</p>
+        <h2 class="ha">블랭크는 <br class="m">공간을 사용할 사람, 그리고<br>동네를 깊이 들여다봅니다.</h2>
+        <p class="hlead">2013년 서울 상도동, 빈 공간을 직접 고치고 운영한 <br class="m">현장 경험으로 새로운 공간의 가치를 만들어 냅니다.</p>
       </div>
       <ol class="hbel rv">
-        <li><span class="n">{01}</span><h3>사용자 경험을 먼저 고민합니다.</h3><p>누가 이곳에 머물고 어떤 하루를 보내게 될지 묻습니다. 그 답으로부터 프로젝트를 기획합니다.</p></li>
-        <li><span class="n">{02}</span><h3>만들어진 후를 설계합니다.</h3><p>좋은 공간은 시간이 지날수록 깊이를 더합니다. 오래 머물고 싶은 공간을 설계합니다.</p></li>
-        <li><span class="n">{03}</span><h3>공간을 넘어 동네를 바라봅니다.</h3><p>빈 공간이 채워지면 동네에 활력이 생겨납니다. 지역의 긍정적인 변화를 이끄는 공간을 만듭니다.</p></li>
+        <li><span class="n">{01}</span><h3>사용자 경험을 먼저 고민합니다.</h3><p>누가 이곳에 머물고 어떤 하루를 보낼지 묻고, <br class="m">그 답으로 프로젝트를 기획합니다.</p></li>
+        <li><span class="n">{02}</span><h3>만들어진 후를 설계합니다.</h3><p>좋은 공간은 시간이 지날수록 깊어집니다. <br class="m">오래 머물고 싶은 공간을 설계합니다.</p></li>
+        <li><span class="n">{03}</span><h3>공간을 넘어 동네를 바라봅니다.</h3><p>빈 공간이 채워지면 동네에 활력이 생깁니다. <br class="m">지역의 변화를 이끄는 공간을 만듭니다.</p></li>
       </ol>
     </div>
   </section>
 
   <section class="wrap hstate rv">
     <p class="eb">블랭크가 하는 일</p>
-    <h2>기획부터 설계, 시공, 운영까지<br>하나의 완결된 프로젝트로 진행합니다.</h2>
-    <p class="lead">빈 건물 개발부터 지역 재생까지, 블랭크는 하나의 팀으로 솔루션을 제공합니다.</p>
+    <h2>기획부터 설계, 시공, 운영까지<br>하나의 프로젝트로 완결합니다.</h2>
+    <p class="lead">빈 건물 개발부터 지역 재생까지, <br class="m">하나의 팀이 모든 과정을 책임집니다.</p>
   </section>
 
   <section class="wrap hwork">
@@ -612,7 +649,7 @@ a.card:not(.photo):not(.bg){transition:transform .2s ease}a.card:not(.photo):not
         <div class="t">
           <span class="k">솔루션</span>
           <h3>빈집 한 채가 다시 쓰이기까지</h3>
-          <p>발견부터 설계, 시공, 운영까지 빈집 한 채의 이야기로 보여드립니다.</p>
+          <p>발견부터 설계, 시공, 운영까지 <br class="m">빈집 한 채의 이야기를 전합니다.</p>
           <span class="go">솔루션 보기 →</span>
         </div>
       </a>
@@ -621,7 +658,7 @@ a.card:not(.photo):not(.bg){transition:transform .2s ease}a.card:not(.photo):not
         <div class="t">
           <span class="k">임팩트</span>
           <h3>공간 너머, 사람과 지역을 잇는 일</h3>
-          <p>지역과 청년, 공공과 함께 만들어 온 거점과 프로그램입니다.</p>
+          <p>지역과 청년, 공공과 함께 만든 <br class="m">거점과 프로그램을 소개합니다.</p>
           <span class="go">임팩트 보기 →</span>
         </div>
       </a>
@@ -630,18 +667,18 @@ a.card:not(.photo):not(.bg){transition:transform .2s ease}a.card:not(.photo):not
         <div class="t">
           <span class="k">포트폴리오</span>
           <h3>다시 쓰이게 된 공간들</h3>
-          <p>주거부터 문화, 업무 공간까지 우리가 고치고 지은 곳들입니다.</p>
+          <p>주거부터 문화, 업무 공간까지 <br class="m">블랭크의 손을 거친 공간들입니다.</p>
           <span class="go">포트폴리오 보기 →</span>
         </div>
       </a>
     </div>
-    <p class="home-more">가진 빈집이 궁금하다면, 사진과 주소로 먼저 확인해 보세요. <a class="tlink" href="https://ai.yoohuu.kr" target="_blank" rel="noopener">유휴 AI 빈집 분석 ↗</a></p>
+    <p class="home-more"><span>가진 빈집의 가능성이 궁금하다면, <br class="m">사진과 주소로 먼저 확인해 보세요.</span> <a class="tlink" href="https://ai.yoohuu.kr" target="_blank" rel="noopener">유휴 AI 빈집 분석 ↗</a></p>
   </section>
 
   <section class="hcta">
     <div class="wrap rv">
-      <h2>비어 있는 <span class="hc-set" role="img" aria-label="빈칸"><span aria-hidden="true">{</span><i aria-hidden="true"></i><span aria-hidden="true">}</span></span> 공간의<br>새로운 가능성을 찾고 계신가요?</h2>
-      <p>빈 집, 빈 건물, 빈 동네 어떤 공간이든 편하게 이야기해 주세요.</p>
+      <h2>비어 있는 <span class="hc-set" role="img" aria-label="빈칸"><span aria-hidden="true">{</span><i aria-hidden="true"></i><span aria-hidden="true">}</span></span> 공간의<br>다음 쓰임을 찾고 계신가요?</h2>
+      <p>빈 집, 빈 건물, 빈 동네, 어떤 공간이든 <br class="m">편하게 이야기해 주세요.</p>
       <a class="pill on-inv" href="#contact">함께 이야기하기</a>
     </div>
   </section>
@@ -1127,13 +1164,13 @@ a.card:not(.photo):not(.bg){transition:transform .2s ease}a.card:not(.photo):not
 <footer>
   <div class="wrap">
     <div class="fg">
-      <div><a class="logo" href="#home" aria-label="BLANK 홈"><svg class="mark" viewBox="64.32 68.05 112.25 19.71" aria-hidden="true"><path d="M67.3945 71.1328h14.3633v5.2344H67.3945zM81.7578 84.6797H67.3945v-5.2344h14.3633zM64.3203 68.0586v19.6992h20.5156V68.0586z"/> <path d="M90.2969 84.6797V68.0586h-3.0743v19.6992h20.5157v-3.0781z"/> <path d="M150.5898 68.0547v14.5703L136.2266 68.9375v-.8828h-3.0743v19.6992h3.0743V73.1836l14.3632 13.6914v.8789h3.0782V68.0547z"/> <path d="M113.3242 71.1328h14.3633v5.2344h-14.3633zM110.2461 68.0586v19.6992h3.0781v-8.3125h14.3633v8.3125h3.0742V68.0586z"/> <path d="M161.4375 84.6797l14.6563-13.9727-2.1211-2.2266-14.8399 14.1484V68.0586h-3.0781v19.6992h20.5157v-3.0781z"/></svg></a><br>변화를 위한 공간, 더 나은 일상을 만드는 사람들<br>(주)블랭크건축사사무소 | (주)블랭크<br>서울 본사 : 서울특별시 동작구 상도로15길 3, 2층<br>영주 본사 : 경상북도 영주시 대학로86번길 14, 2층</div>
+      <div><a class="logo" href="#home" aria-label="BLANK 홈"><svg class="mark" viewBox="64.32 68.05 112.25 19.71" aria-hidden="true"><path d="M67.3945 71.1328h14.3633v5.2344H67.3945zM81.7578 84.6797H67.3945v-5.2344h14.3633zM64.3203 68.0586v19.6992h20.5156V68.0586z"/> <path d="M90.2969 84.6797V68.0586h-3.0743v19.6992h20.5157v-3.0781z"/> <path d="M150.5898 68.0547v14.5703L136.2266 68.9375v-.8828h-3.0743v19.6992h3.0743V73.1836l14.3632 13.6914v.8789h3.0782V68.0547z"/> <path d="M113.3242 71.1328h14.3633v5.2344h-14.3633zM110.2461 68.0586v19.6992h3.0781v-8.3125h14.3633v8.3125h3.0742V68.0586z"/> <path d="M161.4375 84.6797l14.6563-13.9727-2.1211-2.2266-14.8399 14.1484V68.0586h-3.0781v19.6992h20.5157v-3.0781z"/></svg></a><span class="ftag">변화를 위한 공간, 더 나은 일상을 만드는 사람들</span>(주)블랭크건축사사무소 | (주)블랭크<br>서울 본사 : 서울특별시 동작구 상도로15길 3, 2층<br>영주 본사 : 경상북도 영주시 대학로86번길 14, 2층</div>
       <div>
         <nav aria-label="하단 메뉴"><a href="#solution">솔루션</a><a href="#impact">임팩트</a><a href="#portfolio">포트폴리오</a><a href="#about">회사소개</a><a href="#contact">상담하기</a></nav>
         <p style="margin-top:12px"><a href="https://www.instagram.com/blankin_" target="_blank" rel="noopener">인스타그램</a> · <a href="https://www.facebook.com/blankseoul" target="_blank" rel="noopener">페이스북</a></p>
       </div>
     </div>
-    <small>ⓒ 2026 BLANK. 모든 권리 보유.</small>
+    <small>© 2026 BLANK. All rights reserved.</small>
   </div>
 </footer>
 <a class="pill fab" id="fab" href="#contact" aria-label="상담하기" title="상담하기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 7h-3l-2 4v6h6v-6h-3zM10 7H7l-2 4v6h6v-6H8z"/></svg></a>
