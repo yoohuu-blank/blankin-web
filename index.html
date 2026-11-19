@@ -550,6 +550,34 @@ a.card:not(.photo):not(.bg){transition:transform .2s ease}a.card:not(.photo):not
    크기 리듬: 히어로 40 > 선언형 제목 30(철학·CTA) > 정보형 제목 26 > 중간 제목 20
    br.m = 모바일에서만 줄바꿈 */
 br.m{display:none}
+/* 마지막 CTA: { | } 마크를 위에 크게 */
+.cta-mark{font-size:clamp(64px,7vw,110px);line-height:1;margin-bottom:clamp(28px,3vw,40px)}
+.cta-mark .hc-set{margin:0;vertical-align:0}
+/* 카드 아래: 유휴 AI 빈집 분석 (한 줄 링크) */
+.ai-box{position:relative;display:flex;flex-direction:column;gap:6px;margin-top:40px;padding:22px 48px 22px 0;border-top:1px solid var(--fg);border-bottom:1px solid var(--line);color:var(--fg);text-decoration:none}
+.ai-box .ai-k{font-size:13px;font-weight:600;color:var(--muted)}
+.ai-box strong{font-size:clamp(20px,2vw,26px);font-weight:700;line-height:1.4;letter-spacing:-.03em}
+.ai-box .ai-arrow{position:absolute;right:4px;top:18px;font-size:22px;line-height:1;transition:transform .2s ease}
+.ai-box:hover .ai-arrow{transform:translate(2px,-2px)}
+/* 블랭크가 하는 일: 기획·설계·시공·운영 4단계 막대 */
+.hsteps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;max-width:640px;margin-top:clamp(28px,3vw,44px)}
+.hsteps div{display:flex;flex-direction:column;gap:10px}
+.hsteps i{display:block;height:4px;border-radius:2px;background:var(--fg)}
+.hsteps small{font-size:12px;letter-spacing:.04em;font-variant-numeric:tabular-nums;color:var(--muted)}
+.hsteps b{font-size:clamp(16px,1.5vw,20px);font-weight:700;letter-spacing:-.02em}
+/* 막대가 왼쪽부터 차례로 채워짐 (섹션이 화면에 들어올 때 한 번) */
+@keyframes hs-fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.hsteps i{transform-origin:left center}
+.hstate.in .hsteps i{animation:hs-fill .8s cubic-bezier(.22,.7,.2,1) both}
+.hstate.in .hsteps div:nth-child(2) i{animation-delay:.3s}
+.hstate.in .hsteps div:nth-child(3) i{animation-delay:.6s}
+.hstate.in .hsteps div:nth-child(4) i{animation-delay:.9s}
+@media (prefers-reduced-motion:reduce){.hstate.in .hsteps i,#p-home .hband .ha::after{animation:none}}
+/* 철학 섹션(모든 화면): 질문이 주인공, 답은 한 단계 작게 + 깜빡이는 커서 */
+#p-home .hband .hq{color:var(--on-inv)}
+#p-home .hband .ha{margin-top:24px;font-size:clamp(24px,2.6vw,36px);font-weight:600;line-height:1.45;letter-spacing:-.03em}
+#p-home .hband .ha::after{content:"";display:inline-block;width:2px;height:.95em;margin-left:6px;vertical-align:-.12em;background:currentColor;animation:blank-caret 1.1s steps(1,end) infinite}
+#p-home .hcta h2{font-size:clamp(30px,4.6vw,64px);line-height:1.2}
 footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
 @media (max-width:767px){
   br.m{display:inline}
@@ -557,30 +585,38 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   #p-home .hhero h1{font-size:40px;line-height:1.2;letter-spacing:-.035em;text-shadow:0 1px 14px rgba(0,0,0,.35)}
   #p-home .hh-body>p{font-weight:500;text-shadow:0 1px 14px rgba(0,0,0,.35)}
   /* 철학 섹션 */
-  #p-home .hband .hq{font-size:17px;font-weight:600;line-height:1.5;letter-spacing:-.01em}
-  #p-home .hband .ha{margin-top:14px;font-size:30px;font-weight:700;line-height:1.38;letter-spacing:-.02em}
-  #p-home .hband .hlead{margin-top:28px;font-size:15px;line-height:1.7}
+  #p-home .hband .hq{font-size:30px;font-weight:700;line-height:1.38;letter-spacing:-.02em;color:var(--on-inv)}
+  #p-home .hband .ha{margin-top:18px;font-size:23px;font-weight:600;line-height:1.5;letter-spacing:-.02em;color:var(--on-inv)}
+  #p-home .hband .hlead{margin-top:36px;font-size:16px;line-height:1.55;color:color-mix(in srgb,var(--on-inv) 68%,var(--inv))}
   #p-home .hbel{margin-top:56px;gap:36px}
-  #p-home .hbel li{border-top:1px solid color-mix(in srgb,var(--on-inv) 20%,var(--inv));padding-top:28px}
-  #p-home .hbel .n{font-size:13px}
-  #p-home .hbel h3{margin-top:6px;font-size:19px;font-weight:600;line-height:1.4;letter-spacing:-.01em}
-  #p-home .hbel p{margin-top:10px;font-size:15px;line-height:1.6;color:color-mix(in srgb,var(--on-inv) 64%,var(--inv))}
+  #p-home .hbel li{border-top:1px solid color-mix(in srgb,var(--on-inv) 35%,var(--inv));padding-top:28px}
+  #p-home .hbel .n{font-size:14px}
+  #p-home .hbel h3{margin-top:8px;font-size:22px;font-weight:700;line-height:1.35;letter-spacing:-.03em}
+  #p-home .hbel p{margin-top:10px;font-size:16px;line-height:1.55;color:color-mix(in srgb,var(--on-inv) 68%,var(--inv))}
   /* 블랭크가 하는 일 */
-  #p-home .hstate h2{margin-top:10px;font-size:26px;font-weight:700;line-height:1.38;letter-spacing:-.02em}
-  #p-home .hstate .lead{font-size:16px;line-height:1.7}
-  #p-home .home-h{font-size:20px;font-weight:700;line-height:1.4;letter-spacing:-.02em}
-  #p-home .home-work .card h3{font-size:21px;font-weight:700;line-height:1.4}
-  #p-home .home-work .card p{line-height:1.5}
+  #p-home .hstate h2{margin-top:12px;font-size:28px;font-weight:800;line-height:1.3;letter-spacing:-.04em}
+  #p-home .hstate .lead{margin-top:20px;font-size:16px;line-height:1.55}
+  #p-home .hsteps{max-width:300px}
+  #p-home .hwork{padding-top:64px;padding-bottom:48px}
+  #p-home .home-h{font-size:28px;font-weight:800;line-height:1.3;letter-spacing:-.04em}
+  #p-home .home-work .card.bg.tall{aspect-ratio:1/1}
+  #p-home .home-work .card .k{margin-bottom:2px;font-size:13px;font-weight:600;letter-spacing:.02em;color:rgba(255,255,255,.6)}
+  #p-home .home-work .card h3{font-size:22px;font-weight:700;line-height:1.35;letter-spacing:-.03em}
+  #p-home .home-work .card p{font-size:15px;line-height:1.55;color:rgba(255,255,255,.68)}
   /* 마지막 CTA */
-  #p-home .hcta h2{font-size:30px;font-weight:700;line-height:1.38;letter-spacing:-.02em}
-  #p-home .hc-set{font-size:1.3em;vertical-align:-.12em;margin:0 .1em}
+  #p-home .hcta{padding-block:96px;text-align:left}
+  #p-home .cta-mark{font-size:60px;margin:0 0 24px -3px}
+  #p-home .hcta p{margin:20px 0 0;font-size:16px;line-height:1.55;color:color-mix(in srgb,var(--on-inv) 68%,var(--inv))}
+  #p-home .hcta .pill{margin-top:36px;padding:0 0 6px;border:0;border-bottom:2px solid currentColor;border-radius:0;background:none;color:var(--on-inv);font-size:20px;font-weight:700;box-shadow:none}
+  #p-home .hcta h2{font-size:30px;font-weight:700;line-height:1.35;letter-spacing:-.02em}
   /* 푸터: 플로팅 상담 버튼에 가리지 않게 */
   footer{padding-bottom:120px}
 }
 @media (max-width:370px){
   #p-home .hhero h1{font-size:36px}
-  #p-home .hband .ha,#p-home .hcta h2{font-size:28px}
-  #p-home .hstate h2{font-size:24px}
+  #p-home .hband .hq{font-size:28px}
+  #p-home .hcta h2{font-size:28px}
+  #p-home .hstate h2,#p-home .home-h{font-size:26px}
 }
 </style>
 
@@ -612,7 +648,7 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
     <div class="wrap hh-top"><div class="hh-set" aria-hidden="true"><span>{</span><i></i><span>}</span></div></div>
     <div class="wrap hh-body">
       <h1>비어 있는 공간에서<br>새로운 가능성을 발견합니다.</h1>
-      <p>빈 집, 빈 건물, 빈 동네의<br>쓰임을 다시 찾는 블랭크입니다.</p>
+      <p>블랭크는 빈 집, 빈 건물, 빈 동네에<br>지속 가능한 솔루션을 제안합니다.</p>
       <div class="hh-foot">
         <a class="hh-cap" id="hh-cap" href="#w-site-01"><b>충남 소통협력공간</b><span>아산 · 2025</span></a>
         <div class="hh-bars" id="hh-bars" aria-label="사진 고르기"></div>
@@ -623,8 +659,8 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   <section class="hband">
     <div class="wrap">
       <div class="rv">
-        <p class="hq">빈 공간, 어떻게 바꿔야 할까요?</p>
-        <h2 class="ha">블랭크는 <br class="m">공간을 사용할 사람, 그리고<br>동네를 깊이 들여다봅니다.</h2>
+        <p class="hq">빈 공간, <br class="m">어떻게 바꿔야 할까요?</p>
+        <h2 class="ha">답은 사람과 동네에 있습니다.</h2>
         <p class="hlead">2013년 서울 상도동, 빈 공간을 직접 고치고 운영한 <br class="m">현장 경험으로 새로운 공간의 가치를 만들어 냅니다.</p>
       </div>
       <ol class="hbel rv">
@@ -638,11 +674,12 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   <section class="wrap hstate rv">
     <p class="eb">블랭크가 하는 일</p>
     <h2>기획부터 설계, 시공, 운영까지<br>하나의 프로젝트로 완결합니다.</h2>
+    <div class="hsteps" role="list" aria-label="블랭크가 맡는 과정"><div role="listitem"><i></i><small>01</small><b>기획</b></div><div role="listitem"><i></i><small>02</small><b>설계</b></div><div role="listitem"><i></i><small>03</small><b>시공</b></div><div role="listitem"><i></i><small>04</small><b>운영</b></div></div>
     <p class="lead">빈 건물 개발부터 지역 재생까지, <br class="m">하나의 팀이 모든 과정을 책임집니다.</p>
   </section>
 
   <section class="wrap hwork">
-    <h2 class="home-h rv">그래서 지금, 이런 일들을 하고 있습니다</h2>
+    <h2 class="home-h rv">그래서 지금, <br class="m">이런 일들을 하고 있습니다</h2>
     <div class="cards c3 home-work rv">
       <a class="card bg tall" href="#solution">
         <img data-img="dh-room" alt="유휴하우스 동해의 방">
@@ -672,14 +709,19 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
         </div>
       </a>
     </div>
-    <p class="home-more"><span>가진 빈집의 가능성이 궁금하다면, <br class="m">사진과 주소로 먼저 확인해 보세요.</span> <a class="tlink" href="https://ai.yoohuu.kr" target="_blank" rel="noopener">유휴 AI 빈집 분석 ↗</a></p>
+    <a class="ai-box rv" href="https://ai.yoohuu.kr" target="_blank" rel="noopener">
+      <span class="ai-k">유휴 AI 빈집 분석 · 직접 해보기</span>
+      <strong>내 빈집, 사진과 주소만으로<br>먼저 확인해 보세요</strong>
+      <span class="ai-arrow" aria-hidden="true">↗</span>
+    </a>
   </section>
 
   <section class="hcta">
     <div class="wrap rv">
-      <h2>비어 있는 <span class="hc-set" role="img" aria-label="빈칸"><span aria-hidden="true">{</span><i aria-hidden="true"></i><span aria-hidden="true">}</span></span> 공간의<br>다음 쓰임을 찾고 계신가요?</h2>
+      <div class="cta-mark" aria-hidden="true"><span class="hc-set"><span>{</span><i></i><span>}</span></span></div>
+      <h2>비어 있는 공간의<br>새로운 가능성을 <br class="m">찾고 계신가요?</h2>
       <p>빈 집, 빈 건물, 빈 동네, 어떤 공간이든 <br class="m">편하게 이야기해 주세요.</p>
-      <a class="pill on-inv" href="#contact">함께 이야기하기</a>
+      <a class="pill on-inv" href="#contact">함께 이야기하기 →</a>
     </div>
   </section>
 </main>
