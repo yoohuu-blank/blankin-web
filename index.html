@@ -70,7 +70,7 @@ nav.main a[aria-current="page"]{color:var(--fg);background:var(--card)}
 .pill.ai{background:#ffffff;color:#111111;box-shadow:inset 0 0 0 1px #d4d4d4}
 .pill.ai:hover{box-shadow:inset 0 0 0 1px #111111}
 .tlink{display:inline-flex;align-self:flex-start;gap:6px;font-size:15px;font-weight:600;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px;line-height:1.6}
-@media (max-width:720px){header.tuck{transform:translateY(calc(-1 * var(--hd-shift,0px)))}.hd{padding-block:10px}nav.main{order:3;width:100%;margin:0;justify-content:space-between}nav.main a{padding:8px 10px}.hd .pill.ai{margin-left:auto}.hd .pill.sm{padding:8px 15px;font-size:13.5px;min-height:38px}.hd{gap:6px 8px}}
+@media (max-width:720px){header.tuck{transform:translateY(calc(-1 * var(--hd-shift,0px)))}.hd{padding-block:10px}nav.main{order:3;width:100%;margin:0;justify-content:space-between}nav.main a{padding:8px 10px}nav.main a[aria-current="page"]{padding:8px 15px;margin:0 -5px}.hd .pill.ai{margin-left:auto}.hd .pill.sm{padding:8px 15px;font-size:13.5px;min-height:38px}.hd{gap:6px 8px}}
 
 /* pages */
 main{display:block}
@@ -103,6 +103,14 @@ main[hidden]{display:none}
 .next{margin-top:clamp(80px,10vw,120px)}
 .sub-h{margin-top:clamp(72px,9vw,96px);font-size:28px;font-weight:700;line-height:1.4;letter-spacing:-.02em}
 #p-impact .sub-h .mo{display:none}
+#p-impact .cards.sol .card.photo p .mo{display:none}
+#p-impact .cards.sol .card.bg.wide p .mo{display:none}
+#p-impact .hero .pill.mhero{display:none}
+#p-impact .cards.c3.iprob .card p .mo{display:none}
+#p-impact .card.stat span.mo{display:none}
+#p-impact .qa h2 .mo{display:none}
+#p-about .sec-h .mo{display:none}
+#p-impact .cta-2l .mo{display:none}
 
 /* cards */
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:16px;margin-top:40px}
@@ -279,6 +287,9 @@ main[hidden]{display:none}
 .tl-body b{color:var(--fg);font-weight:700}
 .tl.js .tl-item{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
 .tl.js .tl-item.in{opacity:1;transform:none}
+.ml-more{display:none}
+#p-about .inv.cta .mo,#p-about .inv.cta .cta-mark,#p-about .inv.cta .mo-cta{display:none}
+.bd-sym .n2{display:none}
 @media (max-width:640px){.tl-item{grid-template-columns:20px minmax(0,1fr);column-gap:14px}.tl-rail{grid-column:1;grid-row:1/3}.tl-yr{grid-column:2;position:static;margin-bottom:10px}.tl-body{grid-column:2}}
 /* about: 팀 */
 .team .card h3{font-size:24px}
@@ -1112,15 +1123,24 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   /* ===== 임팩트 모바일: 솔루션 최종 규칙 적용 (767px 이하, #p-impact 한정) ===== */
   /* 히어로 */
   #p-impact .hero h1{font-size:34px;font-weight:800;line-height:1.25;letter-spacing:-.04em;text-shadow:0 1px 14px rgba(0,0,0,.35)}
-  #p-impact .hero .eb{margin-bottom:14px;font-size:13px;font-weight:600;letter-spacing:.06em}
-  #p-impact .hero p:not(.eb){margin-top:16px;font-size:16px;font-weight:500;line-height:1.55;letter-spacing:-.02em;text-shadow:0 1px 14px rgba(0,0,0,.35);word-break:keep-all;text-wrap:balance}
+  #p-impact .hero .eb{display:none} /* 솔루션 히어로와 통일: 영어 라벨 없음(모바일만) */
+  /* 히어로 버튼: 솔루션 히어로와 같은 밑줄 화살표 링크(모바일만) */
+  #p-impact .hero .pill.mhero{display:inline-block;position:relative;min-height:0;margin-top:28px;padding:0 0 5px;line-height:1.35;border:0;border-bottom:2px solid #f7f5f2;border-radius:0;background:none;color:#f7f5f2;font-size:20px;font-weight:700;box-shadow:none}
+  #p-impact .hero p:not(.eb){margin-top:16px;font-size:16px;font-weight:500;line-height:1.55;letter-spacing:-.18px;text-shadow:0 1px 14px rgba(0,0,0,.35);word-break:keep-all;text-wrap:balance}
   /* 히어로: 솔루션과 같이 사진이 히어로 끝까지, 글자 높이도 솔루션과 같게(제목 위치 동일), 사진은 만드는 장면이 보이게 오른쪽으로 */
-  #p-impact .hero.illust{padding-bottom:160px}
+  #p-impact .hero.illust{padding-bottom:98px}
   #p-impact .hero.illust>img{object-position:58% 50%!important}
   /* 질문(작은 회색) → 답(크게) */
   #p-impact .qa .q{font-size:16px;font-weight:600;line-height:1.5;letter-spacing:-.01em;color:var(--muted)}
   #p-impact .qa h2{margin-top:10px;font-size:26px;font-weight:800;line-height:1.35;letter-spacing:-.04em;word-break:keep-all;text-wrap:balance}
-  #p-impact .qa .lead{margin-top:20px;font-size:16px;line-height:1.55;letter-spacing:-.02em;color:var(--muted);text-wrap:balance;word-break:keep-all}
+  #p-impact .qa .lead{margin-top:20px;font-size:16px;line-height:1.55;letter-spacing:-.18px;color:var(--muted);text-wrap:balance;word-break:keep-all}
+  #p-impact .qa h2 .dk{display:none}
+  #p-impact .qa h2 .mo{display:inline}
+  #p-about .sec-h .dk{display:none}
+  #p-about .sec-h p{margin-top:20px;font-size:16px;line-height:1.55;color:var(--muted);text-wrap:pretty}
+  #p-about .sec-h .mo{display:inline}
+  #p-impact .qa .lead .dk{display:none}
+  #p-impact .qa .lead .mo{display:inline}
   #p-impact section.scene{padding-top:72px}
   #p-impact section.wrap:not(.scene){padding-top:72px!important}
   #p-impact section.wrap:not(.scene) + .scene{padding-top:56px}
@@ -1133,9 +1153,57 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   #p-impact .cards.c3 .card p{margin:5px 0 0;font-size:15px;font-weight:400;line-height:1.5;letter-spacing:-.02em;color:var(--muted);text-wrap:balance;word-break:keep-all}
   #p-impact .cards.c3 .card.stat b{font-size:34px;font-weight:700;line-height:1.1;letter-spacing:-.045em}
   #p-impact .cards.c3 .card.stat span{display:block;margin-top:6px;font-size:14px;font-weight:500;line-height:1.4;color:var(--muted)}
+  #p-impact .cards.c3.mstat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  #p-impact .cards.c3.mstat .card.stat{padding:16px 12px 15px}
+  #p-impact .cards.c3.mstat .card.stat b{font-size:28px;letter-spacing:-.04em}
+  #p-impact .cards.c3.mstat .card.stat span{margin-top:6px;font-size:13px;font-weight:500;line-height:1.35;letter-spacing:-.01em;word-break:keep-all}
+  #p-impact .cards.c3.mstat .card.stat span.dk{display:none}
+  #p-impact .cards.c3.mstat .card.stat span.mo{display:block;white-space:nowrap}
+  /* 현장에서 본 문제 3카드: 라벨-제목 간격 좁힘 */
+  #p-impact .cards.c3.iprob .card .k{margin:0 0 1px;line-height:1.25}
+  /* 파트너 로고: 모바일은 흐름 대신 4열 고정 그리드 */
+  #p-impact .marquee{overflow:visible;-webkit-mask-image:none;mask-image:none;margin:4px -8px 0}
+  #p-impact .mq-track{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:auto;animation:none;row-gap:0}
+  #p-impact .mq-track li[aria-hidden]{display:none}
+  /* 다크 모드: 어두운 로고가 묻히지 않도록 반전 */
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #p-impact .mq-track img{filter:grayscale(1) invert(1) brightness(.95)}}
+  :root[data-theme="dark"] #p-impact .mq-track img{filter:grayscale(1) invert(1) brightness(.95)}
+  #p-impact .mq-track li{height:50px;padding:0 3px}
+  #p-impact .mq-track img{max-width:none;max-height:none;height:auto;filter:grayscale(1) brightness(.62);opacity:.7}
+  /* 로고마다 가로세로비가 달라서, 눈에 보이는 면적이 비슷하도록 폭을 따로 지정 */
+  /* 표시 순서: 기업 → 지자체 → 지원·창업 기관 (데스크탑 흐름 순서는 그대로) */
+  #p-impact .mq-track li:nth-child(2){order:1}
+  #p-impact .mq-track li:nth-child(1){order:2}
+  #p-impact .mq-track li:nth-child(8){order:3}
+  #p-impact .mq-track li:nth-child(6){order:4}
+  #p-impact .mq-track li:nth-child(7){order:5}
+  #p-impact .mq-track li:nth-child(3){order:6}
+  #p-impact .mq-track li:nth-child(5){order:7}
+  #p-impact .mq-track li:nth-child(4){order:8}
+  #p-impact .mq-track li:nth-child(1) img{width:66px}
+  #p-impact .mq-track li:nth-child(2) img{width:66px}
+  #p-impact .mq-track li:nth-child(3) img{width:46px}
+  #p-impact .mq-track li:nth-child(4) img{width:50px}
+  #p-impact .mq-track li:nth-child(5) img{width:52px}
+  #p-impact .mq-track li:nth-child(6) img{width:60px}
+  #p-impact .mq-track li:nth-child(7) img{width:54px}
+  #p-impact .mq-track li:nth-child(8) img{width:48px}
+  /* 파트너 3카드: 라벨-제목-설명 행간 좁힘 */
+  /* 파트너: 박스 3개 대신 한 장의 카드 안 3줄 리스트(얇은 선 구분) + 아래 로고 영역과 이어 붙임 */
+  #p-impact .cards.c3.ptn{gap:0;background:var(--card);border-radius:14px 14px 0 0;padding:0 18px}
+  #p-impact .cards.c3.ptn .card{gap:0;padding:16px 0 17px;background:none;border-radius:0}
+  #p-impact .cards.c3.ptn .card + .card{border-top:1px solid color-mix(in srgb,var(--fg) 10%,transparent)}
+  #p-impact .cards.c3.ptn + .cards.tight{margin-top:0}
+  #p-impact .cards.c3.ptn + .cards.tight .card.wide{border-radius:0 0 14px 14px;padding-top:20px}
+  #p-impact .cards.c3.ptn .card:last-child{border-bottom:1px solid color-mix(in srgb,var(--fg) 10%,transparent)}
+  #p-impact .cards.c3.ptn .card .k{margin:0 0 5px;line-height:1.25}
+  #p-impact .cards.c3.ptn .card h3{margin:0;font-size:17px;font-weight:600;line-height:1.4;letter-spacing:-.025em;color:color-mix(in srgb,var(--fg) 82%,var(--bg))}
+  #p-impact .cards.c3.ptn .card p{display:none}
+  #p-impact .cards.c3.iprob .card p .dk{display:none}
+  #p-impact .cards.c3.iprob .card p .mo{display:inline}
   #p-impact .cards.tight .card.wide{border-radius:14px;padding:18px;background:var(--card)}
   #p-impact .cards.tight .card.wide>p{font-size:15px;line-height:1.5;letter-spacing:-.02em;color:var(--muted)}
-  #p-impact .cards.tight .tlink{font-size:15px;font-weight:600;letter-spacing:-.02em;line-height:1.5}
+  #p-impact .cards.tight .tlink{justify-self:start;font-size:15px;font-weight:600;letter-spacing:-.02em;line-height:1.5}
   /* OUR APPROACH 검정 영역: 화면 가득 + 회색 라벨 + 작은 회색/큰 흰 제목 */
   #p-impact .inv:not(.cta){margin-left:calc(-1*var(--gut-l));margin-right:calc(-1*var(--gut-r));border-radius:0;padding:72px var(--gut-r) 72px var(--gut-l)}
   #p-impact .inv:not(.cta) .eb{margin-bottom:10px;font-size:14px;font-weight:600;letter-spacing:.06em;opacity:1;color:color-mix(in srgb,var(--on-inv) 55%,var(--inv))}
@@ -1153,7 +1221,7 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   #p-impact .cmp .arrow span{display:none}
   #p-impact .cmp .arrow svg{width:22px;height:22px;stroke-width:1.6;color:color-mix(in srgb,var(--on-inv) 55%,var(--inv))}
   #p-impact .cmp.fx .from.to-list div{background:none;color:color-mix(in srgb,var(--on-inv) 28%,var(--inv));border-color:color-mix(in srgb,var(--on-inv) 14%,transparent)}
-  #p-impact .cmp.fx .from.to-list div.on{color:var(--inv);border-color:var(--on-inv);background:var(--on-inv)}
+  #p-impact .cmp.fx .from.to-list div.on{color:var(--inv);border-color:transparent;background:var(--on-inv)}
   #p-impact .cmp.fx .from:not(.to-list) div{text-decoration:line-through;text-decoration-thickness:1px;text-decoration-color:transparent}
   #p-impact .cmp.fx .from:not(.to-list) div.off{text-decoration-color:color-mix(in srgb,var(--on-inv) 45%,transparent);color:color-mix(in srgb,var(--on-inv) 38%,var(--inv))}
   #p-impact .cmp .arrow{padding:16px 0 14px;gap:4px}
@@ -1166,7 +1234,7 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   /* 사례 3묶음: 번호는 작은 회색 라벨, 대표 1장은 사진 카드, 나머지 2장은 작은 사진 리스트 */
   #p-impact .sub-h .dk{display:none}
   #p-impact .sub-h .mo{display:block}
-  #p-impact .sub-h .n{display:block;margin-bottom:6px;font-size:13px;font-weight:600;line-height:1.4;letter-spacing:-.01em;color:var(--muted)}
+  #p-impact .sub-h .n{display:inline;margin:0 10px 0 0;font-size:16px;font-weight:700;line-height:1.25;letter-spacing:-.01em;color:var(--muted)}
   #p-impact .sub-h{margin-top:56px;font-size:20px;font-weight:700;line-height:1.3;letter-spacing:-.03em}
   #p-impact .qa + .sub-h{margin-top:48px}
   #p-impact .sub-h + .lead{margin-top:8px!important;max-width:none!important;font-size:15px;line-height:1.5;letter-spacing:-.02em;color:var(--muted)!important;text-wrap:balance;word-break:keep-all}
@@ -1186,12 +1254,141 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   #p-impact .cards.sol .card.photo h3{margin:2px 0 0;font-size:18px;font-weight:700;line-height:1.3;letter-spacing:-.03em}
   #p-impact .cards.sol .card.photo p{margin:4px 0 0;font-size:15px;font-weight:400;line-height:1.45;letter-spacing:-.02em;color:var(--muted);word-break:keep-all}
   #p-impact .cards.sol .card.photo .tlink{display:none}
+  /* 사례: 소제목 아래 설명 문단은 큰 카드 설명과 같은 말 → 모바일에서 숨김, 썸네일은 지역·이름만 */
+  #p-impact .sub-h + p.lead{display:none}
+  #p-impact .cards.sol .card.photo p{display:block;margin:3px 0 0;font-size:14px;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #p-impact .cards.sol .card.photo p .dk{display:none}
+  #p-impact .cards.sol .card.photo p .mo{display:inline}
+  #p-impact .cards.sol .card.photo{grid-template-columns:72px minmax(0,1fr);align-items:center;padding:12px 0}
+  #p-impact .cards.sol .card.photo>img.media{width:72px;height:72px}
+  #p-impact .sub-h + .cards.sol{margin-top:16px}
+  /* 사례 소제목: 핵심 키워드만 진하게, 나머지는 회색 */
+  #p-impact .sub-h .mo{word-break:keep-all}
+  #p-impact .sub-h .kw{display:inline;font-size:26px;font-weight:800;line-height:1.25;letter-spacing:-.045em;color:var(--fg)}
+  #p-impact .sub-h .kd{display:block;margin-top:6px;font-size:15px;font-weight:500;line-height:1.4;letter-spacing:-.02em;color:var(--muted)}
+  /* 문제 제기 합치기(모바일): 문제 한 줄 → 해법 키워드. 별도 질문 블록·문제 카드 3개는 숨김 */
+  #p-impact .qa.next,#p-impact .cards.c3.iprob{display:none}
+  #p-impact .sub-h .kd{display:none}
+  #p-impact .sub-h .kp{display:block;margin-bottom:5px;font-size:16px;font-weight:600;line-height:1.4;letter-spacing:-.02em;color:var(--muted)}
+  #p-impact .sub-h .kw{display:block;font-size:24px}
+  /* 01/02/03: 크고 연한 숫자를 제목 앞에 */
+  #p-impact .sub-h .mo{display:block}
+  #p-impact .sub-h .n{display:block;margin:0 0 10px;font-size:40px;font-weight:800;line-height:1;letter-spacing:-.05em;font-variant-numeric:tabular-nums;color:color-mix(in srgb,var(--fg) 16%,var(--bg))}
+  /* 사례 대표 카드: 사진은 가로로 낮게(16:10), 글은 사진 아래 */
+  #p-impact .cards.sol .card.bg.wide{display:block;position:static;aspect-ratio:auto;min-height:0;background:none;border-radius:0;clip-path:none;overflow:visible;padding:0;isolation:auto;box-shadow:none}
+  #p-impact .cards.sol .card.bg.wide::after{display:none}
+  #p-impact .cards.sol .card.bg.wide>img{position:static;display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:center 35%;border-radius:14px;z-index:auto}
+  #p-impact .cards.sol .card.bg.wide .t{position:static;padding:14px 0 0;background:none}
+  #p-impact .cards.sol .card.bg.wide .k{color:var(--muted)}
+  #p-impact .cards.sol .card.bg.wide h3{color:var(--fg)}
+  #p-impact .cards.sol .card.bg.wide p{color:var(--muted)}
+  #p-impact .cards.sol .card.bg.wide .tlink{color:var(--fg)}
+  #p-impact .cards.sol .card.bg.wide + .card.photo{margin-top:18px}
+  /* 대표 카드: 라벨·제목은 사진 아래쪽 위에, 설명·링크는 사진 아래 */
+  #p-impact .cards.sol .card.bg.wide{display:grid;grid-template-columns:minmax(0,1fr)}
+  #p-impact .cards.sol .card.bg.wide>img{grid-area:1/1;position:relative;z-index:0;aspect-ratio:4/3;object-position:center 22%}
+  #p-impact .cards.sol .card.bg.wide::after{content:"";display:block;position:relative;inset:auto;z-index:1;grid-area:1/1;align-self:end;height:68%;border-radius:0 0 14px 14px;background:linear-gradient(to top,rgba(24,18,12,.9) 0%,rgba(24,18,12,.66) 42%,rgba(24,18,12,.24) 76%,rgba(24,18,12,0) 100%);pointer-events:none}
+  #p-impact .cards.sol .card.bg.wide .t{display:contents}
+  #p-impact .cards.sol .card.bg.wide .k{grid-area:1/1;align-self:end;position:relative;z-index:2;margin:0 16px 46px;color:rgba(247,245,242,.8)}
+  #p-impact .cards.sol .card.bg.wide h3{grid-area:1/1;align-self:end;position:relative;z-index:2;margin:0 16px 16px;color:#f7f5f2}
+  #p-impact .cards.sol .card.bg.wide p{grid-area:2/1;margin:14px 0 0}
+  #p-impact .cards.sol .card.bg.wide .tlink{grid-area:3/1;justify-self:start;margin-top:10px}
+  #p-impact .cards.sol .card.bg.wide p .dk{display:none}
+  #p-impact .cards.sol .card.bg.wide p .mo{display:inline}
   /* CTA: 검정 가득, 왼쪽 정렬, 밑줄 링크 */
   #p-impact section.mcta{padding:0;margin-top:72px}
-  #p-impact .mcta .inv.cta{border-radius:0;text-align:left;padding:88px var(--gut-r) 88px var(--gut-l)}
+  /* 버튼 자간·눌리는 영역·어두운 블록 색을 솔루션과 통일 */
+  #p-impact a.pill{letter-spacing:-.03em}
+  /* 회사소개 히어로 제목: 솔루션·임팩트 히어로와 같은 크기·굵기 */
+  #p-about .hero{padding-bottom:169px}
+  #p-about .hero h1 .tp{display:none}
+  /* 회사소개 일하는 방식 카드: 사진은 낮게, 글자는 하단 어두운 영역 안에서 작고 또렷하게 */
+  #p-about .way{gap:12px}
+  #p-about .way .card.bg{aspect-ratio:4/3;border-radius:20px;clip-path:inset(0 round 20px)}
+  #p-about .way .card.bg.light::after{background:linear-gradient(to top,rgba(0,0,0,.84) 0%,rgba(0,0,0,.66) 38%,rgba(0,0,0,.2) 66%,rgba(0,0,0,0) 85%)}
+  #p-about .way .card.bg .t{padding:0 20px 20px;gap:0}
+  #p-about .way .card.bg .n{font-size:12px;font-weight:600;letter-spacing:.04em;color:rgba(255,255,255,.72);text-shadow:none}
+  #p-about .way .card.bg h3{margin-top:6px;font-size:20px;font-weight:800;line-height:1.3;letter-spacing:-.03em;color:#fff}
+  #p-about .way .card.bg p{margin-top:6px;font-size:14px;font-weight:400;line-height:1.5;letter-spacing:-.01em;color:rgba(255,255,255,.88);word-break:keep-all;text-wrap:balance}
+  /* 회사소개 섹션 제목: 솔루션·임팩트와 같은 크기·굵기 */
+  #p-about .sec-h h2{font-size:26px;font-weight:800;line-height:1.35;letter-spacing:-.04em}
+  #p-about .inv.cta h2{font-size:30px;font-weight:800;line-height:1.3;letter-spacing:-.04em;text-wrap:balance}
+  #p-about .hero h1 .tm{display:block;margin-top:14px}
+  #p-about .hero h1{font-size:34px;font-weight:800;line-height:1.25;letter-spacing:-.04em;text-shadow:0 1px 14px rgba(0,0,0,.35)}
+  /* 회사소개 연혁·팀: 솔루션·임팩트와 같은 톤(작고 또렷하게, 제목은 굵게) */
+  #p-about .tl{margin-top:36px}
+  #p-about .tl-item{padding-bottom:36px}
+  #p-about .tl-rail::before{bottom:-36px}
+  #p-about .tl-yr{margin-bottom:8px;font-size:20px;font-weight:800;letter-spacing:-.04em}
+  #p-about .tl-body{font-size:14px;line-height:1.55;letter-spacing:-.02em}
+  #p-about .tl-body li{padding:8px 0;word-break:keep-all;text-wrap:pretty}
+  #p-about .tl-body li:first-child{padding-top:0}
+  #p-about .team .card h3{font-size:20px;font-weight:800;letter-spacing:-.03em}
+  #p-about .team .card>p{font-size:14px;line-height:1.55;color:var(--muted);word-break:keep-all}
+  #p-about .team .card .k{font-size:12px}
+  #p-about .team li{padding:11px 0}
+  #p-about .team li b{font-size:15px;font-weight:700}
+  #p-about .team li span{font-size:13px;letter-spacing:-.02em}
+  #p-about .team li small{font-size:12px}
+  /* 숫자 블록: 솔루션·임팩트의 큰 숫자 카드와 겹치지 않게, 회색 한 덩이 안의 한 줄 행으로 */
+  #p-about .nums{display:block;margin-top:32px;padding:0 18px;background:var(--card);color:var(--fg);border-radius:14px}
+  #p-about .nums .nm{display:grid;grid-template-columns:92px minmax(0,1fr);column-gap:12px;align-items:baseline;padding:16px 0}
+  #p-about .nums .nm + .nm{border-top:1px solid color-mix(in srgb,var(--fg) 10%,transparent)}
+  #p-about .nums .nm b{font-size:28px;font-weight:800;line-height:1.1;letter-spacing:-.045em}
+  #p-about .nums .nm b small{font-size:15px;font-weight:700;margin-left:2px}
+  #p-about .nums .nm span{margin:0;font-size:14px;font-weight:500;line-height:1.4;letter-spacing:-.02em;color:var(--muted);opacity:1}
+  /* 우리가 그리는 미래: 임팩트 '로컬 파트너'와 같은 한 장짜리 회색 카드 + 행 */
+  #p-about .cards.c3.fut{gap:0;background:var(--card);border-radius:14px;padding:0 18px}
+  #p-about .cards.c3.fut .card{gap:0;padding:18px 0 19px;background:none;border-radius:0}
+  #p-about .cards.c3.fut .card + .card{border-top:1px solid color-mix(in srgb,var(--fg) 10%,transparent)}
+  #p-about .cards.c3.fut .card .k{display:block;margin:0 0 5px;font-size:13px;font-weight:600;line-height:1.25;color:var(--muted)}
+  #p-about .cards.c3.fut .card h3{margin:0;font-size:18px;font-weight:700;line-height:1.4;letter-spacing:-.03em;color:var(--fg)}
+  #p-about .cards.c3.fut .card p{display:block;margin:6px 0 0;font-size:14px;font-weight:400;line-height:1.55;letter-spacing:-.02em;color:var(--muted);word-break:keep-all;text-wrap:balance}
+  /* 미디어: 로컬 파트너와 같은 조용한 회색 한 덩이 + 행. 대표 4개만 보이고 나머지는 더 보기 */
+  #p-about .media-list{display:block;padding:0;background:none;border-radius:0;border-top:1px solid color-mix(in srgb,var(--fg) 14%,transparent)}
+  #p-about .media-list a,#p-about .media-list .ml{position:relative;display:flex;flex-direction:column-reverse;justify-content:flex-end;gap:5px;padding:20px 28px 20px 0;border:0;border-radius:0;background:none;color:var(--fg);font-size:16px;font-weight:600;line-height:1.4;letter-spacing:-.025em;word-break:keep-all;text-wrap:pretty}
+  #p-about .media-list>*{border-bottom:1px solid color-mix(in srgb,var(--fg) 10%,transparent)!important}
+  #p-about .media-list small{font-size:13px;font-weight:500;letter-spacing:0;color:var(--muted);white-space:normal}
+  #p-about .media-list a::after{content:"↗";position:absolute;right:0;top:50%;transform:translateY(-50%);font-size:14px;font-weight:500;color:var(--muted)}
+  #p-about .media-list:not(.open)>:nth-child(n+5){display:none}
+  #p-about .ml-more{display:inline-flex;align-items:center;gap:6px;margin-top:20px;padding:0 0 4px;border:0;border-bottom:1.5px solid currentColor;border-radius:0;background:none;color:var(--fg);font:600 15px/1.4 var(--sans);letter-spacing:-.02em;cursor:pointer}
+  #p-about .ml-more[hidden]{display:none}
+  /* 회사소개 브랜드: 4개 모두 같은 크기의 풀블리드 카드(사진 가득, 이름·설명은 아래 어두운 영역) */
+  #p-about .brands{gap:12px}
+  #p-about .brands .bd-sym .n0{display:none}
+  #p-about .brands .bd-sym .n2{display:inline}
+  #p-about .brands .card h3.bn{display:none}
+  #p-about .brands .card{display:grid;grid-template-columns:1fr;grid-template-rows:1fr auto auto;aspect-ratio:4/3;padding:0;gap:0;border-radius:20px;clip-path:inset(0 round 20px);background:#161616;color:#fff;isolation:isolate;position:relative}
+  #p-about .brands .card .bd-img,#p-about .brands .card .slot.bd-img{grid-column:1;grid-row:1/4;width:100%;height:100%;aspect-ratio:auto;border-radius:0;object-fit:cover;z-index:-2}
+  #p-about .brands .card::after{content:"";grid-column:1;grid-row:1/4;z-index:-1;background:linear-gradient(to top,rgba(0,0,0,.82) 0%,rgba(0,0,0,.58) 36%,rgba(0,0,0,.1) 66%,rgba(0,0,0,0) 80%)}
+  #p-about .brands .bd-sym{position:static;grid-column:1;grid-row:2;align-self:end;aspect-ratio:auto;background:none;padding:0 20px;margin:0;align-items:flex-start;justify-content:flex-end;gap:3px;text-align:left;pointer-events:auto}
+  #p-about .brands .bd-sym b{font-size:20px;font-weight:800;line-height:1.3;letter-spacing:-.03em;color:#fff;text-shadow:none}
+  #p-about .brands .bd-sym small{font-size:11px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,.72)}
+  #p-about .brands .card p{grid-column:1;grid-row:3;margin:6px 0 0;padding:0 20px 20px;font-size:14px;line-height:1.5;letter-spacing:-.01em;color:rgba(255,255,255,.88);word-break:keep-all}
+  /* 하단 CTA: 솔루션·임팩트와 같은 어두운 풀폭 블록 */
+  #p-about section.mcta{padding:0;margin-top:72px}
+  #p-about .mcta .inv.cta{border-radius:0;text-align:left;padding:96px var(--gut-r) 96px var(--gut-l)}
+  #p-about .inv.cta .dk{display:none}
+  #p-about .inv.cta .mo{display:inline}
+  #p-about .inv.cta .cta-mark{display:block;font-size:60px;line-height:1;margin:0 0 24px -3px}
+  #p-about .inv.cta .cta-mark .hc-set{margin:0;vertical-align:0}
+  #p-about .inv.cta .cta-mark .hc-set i{animation:none;visibility:hidden}
+  #p-about .inv.cta .mo-cta{display:block;margin:20px 0 0;max-width:none;font-size:16px;line-height:1.55;color:color-mix(in srgb,var(--on-inv) 68%,var(--inv))}
+  #p-about .mcta .inv.cta h2{margin:0;font-size:30px;font-weight:700;line-height:1.35;letter-spacing:-.02em}
+  #p-about .mcta .inv.cta .pill{margin-top:36px;padding:0 0 6px;border:0;border-bottom:2px solid currentColor;border-radius:0;background:none;color:var(--on-inv);font-size:20px;font-weight:700;box-shadow:none}
+  @media (prefers-color-scheme:light){
+    #p-about .inv{--inv:#161616;--on-inv:#f7f5f2}
+  }
+  #p-impact .hero .pill.mhero::after{content:"";position:absolute;left:-8px;right:-8px;top:-10px;bottom:-10px}
+  @media (prefers-color-scheme:light){
+    #p-impact .inv{--inv:#161616;--on-inv:#f7f5f2}
+  }
+  #p-impact .mcta .inv.cta{border-radius:0;text-align:left;padding:80px var(--gut-r) 72px var(--gut-l)}
   #p-impact .mcta .inv.cta h2{margin:0;font-size:30px;font-weight:800;line-height:1.3;letter-spacing:-.04em}
-  #p-impact .mcta .inv.cta .cta-2l{margin:20px 0 0;max-width:none;font-size:min(16px,calc((100vw - 40px)/22));line-height:1.55;letter-spacing:-.02em;opacity:1;color:color-mix(in srgb,var(--on-inv) 68%,var(--inv))}
-  #p-impact .mcta .inv.cta .pill{margin-top:36px;padding:0 0 6px;border:0;border-bottom:2px solid currentColor;border-radius:0;background:none;color:var(--on-inv);font-size:20px;font-weight:700;box-shadow:none}
+  #p-impact .mcta .inv.cta .cta-2l{margin:24px 0 0;max-width:none;font-size:min(16px,calc((100vw - 40px)/22));line-height:1.55;letter-spacing:-.18px;opacity:1;color:color-mix(in srgb,var(--on-inv) 80%,var(--inv))}
+  #p-impact .mcta .inv.cta .cta-2l .dk{display:none}
+  #p-impact .mcta .inv.cta .cta-2l .mo{display:block;white-space:nowrap;font-size:17px;line-height:1.6}
+  #p-impact .mcta .inv.cta .pill{margin-top:32px;padding:0 0 6px;border:0;border-bottom:2px solid currentColor;border-radius:0;background:none;color:var(--on-inv);font-size:20px;font-weight:700;box-shadow:none}
   /* 비교 칸 켜짐: 처음부터 어두운 상태로 두고(흰 칸이 갑자기 꺼지지 않게), 천천히 부드럽게 차례로 켜짐 */
   #p-solution .cmp .from div,#p-impact .cmp .from div{transition:color 1.3s ease,border-color 1.3s ease,background-color 1.3s ease,text-decoration-color 1.3s ease,transform 1.3s cubic-bezier(.2,.7,.2,1)}
   #p-solution .cmp.fx .from.to-list div,#p-impact .cmp.fx .from.to-list div{transform:translateY(8px)}
@@ -1547,21 +1744,22 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
       <p class="eb">SOCIAL IMPACT</p>
       <h1>공간을 넘어,<br>지역과 사회의 문제로</h1>
       <p>블랭크는 공간을 넘어 지역과 사회 문제 해결에 기여합니다.</p>
+      <a class="pill light mhero" href="#contact">협업 문의하기 →</a>
     </div>
   </section>
 
   <section class="scene wrap">
-    <div class="qa"><p class="q">공간을 만드는 회사가 왜 지역을 이야기하나요?</p><h2>50개 이상 지역을 넘나들며,<br>공간 하나가 동네를 바꾸는 걸 확인했습니다.</h2><p class="lead">서울의 골목에서 춘천, 세종, 거창, 울산까지. 다양한 로컬 프로젝트 경험에서 얻은 변화의 가능성이 블랭크를 공간 밖으로 이끌었습니다.</p></div>
-    <div class="cards c3">
-      <div class="card stat"><b>50+</b><span>개 지역을 넘나든 로컬 프로젝트</span></div>
-      <div class="card stat"><b>100+</b><span>건의 임팩트 프로젝트</span></div>
-      <div class="card stat"><b>2013</b><span>년부터 이어 온 현장</span></div>
+    <div class="qa"><p class="q">공간을 만드는 회사가 왜 지역을 이야기하나요?</p><h2><span class="dk">50개 이상 지역을 넘나들며,<br>공간 하나가 동네를 바꾸는 걸 확인했습니다.</span><span class="mo">공간 하나로 동네가 달라지는 것,<br>현장에서 확인했습니다.</span></h2><p class="lead"><span class="dk">서울의 골목에서 춘천, 세종, 거창, 울산까지. 다양한 로컬 프로젝트 경험에서 얻은 변화의 가능성이 블랭크를 공간 밖으로 이끌었습니다.</span><span class="mo">서울의 골목에서 춘천, 세종, 거창, 울산까지.</span></p></div>
+    <div class="cards c3 mstat">
+      <div class="card stat"><b>50+</b><span class="dk">개 지역을 넘나든 로컬 프로젝트</span><span class="mo">개 지역의<br>로컬 프로젝트</span></div>
+      <div class="card stat"><b>100+</b><span class="dk">건의 임팩트 프로젝트</span><span class="mo">건의 임팩트<br>프로젝트</span></div>
+      <div class="card stat"><b>2013</b><span class="dk">년부터 이어 온 현장</span><span class="mo">년부터<br>이어 온 현장</span></div>
     </div>
-    <div class="qa next"><p class="q">현장에서 무엇을 봤나요?</p><h2>공간만 고쳐서는<br>풀리지 않는 문제들이 있었습니다.</h2></div>
-    <div class="cards c3">
-      <div class="card"><span class="k">비어 가는 거리</span><h3>가게는 비고 창업은 막막합니다</h3><p>빈 상가는 늘어 가는데, 동네에서 가게를 열고 싶은 사람에게는 첫 공간도, 경험도, 기댈 사람도 부족합니다.</p></div>
-      <div class="card"><span class="k">머물 곳 없는 창작자</span><h3>창작자가 머물 곳이 없습니다</h3><p>글을 쓰고, 일을 벌이고, 서로 만날 공간이 없으면 지역의 창작과 혁신도 뿌리내리지 못합니다.</p></div>
-      <div class="card"><span class="k">줄어드는 사람</span><h3>사람이 떠나고 빈집만 남습니다</h3><p>인구가 줄어드는 지역에는 오래 비어 있는 집과, 다시 찾아올 이유가 필요합니다.</p></div>
+    <div class="qa next"><p class="q">현장에서 무엇을 봤나요?</p><h2><span class="dk">공간만 고쳐서는<br>풀리지 않는 문제들이 있었습니다.</span><span class="mo">공간만 고쳐서는<br>풀리지 않는 문제들이<br>있었습니다.</span></h2></div>
+    <div class="cards c3 iprob">
+      <div class="card"><span class="k">비어 가는 거리</span><h3>가게는 비고 창업은 막막합니다</h3><p><span class="dk">빈 상가는 늘어 가는데, 동네에서 가게를 열고 싶은 사람에게는 첫 공간도, 경험도, 기댈 사람도 부족합니다.</span><span class="mo">빈 상가는 늘어 가지만, 가게를 열고 싶은 사람에게는 첫 공간도, 경험도, 사람도 부족합니다.</span></p></div>
+      <div class="card"><span class="k">머물 곳 없는 창작자</span><h3>창작자가 머물 곳이 없습니다</h3><p><span class="dk">글을 쓰고, 일을 벌이고, 서로 만날 공간이 없으면 지역의 창작과 혁신도 뿌리내리지 못합니다.</span><span class="mo">글을 쓰고, 생활하고, 서로 만날 공간이 없으면 지역에서 창작도 혁신도 뿌리내리지 못합니다.</span></p></div>
+      <div class="card"><span class="k">줄어드는 사람</span><h3>사람이 떠나고 빈집만 남습니다</h3><p><span class="dk">인구가 줄어드는 지역에는 오래 비어 있는 집과, 다시 찾아올 이유가 필요합니다.</span><span class="mo">오래 비어 있는 집에는 사람이 다시 찾아올 이유가 필요합니다.</span></p></div>
     </div>
   </section>
 
@@ -1593,34 +1791,34 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   <section class="scene wrap">
     <div class="qa"><p class="q">구체적으로 어떤 일을 하나요?</p><h2>블랭크는 그동안 현장에서<br>다음과 같은 변화를 만들어 왔습니다.</h2></div>
 
-    <h3 class="sub-h"><span class="dk">{01} &nbsp;유휴공간 활용 로컬 창업 생태계 구축</span><span class="mo"><span class="n">01</span>유휴공간 활용 로컬 창업 생태계 구축</span></h3>
+    <h3 class="sub-h"><span class="dk">{01} &nbsp;유휴공간 활용 로컬 창업 생태계 구축</span><span class="mo"><span class="n">01</span><span class="kp">가게는 비고 창업은 막막합니다</span><b class="kw">로컬 창업 생태계</b><span class="kd">빈 상가를 창업가의 첫 무대로</span></span></h3>
     <p class="lead" style="margin-top:12px;max-width:640px;color:var(--body)">비어 있는 상가와 건물을 동네 창업가의 첫 무대로 바꿉니다. 발굴하고, 키우고, 가게를 열 때까지 함께합니다.</p>
     <div class="cards sol">
-      <a class="card bg wide" href="#portfolio" data-work="site-31" style="text-decoration:none"><img src="photos/0ef065d036fc.webp" alt="리부트 울산 태화동 내가게" loading="lazy"><div class="t"><span class="k">대표 프로젝트 · 울산 중구</span><h3>리부트 울산 ‘태화동 내가게’</h3><p>울산 태화동의 빈 상가를 로컬 창업가의 첫 가게로 바꾸는 프로젝트입니다. 로컬창업캠프로 60개 팀의 창업 풀을 만들고, 그중 선발된 팀이 태화동에 실제 가게를 열 때까지 공간과 운영을 함께합니다.</p><span class="tlink">자세히 보기 →</span></div></a>
-      <a class="card photo" href="#portfolio" data-work="site-32" style="text-decoration:none"><img class="media" src="photos/f4fbe66ce314.webp" alt="액티브 군산" loading="lazy"><div class="t"><span class="k">전북 군산</span><h3>액티브 군산</h3><p>군산의 유휴공간을 거점으로 지역 창업가를 발굴하고 연결합니다.</p><span class="tlink">자세히 보기 →</span></div></a>
-      <a class="card photo" href="#portfolio" data-work="site-33" style="text-decoration:none"><img class="media" src="photos/42f83832cef3.webp" alt="과천 새서울플라자" loading="lazy"><div class="t"><span class="k">경기 과천</span><h3>과천 새서울플라자</h3><p>오래된 상가의 빈 점포를 청년 창업가의 점포로 고쳐, 상가에 새로운 사람과 활기를 들였습니다.</p><span class="tlink">자세히 보기 →</span></div></a>
+      <a class="card bg wide" href="#portfolio" data-work="site-31" style="text-decoration:none"><img src="photos/0ef065d036fc.webp" alt="리부트 울산 태화동 내가게" loading="lazy"><div class="t"><span class="k">대표 프로젝트 · 울산 중구</span><h3>리부트 울산 ‘태화동 내가게’</h3><p><span class="dk">울산 태화동의 빈 상가를 로컬 창업가의 첫 가게로 바꾸는 프로젝트입니다. 로컬창업캠프로 60개 팀의 창업 풀을 만들고, 그중 선발된 팀이 태화동에 실제 가게를 열 때까지 공간과 운영을 함께합니다.</span><span class="mo">태화동의 빈 상가를 로컬 창업가의 첫 가게로 바꿉니다. 로컬창업캠프 60개 팀 중 선발된 팀이 가게를 열 때까지 공간과 운영을 함께합니다.</span></p><span class="tlink">자세히 보기 →</span></div></a>
+      <a class="card photo" href="#portfolio" data-work="site-32" style="text-decoration:none"><img class="media" src="photos/f4fbe66ce314.webp" alt="액티브 군산" loading="lazy"><div class="t"><span class="k">전북 군산</span><h3>액티브 군산</h3><p><span class="dk">군산의 유휴공간을 거점으로 지역 창업가를 발굴하고 연결합니다.</span><span class="mo">지역 창업가 발굴과 연결</span></p><span class="tlink">자세히 보기 →</span></div></a>
+      <a class="card photo" href="#portfolio" data-work="site-33" style="text-decoration:none"><img class="media" src="photos/42f83832cef3.webp" alt="과천 새서울플라자" loading="lazy"><div class="t"><span class="k">경기 과천</span><h3>과천 새서울플라자</h3><p><span class="dk">오래된 상가의 빈 점포를 청년 창업가의 점포로 고쳐, 상가에 새로운 사람과 활기를 들였습니다.</span><span class="mo">빈 점포를 청년 창업가의 점포로</span></p><span class="tlink">자세히 보기 →</span></div></a>
     </div>
 
-    <h3 class="sub-h"><span class="dk">{02} &nbsp;창작자를 위한 코워킹, 코리빙 공간 조성</span><span class="mo"><span class="n">02</span>창작자를 위한 코워킹, 코리빙 공간 조성</span></h3>
+    <h3 class="sub-h"><span class="dk">{02} &nbsp;창작자를 위한 코워킹, 코리빙 공간 조성</span><span class="mo"><span class="n">02</span><span class="kp">창작자가 머물 곳이 없습니다</span><b class="kw">코워킹, 코리빙</b><span class="kd">창작자가 머물고 일하고 만나는 공간</span></span></h3>
     <p class="lead" style="margin-top:12px;max-width:640px;color:var(--body)">작가와 활동가, 지역의 혁신가가 머물고 일하고 만나는 공간을 만듭니다. 창작이 머무는 곳에 지역의 새로운 이야기가 생깁니다.</p>
     <div class="cards sol">
-      <a class="card bg wide" href="#portfolio" data-work="site-08" style="text-decoration:none"><img src="photos/482b29ffa771.webp" alt="밀리의 서재 작가의 집" loading="lazy"><div class="t"><span class="k">대표 프로젝트 · 서울 부암동</span><h3>밀리의 서재 ‘작가의 집’</h3><p>kt 밀리의서재가 신진 소설가를 위해 연 문학 레지던시입니다. 작가들이 머물며 글을 쓰는 집을 블랭크가 함께 만들고, 지금도 맡아 운영합니다.</p><span class="tlink">자세히 보기 →</span></div></a>
-      <a class="card photo" href="#portfolio" data-work="site-16" style="text-decoration:none"><img class="media" src="photos/hq/5a9c4e10c0578.webp" alt="청자장 복합문화공간 외관" loading="lazy"><div class="t"><span class="k">세종 조치원</span><h3>조치원 청자장</h3><p>조치원의 오래된 건물을 창작자와 주민이 함께 쓰는 복합문화공간으로 고쳤습니다.</p><span class="tlink">자세히 보기 →</span></div></a>
-      <a class="card photo" href="#portfolio" data-work="site-15" style="text-decoration:none"><img class="media" src="photos/hq/6bee813f4fa04.webp" alt="춘천 소통협력공간 커먼즈필드 춘천 외관" loading="lazy"><div class="t"><span class="k">강원 춘천</span><h3>춘천 소통협력공간</h3><p>지역의 혁신가와 활동가가 모여 일하고 만나는 사회혁신 일상공간, 커먼즈필드 춘천을 만들었습니다.</p><span class="tlink">자세히 보기 →</span></div></a>
+      <a class="card bg wide" href="#portfolio" data-work="site-08" style="text-decoration:none"><img src="photos/482b29ffa771.webp" alt="밀리의 서재 작가의 집" loading="lazy"><div class="t"><span class="k">대표 프로젝트 · 서울 부암동</span><h3>밀리의 서재 ‘작가의 집’</h3><p><span class="dk">kt 밀리의서재가 신진 소설가를 위해 연 문학 레지던시입니다. 작가들이 머물며 글을 쓰는 집을 블랭크가 함께 만들고, 지금도 맡아 운영합니다.</span><span class="mo">kt 밀리의서재가 신진 소설가를 위해 연 문학<br>레지던시입니다. 작가들이 머물며 글을 쓰는 집을<br>블랭크가 함께 만들고, 지금도 맡아 운영합니다.</span></p><span class="tlink">자세히 보기 →</span></div></a>
+      <a class="card photo" href="#portfolio" data-work="site-16" style="text-decoration:none"><img class="media" src="photos/hq/5a9c4e10c0578.webp" alt="청자장 복합문화공간 외관" loading="lazy"><div class="t"><span class="k">세종 조치원</span><h3>조치원 청자장</h3><p><span class="dk">조치원의 오래된 건물을 창작자와 주민이 함께 쓰는 복합문화공간으로 고쳤습니다.</span><span class="mo">오래된 건물을 복합문화공간으로</span></p><span class="tlink">자세히 보기 →</span></div></a>
+      <a class="card photo" href="#portfolio" data-work="site-15" style="text-decoration:none"><img class="media" src="photos/hq/6bee813f4fa04.webp" alt="춘천 소통협력공간 커먼즈필드 춘천 외관" loading="lazy"><div class="t"><span class="k">강원 춘천</span><h3>춘천 소통협력공간</h3><p><span class="dk">지역의 혁신가와 활동가가 모여 일하고 만나는 사회혁신 일상공간, 커먼즈필드 춘천을 만들었습니다.</span><span class="mo">혁신가와 활동가가 만나는 공간</span></p><span class="tlink">자세히 보기 →</span></div></a>
     </div>
 
-    <h3 class="sub-h"><span class="dk">{03} &nbsp;인구 감소 지역에 새로운 생활 인구 유입</span><span class="mo"><span class="n">03</span>인구 감소 지역에 새로운 생활 인구 유입</span></h3>
+    <h3 class="sub-h"><span class="dk">{03} &nbsp;인구 감소 지역에 새로운 생활 인구 유입</span><span class="mo"><span class="n">03</span><span class="kp">사람이 떠나고 빈집만 남습니다</span><b class="kw">인구 감소 지역</b><span class="kd">빈집을 사람이 다시 찾아오는 곳으로</span></span></h3>
     <p class="lead" style="margin-top:12px;max-width:640px;color:var(--body)">오래 비어 있던 집을 머무는 공간으로 바꿔, 사람이 줄어드는 지역에 다시 찾아오고 살아 볼 이유를 만듭니다.</p>
     <div class="cards sol">
-      <a class="card bg wide" href="#portfolio" data-work="site-09" style="text-decoration:none"><img src="photos/279665be72ad.webp" alt="스테이 달이실" loading="lazy"><div class="t"><span class="k">대표 프로젝트 · 경남 거창</span><h3>거창군 ‘스테이 달이실’</h3><p>오래 비어 있던 농촌 빈집 네 채를 고친 거창군의 ‘경남 별장’입니다. 머무는 숙소이자 농촌 살아보기 공간으로, 블랭크가 맡아 운영하며 도시의 사람들을 거창으로 불러들입니다.</p><span class="tlink">자세히 보기 →</span></div></a>
-      <a class="card photo" href="#portfolio" data-work="site-34" style="text-decoration:none"><img class="media" src="photos/e2f175b5ba95.webp" alt="강진 병영면 마을" loading="lazy"><div class="t"><span class="k">전남 강진</span><h3>병영면 마을호텔 계획 수립</h3><p>마을의 빈집과 유휴 공간을 엮어 마을 전체가 하나의 호텔이 되는 계획을 세웠습니다.</p><span class="tlink">자세히 보기 →</span></div></a>
-      <a class="card photo" href="#portfolio" data-work="site-35" style="text-decoration:none"><img class="media" src="photos/a7a05370b4c7.webp" alt="장항 아우름스테이" loading="lazy"><div class="t"><span class="k">충남 서천</span><h3>장항 아우름스테이</h3><p>장항의 유휴 공간을 머무는 공간으로 바꿔, 지역을 찾고 머무는 사람을 늘립니다.</p><span class="tlink">자세히 보기 →</span></div></a>
+      <a class="card bg wide" href="#portfolio" data-work="site-09" style="text-decoration:none"><img src="photos/279665be72ad.webp" alt="스테이 달이실" loading="lazy"><div class="t"><span class="k">대표 프로젝트 · 경남 거창</span><h3>거창군 ‘스테이 달이실’</h3><p><span class="dk">오래 비어 있던 농촌 빈집 네 채를 고친 거창군의 ‘경남 별장’입니다. 머무는 숙소이자 농촌 살아보기 공간으로, 블랭크가 맡아 운영하며 도시의 사람들을 거창으로 불러들입니다.</span><span class="mo">농촌 빈집 네 채를 고친 거창군의 ‘경남 별장’입니다.<br>숙소이자 농촌 살아보기 공간으로, 블랭크가 맡아<br>운영하며 도시의 사람들을 불러들입니다.</span></p><span class="tlink">자세히 보기 →</span></div></a>
+      <a class="card photo" href="#portfolio" data-work="site-34" style="text-decoration:none"><img class="media" src="photos/e2f175b5ba95.webp" alt="강진 병영면 마을" loading="lazy"><div class="t"><span class="k">전남 강진</span><h3>병영면 마을호텔 계획 수립</h3><p><span class="dk">마을의 빈집과 유휴 공간을 엮어 마을 전체가 하나의 호텔이 되는 계획을 세웠습니다.</span><span class="mo">마을이 하나의 호텔이 되는 계획</span></p><span class="tlink">자세히 보기 →</span></div></a>
+      <a class="card photo" href="#portfolio" data-work="site-35" style="text-decoration:none"><img class="media" src="photos/a7a05370b4c7.webp" alt="장항 아우름스테이" loading="lazy"><div class="t"><span class="k">충남 서천</span><h3>장항 아우름스테이</h3><p><span class="dk">장항의 유휴 공간을 머무는 공간으로 바꿔, 지역을 찾고 머무는 사람을 늘립니다.</span><span class="mo">유휴 공간을 머무는 공간으로</span></p><span class="tlink">자세히 보기 →</span></div></a>
     </div>
   </section>
 
   <section class="scene wrap">
-    <div class="qa"><p class="q">이 모든 것을 블랭크 혼자서 하나요?</p><h2>로컬 파트너와 협력하여<br>더 큰 임팩트를 창출합니다.</h2><p class="lead">지역을 가장 잘 아는 건 그 지역의 사람들입니다. 블랭크는 지자체와 공공기관, 기업, 그리고 지역에서 활동해 온 사람들과 함께할 때 변화가 더 멀리 간다고 믿습니다.</p></div>
-    <div class="cards c3">
+    <div class="qa"><p class="q">이 모든 것을 블랭크 혼자서 하나요?</p><h2><span class="dk">로컬 파트너와 협력하여<br>더 큰 임팩트를 창출합니다.</span><span class="mo">로컬 파트너와 함께<br>더 큰 임팩트를 만듭니다.</span></h2><p class="lead"><span class="dk">지역을 가장 잘 아는 건 그 지역의 사람들입니다. 블랭크는 지자체와 공공기관, 기업, 그리고 지역에서 활동해 온 사람들과 함께할 때 변화가 더 멀리 간다고 믿습니다.</span><span class="mo">지역을 가장 잘 아는 건 그 지역 사람들입니다.<br>함께할 때 변화가 더 멀리 간다고 믿습니다.</span></p></div>
+    <div class="cards c3 ptn">
       <div class="card"><span class="k">지자체 · 공공기관</span><h3>정책을 현장의 공간으로</h3><p>지역의 과제를 함께 정의하고, 사업이 실제 공간과 운영으로 이어지도록 합니다.</p></div>
       <div class="card"><span class="k">기업 · 재단</span><h3>자원을 지역의 기회로</h3><p>기업의 브랜드와 자원이 지역과 사람에게 닿는 프로젝트를 함께 만듭니다.</p></div>
       <div class="card"><span class="k">로컬 크리에이터 · 창업가</span><h3>사람을 지역의 주인공으로</h3><p>지역에서 일을 벌이는 사람들이 공간을 얻고, 서로 연결되고, 오래 머물 수 있게 돕습니다.</p></div>
@@ -1631,7 +1829,7 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   <section class="scene wrap mcta">
     <div class="inv cta">
       <h2>다음 변화는<br>어느 지역에서 시작될까요?</h2>
-      <p class="cta-2l"><span>지역의 문제 해결, 현장의 답이 필요한 사업이 있다면</span><br><span>블랭크와 함께 진짜 변화를 만들어 가요.</span></p>
+      <p class="cta-2l"><span class="dk"><span>지역의 문제 해결, 현장의 답이 필요한 사업이 있다면</span><br><span>블랭크와 함께 진짜 변화를 만들어 가요.</span></span><span class="mo">지역의 문제 해결,<br>현장의 답이 필요한 사업이 있다면<br>블랭크와 함께 진짜 변화를 만들어 가요.</span></p>
       <a class="pill on-inv" href="#contact">협업 문의하기</a>
     </div>
   </section>
@@ -1693,12 +1891,12 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   <img src="photos/58444e0e07f7.webp" alt="블랭크 사람들이 한 테이블에 둘러앉아 함께 밥을 먹는 모습을 그린 손그림">
     <div class="wrap">
       <svg class="mark" viewBox="64.32 68.05 112.25 19.71" role="img" aria-label="BLANK"><path d="M67.3945 71.1328h14.3633v5.2344H67.3945zM81.7578 84.6797H67.3945v-5.2344h14.3633zM64.3203 68.0586v19.6992h20.5156V68.0586z"/> <path d="M90.2969 84.6797V68.0586h-3.0743v19.6992h20.5157v-3.0781z"/> <path d="M150.5898 68.0547v14.5703L136.2266 68.9375v-.8828h-3.0743v19.6992h3.0743V73.1836l14.3632 13.6914v.8789h3.0782V68.0547z"/> <path d="M113.3242 71.1328h14.3633v5.2344h-14.3633zM110.2461 68.0586v19.6992h3.0781v-8.3125h14.3633v8.3125h3.0742V68.0586z"/> <path d="M161.4375 84.6797l14.6563-13.9727-2.1211-2.2266-14.8399 14.1484V68.0586h-3.0781v19.6992h20.5157v-3.0781z"/></svg>
-      <h1>빈 공간의 기획부터 설계, 운영까지.<br>한 팀이 합니다.</h1>
+      <h1>빈 공간의 기획부터<span class="dk"> </span><span class="mo"><br></span>설계, 운영까지<span class="tp">.</span><br><span class="tm">한 팀이 합니다<span class="tp">.</span></span></h1>
     </div>
   </section>
 
   <section class="scene wrap">
-    <div class="sec-h"><h2>빈 공간은 늘어 가는데,<br>쓰임을 모르면 다시 비어 갑니다.</h2><p>기획, 설계, 시공, 운영이 따로 움직이면 처음 정한 쓰임은 흐려지고 공간은 고친 뒤에도 비어 갑니다. 블랭크는 이 문제를 직시하는 데서 시작했습니다. 2013년부터 한 팀이 처음부터 끝까지 맡아 왔습니다.</p></div>
+    <div class="sec-h"><h2>빈 공간은 늘어 가는데,<br>쓰임을 모르면 다시 비어 갑니다.</h2><p><span class="dk">기획, 설계, 시공, 운영이 따로 움직이면 처음 정한 쓰임은 흐려지고 공간은 고친 뒤에도 비어 갑니다. 블랭크는 이 문제를 직시하는 데서 시작했습니다. 2013년부터 한 팀이 처음부터 끝까지 맡아 왔습니다.</span><span class="mo">기획, 설계, 시공, 운영이 따로 움직이면 쓰임은<br>흐려지고, 고친 공간은 제 역할을 잃습니다.<br>블랭크는 2013년부터 한 팀이 끝까지 맡았습니다.</span></p></div>
     <div class="inv nums">
       <div class="nm"><b>13<small>년+</small></b><span>2013년부터 이어 온 현장</span></div>
       <div class="nm"><b>50<small>+</small></b><span>개 지역을 넘나든 로컬 프로젝트</span></div>
@@ -1708,12 +1906,12 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   </section>
 
   <section class="scene wrap">
-    <div class="sec-h"><p class="eb">일하는 방식</p><h2>한 팀이 처음부터 끝까지.<br>블랭크가 일하는 세 가지 방식</h2><p>기획, 설계, 운영을 잇는 수직 통합 모델로 처음 정한 쓰임이 끝까지 이어지게 합니다.</p></div>
+    <div class="sec-h"><p class="eb">일하는 방식</p><h2>한 팀이 처음부터 끝까지.<br>블랭크가 일하는 세 가지 방식</h2><p>기획, 설계, 운영을 잇는 수직 통합 모델로 <br class="m">처음 정한 쓰임이 끝까지 이어지게 합니다.</p></div>
     <div class="cards c3 way" id="ab-way"></div>
   </section>
 
   <section class="scene wrap">
-    <div class="sec-h"><p class="eb">맨파워</p><h2>공간을 그리고 운영하는 사람들</h2><p>기획설계, 사업개발, 운영관리 세 팀의 구성원 9명이 한 팀으로 움직입니다.</p></div>
+    <div class="sec-h"><p class="eb">맨파워</p><h2>공간을 그리고 운영하는 사람들</h2><p>기획설계, 사업개발, 운영관리 세 팀의 <br class="m">구성원 9명이 한 팀으로 움직입니다.</p></div>
     <div class="cards c3 team">
       <div class="card"><span class="k">(주)블랭크건축사사무소</span><h3>기획설계</h3><p>변화를 만드는 공간을 기획하고 설계합니다.</p><ul><li><b>김지은</b><span>Co-CEO · 건축사(KIRA) · 서울시공공건축가</span><small>2015~</small></li><li><b>김민보</b><span>Director</span><small>2024~</small></li></ul></div>
       <div class="card"><span class="k">(주)블랭크</span><h3>사업개발</h3><p>유휴공간과 로컬사업을 발굴, 기획합니다.</p><ul><li><b>문승규</b><span>Co-CEO · Co-founder</span><small>2013~</small></li><li><b>김세중</b><span>Director</span><small>2017~</small></li><li><b>엄성진</b><span>Director</span><small>2022~</small></li><li><b>최인영</b><span>Marketer</span><small>2025~</small></li><li><b>박종훈</b><span>Director</span><small>2026~</small></li></ul></div>
@@ -1734,7 +1932,7 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
 
   <section class="scene wrap">
     <div class="sec-h"><p class="eb">우리가 그리는 미래</p><h2>공간에서 지역으로,<br>지역에서 사회로</h2></div>
-    <div class="cards c3">
+    <div class="cards c3 fut">
       <div class="card"><span class="k">{01}</span><h3>빈집에서 생활 인구로</h3><p>사람이 줄어드는 지역에 다시 찾아오고 살아 볼 이유를 만듭니다.</p></div>
       <div class="card"><span class="k">{02}</span><h3>빈 상가에서 로컬 창업으로</h3><p>비어 가는 거리를 동네 창업가의 첫 무대로 바꿉니다.</p></div>
       <div class="card"><span class="k">{03}</span><h3>공간에서 사회로</h3><p>공간 하나가 거리를, 동네를, 사회를 바꾸는 일을 이어 갑니다.</p></div>
@@ -1754,13 +1952,14 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
       <div class="ml">[프로젝트 리포트] 프로젝트 블랭크<small>대한건축학회 「건축」 · 2019</small></div>
       <a href="https://www.mk.co.kr/premium/life/view/2019/12/27375/" target="_blank" rel="noopener noreferrer">청년 동네건축가들의 현재와 미래<small>매경프리미엄 · 2019</small></a>
       <a href="https://vmspace.com/project/project_view.html?base_seq=MzM5" target="_blank" rel="noopener noreferrer">새로운 시대의 건축가 그룹들<small>월간 SPACE · 2018</small></a>
-    </div></div>
+    </div><button class="ml-more" type="button" onclick="this.previousElementSibling.classList.add('open');this.hidden=true">미디어 더 보기 <span aria-hidden="true">↓</span></button></div>
   </section>
 
-  <section class="scene wrap">
+  <section class="scene wrap mcta">
     <div class="inv cta">
-      <h2>함께 만들고 싶은 공간이 있다면</h2>
-      <a class="pill on-inv" href="#contact">상담하기</a>
+      <h2><span class="dk">함께 만들고 싶은 공간이 있다면</span><span class="mo">비어 있는 공간의<br>새로운 가능성을<br>찾고 계신가요?</span></h2>
+      <p class="mo-cta">빈 집, 빈 건물, 빈 동네, 어떤 공간이든 <br class="m">편하게 이야기해 주세요.</p>
+      <a class="pill on-inv" href="#contact"><span class="dk">상담하기</span><span class="mo">함께 이야기하기 →</span></a>
     </div>
   </section>
 </main>
@@ -1976,8 +2175,8 @@ const tl=$('#hist');
 tl.innerHTML=[...HIST].reverse().map(h=>`<article class="tl-item"><h3 class="tl-yr">${h[0]}</h3><span class="tl-rail" aria-hidden="true"></span><ul class="tl-body">${h[1].map(l=>`<li>${esc(l).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')}</li>`).join('')}</ul></article>`).join('');
 try{if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){tl.classList.add('js');const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}}),{rootMargin:'0px 0px -8% 0px'});tl.querySelectorAll('.tl-item').forEach(el=>io.observe(el))}}catch(err){}
 const BRANDS=[['유휴하우스','yoohuu','유휴하우스','빈집큐레이션 플랫폼','dh-room'],['{공집합}','gongzipop','{공집합}','이웃이 주인되는 우리동네 커뮤니티 바','gong'],['WIS','Work In Sangdo','워크인 상도','블랭크가 상도동에서 일하는 공간','wis'],['달이실','STAY','스테이 달이실','농촌 빈집 네 채를 고친 거창의 ‘경남 별장’','dalisil']];
-$('#ab-brands').innerHTML=BRANDS.map(b=>`<div class="card"><div class="bd-sym" role="img" aria-label="${esc(b[2])} 브랜드 심볼"><b>${esc(b[0])}</b><small>${esc(b[1])}</small></div>${b[4]?`<img class="bd-img" src="${IMG[b[4]]}" alt="${esc(b[2])} 대표 이미지" loading="lazy">`:`<div class="slot bd-img"><b>대표 사진</b><small>준비 중</small></div>`}<h3>${esc(b[2])}</h3><p>${esc(b[3])}</p></div>`).join('');
-const WAY=[['{01}','기획','쓰임부터 찾습니다','공간과 동네를 직접 걷고 읽어, 그 자리에 어울리는 쓰임을 정합니다.','commons'],['{02}','설계','운영을 아는 설계','건축사사무소가 문을 연 뒤의 동선까지 쓰임에 꼭 맞게 그립니다.','cheongja'],['{03}','운영','문 연 뒤까지 직접','상도, 밀리 작가의 집, 스테이 달이실까지 직접 꾸려 왔습니다.','dalisil']];
+$('#ab-brands').innerHTML=BRANDS.map(b=>`<div class="card"><div class="bd-sym" role="img" aria-label="${esc(b[2])} 브랜드 심볼"><b><span class="n0">${esc(b[0])}</span><span class="n2">${esc(b[2])}</span></b><small>${esc(b[1])}</small></div>${b[4]?`<img class="bd-img" src="${IMG[b[4]]}" alt="${esc(b[2])} 대표 이미지" loading="lazy">`:`<div class="slot bd-img"><b>대표 사진</b><small>준비 중</small></div>`}<h3 class="bn">${esc(b[2])}</h3><p>${esc(b[3])}</p></div>`).join('');
+const WAY=[['{01}','기획','쓰임부터 찾습니다','공간과 동네를 직접 걷고 읽어, 그 자리에 어울리는 쓰임을 정합니다.','commons'],['{02}','설계','운영을 아는 설계','건축사사무소가 문을 연 뒤의 동선까지 쓰임에 꼭 맞게 그립니다.','cheongja'],['{03}','운영','문 연 뒤까지 직접','공집합, 밀리 작가의 집, 스테이 달이실까지 직접 꾸려 왔습니다.','dalisil']];
 $('#ab-way').innerHTML=WAY.map(w=>`<div class="card bg light"><img src="${IMG[w[4]]}" alt="${esc(w[1])}" loading="lazy"><div class="t"><span class="n">${w[0]} ${w[1]}</span><h3>${w[2]}</h3><p>${w[3]}</p></div></div>`).join('');
 
 /* ── 대표작 슬라이드 ── */
