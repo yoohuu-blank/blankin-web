@@ -102,6 +102,7 @@ main[hidden]{display:none}
 .qa.title h2{margin-top:0;font-size:clamp(32px,4.6vw,48px)}
 .next{margin-top:clamp(80px,10vw,120px)}
 .sub-h{margin-top:clamp(72px,9vw,96px);font-size:28px;font-weight:700;line-height:1.4;letter-spacing:-.02em}
+#p-impact .sub-h .mo{display:none}
 
 /* cards */
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:16px;margin-top:40px}
@@ -1096,6 +1097,100 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   /* 홈 히어로(모바일): 실제 헤더 높이만큼만 빼서 첫 화면에 꽉 차게, 하단 줄은 항상 두 줄로 쌓아 슬라이드가 바뀌어도 글·괄호 위치가 안 흔들리게 */
   #p-home#p-home .hhero{height:calc(100svh - var(--hdh,113px) - env(safe-area-inset-top,0px));min-height:520px}
   #p-home#p-home .hh-foot{flex-direction:column;align-items:flex-start;gap:0}
+  /* 홈 히어로(모바일) 포스터 구도: 좌우 20 여백 / 위 40 여백 아래 괄호(오른쪽 위, 크기 고정) / 글은 왼쪽 아래 한 덩어리 / 아래 여백은 작게. 슬라이드마다 바뀌는 건 사진과 이름 줄뿐 */
+  #p-home#p-home .hh-top{align-items:flex-start;padding-top:40px;padding-bottom:0}
+  #p-home#p-home .hh-set{font-size:80px}
+  #p-home#p-home .hh-body{padding-bottom:calc(36px + env(safe-area-inset-bottom,0px))}
+  #p-home#p-home .hh-foot{margin-top:32px;padding-top:6px}
+  #p-home#p-home .hh-cap{flex-wrap:nowrap;white-space:nowrap;min-height:32px;max-width:calc(100% - 76px)}
+  #p-home#p-home .hh-bars button{height:24px}
+  /* ===== 임팩트 모바일: 솔루션 최종 규칙 적용 (767px 이하, #p-impact 한정) ===== */
+  /* 히어로 */
+  #p-impact .hero h1{font-size:34px;font-weight:800;line-height:1.25;letter-spacing:-.04em;text-shadow:0 1px 14px rgba(0,0,0,.35)}
+  #p-impact .hero .eb{margin-bottom:14px;font-size:13px;font-weight:600;letter-spacing:.06em}
+  #p-impact .hero p:not(.eb){margin-top:16px;font-size:16px;font-weight:500;line-height:1.55;letter-spacing:-.02em;text-shadow:0 1px 14px rgba(0,0,0,.35);word-break:keep-all;text-wrap:balance}
+  /* 히어로: 솔루션과 같이 사진이 히어로 끝까지, 글자 높이도 솔루션과 같게(제목 위치 동일), 사진은 만드는 장면이 보이게 오른쪽으로 */
+  #p-impact .hero.illust{padding-bottom:160px}
+  #p-impact .hero.illust>img{object-position:58% 50%!important}
+  /* 질문(작은 회색) → 답(크게) */
+  #p-impact .qa .q{font-size:16px;font-weight:600;line-height:1.5;letter-spacing:-.01em;color:var(--muted)}
+  #p-impact .qa h2{margin-top:10px;font-size:26px;font-weight:800;line-height:1.35;letter-spacing:-.04em;word-break:keep-all;text-wrap:balance}
+  #p-impact .qa .lead{margin-top:20px;font-size:16px;line-height:1.55;letter-spacing:-.02em;color:var(--muted);text-wrap:balance;word-break:keep-all}
+  #p-impact section.scene{padding-top:72px}
+  #p-impact section.wrap:not(.scene){padding-top:72px!important}
+  #p-impact section.wrap:not(.scene) + .scene{padding-top:56px}
+  #p-impact .qa.next{margin-top:56px}
+  /* 통계·문제·파트너 카드: 회색 타일 */
+  #p-impact .cards.c3{display:flex;flex-direction:column;gap:10px;margin-top:28px}
+  #p-impact .cards.c3 .card{aspect-ratio:auto;min-height:0;border-radius:14px;padding:18px 18px 19px;background:var(--card)}
+  #p-impact .cards.c3 .card .k{display:block;margin:0 0 6px;font-size:13px;font-weight:600;line-height:1.4;letter-spacing:-.01em;color:var(--muted)}
+  #p-impact .cards.c3 .card h3{margin:0;font-size:20px;font-weight:700;line-height:1.3;letter-spacing:-.03em;color:var(--fg)}
+  #p-impact .cards.c3 .card p{margin:5px 0 0;font-size:15px;font-weight:400;line-height:1.5;letter-spacing:-.02em;color:var(--muted);text-wrap:balance;word-break:keep-all}
+  #p-impact .cards.c3 .card.stat b{font-size:34px;font-weight:700;line-height:1.1;letter-spacing:-.045em}
+  #p-impact .cards.c3 .card.stat span{display:block;margin-top:6px;font-size:14px;font-weight:500;line-height:1.4;color:var(--muted)}
+  #p-impact .cards.tight .card.wide{border-radius:14px;padding:18px;background:var(--card)}
+  #p-impact .cards.tight .card.wide>p{font-size:15px;line-height:1.5;letter-spacing:-.02em;color:var(--muted)}
+  #p-impact .cards.tight .tlink{font-size:15px;font-weight:600;letter-spacing:-.02em;line-height:1.5}
+  /* OUR APPROACH 검정 영역: 화면 가득 + 회색 라벨 + 작은 회색/큰 흰 제목 */
+  #p-impact .inv:not(.cta){margin-left:calc(-1*var(--gut-l));margin-right:calc(-1*var(--gut-r));border-radius:0;padding:72px var(--gut-r) 72px var(--gut-l)}
+  #p-impact .inv:not(.cta) .eb{margin-bottom:10px;font-size:14px;font-weight:600;letter-spacing:.06em;opacity:1;color:color-mix(in srgb,var(--on-inv) 55%,var(--inv))}
+  #p-impact .inv:not(.cta) h2{margin-top:0}
+  #p-impact .inv:not(.cta) h2 .a{display:block;font-size:20px;font-weight:600;line-height:1.5;letter-spacing:-.03em;color:color-mix(in srgb,var(--on-inv) 68%,var(--inv))}
+  #p-impact .inv:not(.cta) h2 br.dt{display:none}
+  #p-impact .inv:not(.cta) h2 .b{display:block;margin-top:14px;font-size:30px;font-weight:800;line-height:1.3;letter-spacing:-.04em;text-wrap:balance;word-break:keep-all}
+  #p-impact .cmp .from{gap:8px}
+  #p-impact .cmp .from div{font-size:16px;border-radius:12px;transition:color .5s ease,border-color .5s ease,background-color .5s ease,text-decoration-color .5s ease}
+  #p-impact .cmp .from:not(.to-list) div{opacity:1;color:color-mix(in srgb,var(--on-inv) 55%,var(--inv));border-color:color-mix(in srgb,var(--on-inv) 16%,transparent)}
+  #p-impact .cmp .from.to-list .lbl{opacity:1;color:var(--on-inv)}
+  #p-impact .cmp .from.to-list div{background:var(--on-inv);color:var(--inv);border:1px solid var(--on-inv);font-weight:600}
+  #p-impact .cmp .from div{padding:12px 18px}
+  #p-impact .cmp .arrow{padding:16px 0 14px;gap:0}
+  #p-impact .cmp .arrow span{display:none}
+  #p-impact .cmp .arrow svg{width:22px;height:22px;stroke-width:1.6;color:color-mix(in srgb,var(--on-inv) 55%,var(--inv))}
+  #p-impact .cmp.fx .from.to-list div{background:none;color:color-mix(in srgb,var(--on-inv) 28%,var(--inv));border-color:color-mix(in srgb,var(--on-inv) 14%,transparent)}
+  #p-impact .cmp.fx .from.to-list div.on{color:var(--inv);border-color:var(--on-inv);background:var(--on-inv)}
+  #p-impact .cmp.fx .from:not(.to-list) div{text-decoration:line-through;text-decoration-thickness:1px;text-decoration-color:transparent}
+  #p-impact .cmp.fx .from:not(.to-list) div.off{text-decoration-color:color-mix(in srgb,var(--on-inv) 45%,transparent);color:color-mix(in srgb,var(--on-inv) 38%,var(--inv))}
+  #p-impact .cmp .arrow{padding:16px 0 14px;gap:4px}
+  #p-impact .cmp .arrow span{display:block;font-size:13px;font-weight:600;letter-spacing:-.01em;color:color-mix(in srgb,var(--on-inv) 55%,var(--inv))}
+  #p-impact .inv:not(.cta) .down .dk{display:none}
+  #p-impact .inv:not(.cta) .down .mo{display:block}
+  #p-impact .inv:not(.cta) .down{margin-top:32px;padding-inline:0}
+  #p-impact .inv:not(.cta) .down .g{display:block;font-size:20px;font-weight:600;line-height:1.5;letter-spacing:-.03em;color:color-mix(in srgb,var(--on-inv) 68%,var(--inv))}
+  #p-impact .inv:not(.cta) .down .b{display:block;font-size:20px;font-weight:800;line-height:1.4;letter-spacing:-.04em;color:var(--on-inv)}
+  /* 사례 3묶음: 번호는 작은 회색 라벨, 대표 1장은 사진 카드, 나머지 2장은 작은 사진 리스트 */
+  #p-impact .sub-h .dk{display:none}
+  #p-impact .sub-h .mo{display:block}
+  #p-impact .sub-h .n{display:block;margin-bottom:6px;font-size:13px;font-weight:600;line-height:1.4;letter-spacing:-.01em;color:var(--muted)}
+  #p-impact .sub-h{margin-top:56px;font-size:20px;font-weight:700;line-height:1.3;letter-spacing:-.03em}
+  #p-impact .qa + .sub-h{margin-top:48px}
+  #p-impact .sub-h + .lead{margin-top:8px!important;max-width:none!important;font-size:15px;line-height:1.5;letter-spacing:-.02em;color:var(--muted)!important;text-wrap:balance;word-break:keep-all}
+  #p-impact .cards.sol{display:block;margin-top:20px}
+  #p-impact .cards.sol .card.bg.wide{aspect-ratio:4/5;border-radius:14px;clip-path:inset(0 round 14px)}
+  #p-impact .cards.sol .card.bg.wide::after{background:linear-gradient(to top,rgba(24,18,12,.88) 0%,rgba(24,18,12,.58) 38%,rgba(24,18,12,.14) 68%,rgba(24,18,12,0) 100%)}
+  #p-impact .cards.sol .card.bg.wide .t{padding:16px 16px 18px;gap:0}
+  #p-impact .cards.sol .card.bg.wide .k{font-size:13px;font-weight:600;line-height:1.4;letter-spacing:-.01em;color:rgba(247,245,242,.75)}
+  #p-impact .cards.sol .card.bg.wide h3{margin:2px 0 0;font-size:20px;font-weight:700;line-height:1.3;letter-spacing:-.03em;color:#f7f5f2}
+  #p-impact .cards.sol .card.bg.wide p{margin:6px 0 0;font-size:15px;font-weight:400;line-height:1.5;letter-spacing:-.02em;color:rgba(247,245,242,.88);word-break:keep-all}
+  #p-impact .cards.sol .card.bg.wide .tlink{margin-top:10px;font-size:15px;font-weight:600;letter-spacing:-.02em;line-height:1.5}
+  #p-impact .cards.sol .card.photo{display:grid;grid-template-columns:88px minmax(0,1fr);column-gap:14px;align-items:start;padding:16px 0;margin:0;background:none;border-radius:0;box-shadow:none;border:0!important;border-bottom:1px solid var(--line)!important}
+  #p-impact .cards.sol .card.bg.wide + .card.photo{margin-top:8px;border-top:1px solid var(--line)!important}
+  #p-impact .cards.sol .card.photo>img.media{display:block;width:88px;height:88px;aspect-ratio:1/1;object-fit:cover;border-radius:12px;margin:0}
+  #p-impact .cards.sol .card.photo>.t{padding:0;min-width:0;gap:0}
+  #p-impact .cards.sol .card.photo .k{font-size:13px;font-weight:600;line-height:1.4;letter-spacing:-.01em;color:var(--muted)}
+  #p-impact .cards.sol .card.photo h3{margin:2px 0 0;font-size:18px;font-weight:700;line-height:1.3;letter-spacing:-.03em}
+  #p-impact .cards.sol .card.photo p{margin:4px 0 0;font-size:15px;font-weight:400;line-height:1.45;letter-spacing:-.02em;color:var(--muted);word-break:keep-all}
+  #p-impact .cards.sol .card.photo .tlink{display:none}
+  /* CTA: 검정 가득, 왼쪽 정렬, 밑줄 링크 */
+  #p-impact section.mcta{padding:0;margin-top:72px}
+  #p-impact .mcta .inv.cta{border-radius:0;text-align:left;padding:88px var(--gut-r) 88px var(--gut-l)}
+  #p-impact .mcta .inv.cta h2{margin:0;font-size:30px;font-weight:800;line-height:1.3;letter-spacing:-.04em}
+  #p-impact .mcta .inv.cta .cta-2l{margin:20px 0 0;max-width:none;font-size:min(16px,calc((100vw - 40px)/22));line-height:1.55;letter-spacing:-.02em;opacity:1;color:color-mix(in srgb,var(--on-inv) 68%,var(--inv))}
+  #p-impact .mcta .inv.cta .pill{margin-top:36px;padding:0 0 6px;border:0;border-bottom:2px solid currentColor;border-radius:0;background:none;color:var(--on-inv);font-size:20px;font-weight:700;box-shadow:none}
+  /* 비교 칸 켜짐: 처음부터 어두운 상태로 두고(흰 칸이 갑자기 꺼지지 않게), 천천히 부드럽게 차례로 켜짐 */
+  #p-solution .cmp .from div,#p-impact .cmp .from div{transition:color 1.3s ease,border-color 1.3s ease,background-color 1.3s ease,text-decoration-color 1.3s ease,transform 1.3s cubic-bezier(.2,.7,.2,1)}
+  #p-solution .cmp.fx .from.to-list div,#p-impact .cmp.fx .from.to-list div{transform:translateY(8px)}
+  #p-solution .cmp.fx .from.to-list div.on,#p-impact .cmp.fx .from.to-list div.on{transform:none}
   /* 푸터: 플로팅 상담 버튼에 가리지 않게 */
   footer{padding-bottom:120px}
 }
@@ -1107,6 +1202,9 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   #p-home .hcta h2{font-size:28px}
   #p-home .hstate h2,#p-home .home-h{font-size:26px}
   #p-solution .qa h2{font-size:24px}
+  #p-impact .qa h2{font-size:24px}
+  #p-impact .inv:not(.cta) h2 .b{font-size:28px}
+  #p-impact .mcta .inv.cta h2{font-size:26px}
   #p-solution .inv:not(.cta) h2 .b{font-size:28px}
   #p-solution#p-solution .cards.mstory .card.photo:not(.wide) h3{font-size:17px}
 }
@@ -1465,7 +1563,7 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   <section class="wrap" style="padding-top:clamp(100px,13vw,180px)">
     <div class="inv">
       <p class="eb">OUR APPROACH</p>
-      <h2>서류 말고 현장에서<br>답을 찾는 임팩트 솔루션을 지향합니다.</h2>
+      <h2><span class="a">서류 말고 현장에서</span><br class="dt"><span class="b">답을 찾는 임팩트 솔루션을 지향합니다.</span></h2>
       <div class="cmp">
         <div class="from">
           <p class="lbl">흔히는</p>
@@ -1483,14 +1581,14 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
           <div>지속 가능한 운영 시스템을 구축합니다</div>
         </div>
       </div>
-      <p class="down">계획안이 아니라 <span>변화된 현장의 결과</span>로 증명합니다</p>
+      <p class="down"><span class="dk">계획안이 아니라 <span>변화된 현장의 결과</span>로 증명합니다</span><span class="mo"><span class="g">계획안이 아니라</span><span class="b">변화된 현장의 결과로 증명합니다</span></span></p>
     </div>
   </section>
 
   <section class="scene wrap">
     <div class="qa"><p class="q">구체적으로 어떤 일을 하나요?</p><h2>블랭크는 그동안 현장에서<br>다음과 같은 변화를 만들어 왔습니다.</h2></div>
 
-    <h3 class="sub-h">{01} &nbsp;유휴공간 활용 로컬 창업 생태계 구축</h3>
+    <h3 class="sub-h"><span class="dk">{01} &nbsp;유휴공간 활용 로컬 창업 생태계 구축</span><span class="mo"><span class="n">01</span>유휴공간 활용 로컬 창업 생태계 구축</span></h3>
     <p class="lead" style="margin-top:12px;max-width:640px;color:var(--body)">비어 있는 상가와 건물을 동네 창업가의 첫 무대로 바꿉니다. 발굴하고, 키우고, 가게를 열 때까지 함께합니다.</p>
     <div class="cards sol">
       <a class="card bg wide" href="#portfolio" data-work="site-31" style="text-decoration:none"><img src="photos/0ef065d036fc.webp" alt="리부트 울산 태화동 내가게" loading="lazy"><div class="t"><span class="k">대표 프로젝트 · 울산 중구</span><h3>리부트 울산 ‘태화동 내가게’</h3><p>울산 태화동의 빈 상가를 로컬 창업가의 첫 가게로 바꾸는 프로젝트입니다. 로컬창업캠프로 60개 팀의 창업 풀을 만들고, 그중 선발된 팀이 태화동에 실제 가게를 열 때까지 공간과 운영을 함께합니다.</p><span class="tlink">자세히 보기 →</span></div></a>
@@ -1498,7 +1596,7 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
       <a class="card photo" href="#portfolio" data-work="site-33" style="text-decoration:none"><img class="media" src="photos/42f83832cef3.webp" alt="과천 새서울플라자" loading="lazy"><div class="t"><span class="k">경기 과천</span><h3>과천 새서울플라자</h3><p>오래된 상가의 빈 점포를 청년 창업가의 점포로 고쳐, 상가에 새로운 사람과 활기를 들였습니다.</p><span class="tlink">자세히 보기 →</span></div></a>
     </div>
 
-    <h3 class="sub-h">{02} &nbsp;창작자를 위한 코워킹, 코리빙 공간 조성</h3>
+    <h3 class="sub-h"><span class="dk">{02} &nbsp;창작자를 위한 코워킹, 코리빙 공간 조성</span><span class="mo"><span class="n">02</span>창작자를 위한 코워킹, 코리빙 공간 조성</span></h3>
     <p class="lead" style="margin-top:12px;max-width:640px;color:var(--body)">작가와 활동가, 지역의 혁신가가 머물고 일하고 만나는 공간을 만듭니다. 창작이 머무는 곳에 지역의 새로운 이야기가 생깁니다.</p>
     <div class="cards sol">
       <a class="card bg wide" href="#portfolio" data-work="site-08" style="text-decoration:none"><img src="photos/482b29ffa771.webp" alt="밀리의 서재 작가의 집" loading="lazy"><div class="t"><span class="k">대표 프로젝트 · 서울 부암동</span><h3>밀리의 서재 ‘작가의 집’</h3><p>kt 밀리의서재가 신진 소설가를 위해 연 문학 레지던시입니다. 작가들이 머물며 글을 쓰는 집을 블랭크가 함께 만들고, 지금도 맡아 운영합니다.</p><span class="tlink">자세히 보기 →</span></div></a>
@@ -1506,7 +1604,7 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
       <a class="card photo" href="#portfolio" data-work="site-15" style="text-decoration:none"><img class="media" src="photos/hq/6bee813f4fa04.webp" alt="춘천 소통협력공간 커먼즈필드 춘천 외관" loading="lazy"><div class="t"><span class="k">강원 춘천</span><h3>춘천 소통협력공간</h3><p>지역의 혁신가와 활동가가 모여 일하고 만나는 사회혁신 일상공간, 커먼즈필드 춘천을 만들었습니다.</p><span class="tlink">자세히 보기 →</span></div></a>
     </div>
 
-    <h3 class="sub-h">{03} &nbsp;인구 감소 지역에 새로운 생활 인구 유입</h3>
+    <h3 class="sub-h"><span class="dk">{03} &nbsp;인구 감소 지역에 새로운 생활 인구 유입</span><span class="mo"><span class="n">03</span>인구 감소 지역에 새로운 생활 인구 유입</span></h3>
     <p class="lead" style="margin-top:12px;max-width:640px;color:var(--body)">오래 비어 있던 집을 머무는 공간으로 바꿔, 사람이 줄어드는 지역에 다시 찾아오고 살아 볼 이유를 만듭니다.</p>
     <div class="cards sol">
       <a class="card bg wide" href="#portfolio" data-work="site-09" style="text-decoration:none"><img src="photos/279665be72ad.webp" alt="스테이 달이실" loading="lazy"><div class="t"><span class="k">대표 프로젝트 · 경남 거창</span><h3>거창군 ‘스테이 달이실’</h3><p>오래 비어 있던 농촌 빈집 네 채를 고친 거창군의 ‘경남 별장’입니다. 머무는 숙소이자 농촌 살아보기 공간으로, 블랭크가 맡아 운영하며 도시의 사람들을 거창으로 불러들입니다.</p><span class="tlink">자세히 보기 →</span></div></a>
@@ -1525,7 +1623,7 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
     <div class="cards tight"><div class="card wide"><p>블랭크와 함께 변화를 만들어 나가는 파트너</p><div class="marquee" role="region" aria-label="파트너 로고"><ul class="mq-track"><li><img src="photos/cd142ddbe328.webp" alt="밀리의서재"></li><li><img src="photos/d5e512342cb9.webp" alt="현대해상"></li><li><img src="photos/3f75ea1247f2.webp" alt="루트임팩트"></li><li><img src="photos/b09727cbfd18.webp" alt="사단법인 점프"></li><li><img src="photos/ef06b4f0a2cd.webp" alt="인액터스"></li><li><img src="photos/ddbbac8b7c4d.webp" alt="거창군"></li><li><img src="photos/99c8e3b90b3e.webp" alt="강진군"></li><li><img src="photos/7668d5a5005f.webp" alt="춘천시"></li><li aria-hidden="true"><img src="photos/cd142ddbe328.webp" alt=""></li><li aria-hidden="true"><img src="photos/d5e512342cb9.webp" alt=""></li><li aria-hidden="true"><img src="photos/3f75ea1247f2.webp" alt=""></li><li aria-hidden="true"><img src="photos/b09727cbfd18.webp" alt=""></li><li aria-hidden="true"><img src="photos/ef06b4f0a2cd.webp" alt=""></li><li aria-hidden="true"><img src="photos/ddbbac8b7c4d.webp" alt=""></li><li aria-hidden="true"><img src="photos/99c8e3b90b3e.webp" alt=""></li><li aria-hidden="true"><img src="photos/7668d5a5005f.webp" alt=""></li></ul></div></div><a class="tlink" href="#portfolio-impact" style="margin-top:12px">임팩트 프로젝트 모두 보기 →</a></div></div>
   </section>
 
-  <section class="scene wrap">
+  <section class="scene wrap mcta">
     <div class="inv cta">
       <h2>다음 변화는<br>어느 지역에서 시작될까요?</h2>
       <p class="cta-2l"><span>지역의 문제 해결, 현장의 답이 필요한 사업이 있다면</span><br><span>블랭크와 함께 진짜 변화를 만들어 가요.</span></p>
@@ -2186,18 +2284,20 @@ try{new MutationObserver(ms=>{for(const m of ms)for(const a of m.addedNodes){if(
 <script>
 /* 솔루션 비교: 스크롤로 들어오면 오른쪽 칸이 차례로 켜지고 짝인 왼쪽 칸에 취소선 (모바일, 움직임 줄이기 설정이면 생략) */
 (function(){
-  var c=document.querySelector('#p-solution .cmp');
+  ['#p-solution .cmp','#p-impact .cmp'].forEach(function(sel){
+  var c=document.querySelector(sel);
   if(!c||!('IntersectionObserver' in window)) return;
   var mq=window.matchMedia('(max-width:767px)'),rm=window.matchMedia('(prefers-reduced-motion:reduce)');
   if(!mq.matches||rm.matches) return;
   var L=c.querySelectorAll('.from:not(.to-list) > div'),R=c.querySelectorAll('.from.to-list > div'),done=false;
+  c.classList.add('fx');
   var io=new IntersectionObserver(function(es){
     if(done||!es[0].isIntersecting) return;
     done=true;io.disconnect();
-    c.classList.add('fx');
-    R.forEach(function(r,i){setTimeout(function(){r.classList.add('on');if(L[i])L[i].classList.add('off');},700+i*650);});
-  },{threshold:.6});
+    R.forEach(function(r,i){setTimeout(function(){r.classList.add('on');if(L[i])L[i].classList.add('off');},800+i*850);});
+  },{threshold:.5});
   io.observe(c);
+  });
 })();
 </script>
 <script>
