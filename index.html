@@ -1080,6 +1080,18 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   #p-solution#p-solution .voices .quote .dk{display:none}
   #p-solution#p-solution .voices .quote .mo{display:inline}
   #p-solution#p-solution .strip .tg{display:block}
+  /* 설계: 어두운 띠로 흐름 환기 (모바일만) */
+  #p-solution#p-solution section.chap.mdark{background:#111;margin-top:72px;padding:56px 20px 64px}
+  #p-solution#p-solution section.chap.mdark+section.chap{margin-top:0;padding-top:72px}
+  #p-solution#p-solution .mdark .qa .q{color:rgba(255,255,255,.55)}
+  #p-solution#p-solution .mdark .qa h2{color:#fff}
+  #p-solution#p-solution .mdark .cards.mflat .card{background:#1c1c1c;color:#fff}
+  #p-solution#p-solution .mdark .cards.mflat .card.mcutp{background:none}
+  #p-solution#p-solution .mdark .cards.mflat .card h3{color:#fff}
+  #p-solution#p-solution .mdark .cards.mflat .card p{color:rgba(255,255,255,.62)}
+  #p-solution#p-solution .mdark .mwork .m{color:rgba(255,255,255,.55)}
+  #p-solution#p-solution .mdark .mwork b{color:#fff}
+  #p-solution#p-solution .mdark .tlink,#p-solution#p-solution .mdark .mmore .tlink{color:#fff;border-bottom-color:rgba(255,255,255,.7)}
   /* 푸터: 플로팅 상담 버튼에 가리지 않게 */
   footer{padding-bottom:120px}
 }
@@ -1292,7 +1304,7 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
     </div>
   </section>
 
-  <section class="scene wrap chap">
+  <section class="scene wrap chap mdark">
     <div class="qa"><p class="ch"><span class="stp"><i>01 쓰임</i><i class="on">02 설계</i><i>03 시공</i><i>04 운영</i></span></p><p class="q">쓰임이 정해지면, 설계는 누가 하나요?</p><h2>블랭크가 직접 합니다.<br>블랭크는 건축사사무소입니다.</h2></div>
     <div class="cards mflat">
       <div class="card wide mcutp"><h3>2013년부터, 공간을 그려 온 건축사사무소</h3><p><span class="dk">공공, 민간, 기업, 개인의 다양한 공간을 설계해 왔습니다. 공간을 고찰하고 창조적으로 설계하는 일은 지금도 블랭크의 중심입니다.</span><span class="mo">공공, 민간, 기업, 개인의 공간을 설계해 왔습니다.</span></p>
