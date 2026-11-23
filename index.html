@@ -1098,9 +1098,14 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   #p-home#p-home .hhero{height:calc(100svh - var(--hdh,113px) - env(safe-area-inset-top,0px));min-height:520px}
   #p-home#p-home .hh-foot{flex-direction:column;align-items:flex-start;gap:0}
   /* 홈 히어로(모바일) 포스터 구도: 좌우 20 여백 / 위 40 여백 아래 괄호(오른쪽 위, 크기 고정) / 글은 왼쪽 아래 한 덩어리 / 아래 여백은 작게. 슬라이드마다 바뀌는 건 사진과 이름 줄뿐 */
+  /* 홈 히어로(모바일) 한 가지 규칙: 높이 520px·제목 36px·괄호 80px을 모든 폰 폭에서 똑같이(화면 높이·주소창·폭과 상관없이) → 어떤 폰·웹 모바일 보기에서도 같은 구도. 글은 위로 떠오르지 않고 제자리에서 나타남 */
+  #p-home#p-home .hhero{--x:clamp(0px,calc(100svh - 844px),100px);height:calc(520px + var(--x));min-height:0}
+  #p-home#p-home .hhero h1{font-size:36px;line-height:1.2;max-width:320px}
+  #p-home#p-home .hhero h1,#p-home#p-home .hh-body>p,#p-home#p-home .hh-foot{animation-name:hh-fade}
+  @keyframes hh-fade{from{opacity:0}}
   #p-home#p-home .hh-top{align-items:flex-start;padding-top:40px;padding-bottom:0}
   #p-home#p-home .hh-set{font-size:80px}
-  #p-home#p-home .hh-body{padding-bottom:calc(36px + env(safe-area-inset-bottom,0px))}
+  #p-home#p-home .hh-body{padding-bottom:calc(36px + var(--x,0px)/2 + env(safe-area-inset-bottom,0px))}
   #p-home#p-home .hh-foot{margin-top:32px;padding-top:6px}
   #p-home#p-home .hh-cap{flex-wrap:nowrap;white-space:nowrap;min-height:32px;max-width:calc(100% - 76px)}
   #p-home#p-home .hh-bars button{height:24px}
