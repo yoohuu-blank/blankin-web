@@ -30,7 +30,7 @@
   --bg:#ffffff;--fg:#111111;--body:#4a4a4a;--muted:#6e6e6e;--q:#858585;
   --card:#f5f5f5;--line:#e4e4e4;--slot:#bdbdbd;--slotbg:#ffffff;
   --inv:#111111;--on-inv:#f7f5f2;--hdr:rgba(255,255,255,.94);
-  --photo-ink:#f7f5f2;--photo-bg:#1a1a1a;
+  --photo-ink:#f7f5f2;--photo-bg:#1a1a1a;--t2:color-mix(in srgb,var(--fg) 90%,var(--bg));
   --sans:'Pretendard Variable',Pretendard,-apple-system,system-ui,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
   --gut-l:max(20px,env(safe-area-inset-left,0px));--gut-r:max(20px,env(safe-area-inset-right,0px));
 }
@@ -163,6 +163,11 @@ main[hidden]{display:none}
 .mfaq .mo{display:none}
 .mtwo .mo{display:none}
 .mlist .mo{display:none}
+#p-solution .mmore .strip>a.mx{display:none}
+#p-solution .tlink.nou .mo{display:none}
+#p-solution .mgain{display:none}
+#p-solution .qa.mfirst h2 .mo{display:none}
+#p-solution .cards.mlist .card.mnew{display:none}
 .mflat .card.bg .mo{display:none}
 .cmp .mo{display:none}
 .tmo{display:none}
@@ -1067,6 +1072,21 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   #p-solution#p-solution .mstatsec .qa h2.hs{font-size:26px;font-weight:800;line-height:1.35;letter-spacing:-.04em}
   #p-solution#p-solution .mfaq .qa h2{font-size:26px;font-weight:800;line-height:1.35;letter-spacing:-.04em}
   #p-solution#p-solution .mfaq .faq summary{font-size:15px;font-weight:600;line-height:1.4;letter-spacing:-.025em}
+  #p-solution#p-solution .mfaq .faq summary{font-size:15px;font-weight:500;line-height:1.35;letter-spacing:-.025em;color:var(--body);min-height:44px;padding:0;align-items:center}
+  /* FAQ 정렬: 질문 글자는 제목과 같은 왼쪽선, 열린 타일만 양옆으로 번짐 */
+  /* 왜 다시 비어 갈까요: 상자는 유지, 여백만 촘촘하게 / 마지막 카드는 라이트·다크 모두 강하게 */
+  #p-solution#p-solution .mprob .cards.c3{gap:22px;margin-top:24px}
+  #p-solution#p-solution .mprob .cards.c3 .card{padding:14px 18px 15px}
+  #p-solution#p-solution .mprob .cards.c3 .card:not(:last-child)::after{height:22px;font-size:15px}
+  #p-solution#p-solution .mprob .cards.c3 .card h3{font-size:19px;line-height:1.3}
+  #p-solution#p-solution .mprob .cards.c3 .card p{margin-top:3px;font-size:14px;line-height:1.45}
+  #p-solution#p-solution .mprob .cards.c3 .card:last-child{background:var(--inv)}
+  #p-solution#p-solution .mprob .cards.c3 .card:last-child h3{color:var(--on-inv)}
+  #p-solution#p-solution .mprob .cards.c3 .card:last-child p{color:var(--on-inv);opacity:.72}
+  #p-solution#p-solution .mfaq .faq details{padding:0 18px;margin:0 -18px}
+  #p-solution#p-solution .mfaq .faq details[open]{padding:0 18px 16px;margin:4px -18px}
+  #p-solution#p-solution .mfaq .faq details[open] summary{color:var(--fg)}
+  #p-solution#p-solution .mfaq .faq summary::after{margin-right:0}
   #p-solution#p-solution :is(.cards .card,.mmore .card) p{line-height:1.5}
   #p-solution#p-solution .mpick .card h3{letter-spacing:-.03em;line-height:1.3}
   #p-solution#p-solution .mwork b{font-weight:700}
@@ -1418,6 +1438,339 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
 @media (max-width:340px){
   #p-solution#p-solution .cards.mstory .card.photo:not(.wide) h3{font-size:16px}
 }
+@media (max-width:767px){
+  /* 솔루션 "직접 가서 보고…" 한 덩어리로 합침(모바일만): 카드 3장, 두 번째 질문 숨김 */
+  #p-solution#p-solution .qa.mfirst h2 .dk{display:none}
+  #p-solution#p-solution .qa.mfirst h2 .mo{display:inline}
+  #p-solution#p-solution .cards.mlist .card .dk{display:none}
+  #p-solution#p-solution .cards.mlist .card .mo{display:inline}
+  #p-solution#p-solution .cards.mlist .card.mskip,#p-solution#p-solution .qa.mmerge,#p-solution#p-solution .cards.mmerge{display:none}
+  #p-solution#p-solution .cards.mlist .card.bg.mnew{display:flex}
+}
+@media (max-width:767px){
+  /* 솔루션 "기획하고 운영해 본 사람이 설계합니다": 카드 3장 -> 회색 한 덩이 + 가는 구분선(임팩트 파트너 박스와 같은 방식) */
+  #p-solution#p-solution .cards.mone{display:block;margin-top:24px;padding:0 18px;border-radius:14px;background:var(--card,#f4f4f4)}
+  #p-solution#p-solution .cards.mone .card,#p-solution#p-solution .cards.mone .card.mtile{display:block;position:static;margin:0!important;padding:17px 0 18px;min-height:0;aspect-ratio:auto;border:0!important;border-radius:0;background:none;overflow:visible}
+  #p-solution#p-solution .cards.mone .card + .card{border-top:1px solid color-mix(in srgb,var(--fg) 10%,transparent)!important}
+  #p-solution#p-solution .cards.mone .card .t{position:static;padding:0!important;background:none}
+  #p-solution#p-solution .cards.mone .card h3{margin:0;font-size:18px;font-weight:600;line-height:1.35;letter-spacing:-.03em;color:var(--fg)}
+  #p-solution#p-solution .cards.mone .card p{margin:4px 0 0;font-size:15px;line-height:1.45}
+}
+@media (max-width:767px){
+  /* 솔루션 "꼭 전부 맡겨야 하나요?" 아래: 한 번에 맡기면 좋은 점(시공 챕터의 "그러면 뭐가 편해지나요?"를 옮김) */
+  #p-solution#p-solution .qa.mmv,#p-solution#p-solution .cards.mmv{display:none}
+  #p-solution#p-solution .mgain{display:block;margin-top:36px}
+  #p-solution .mgain .gl{margin:0 0 10px;font-size:13px;font-weight:600;line-height:1.3;letter-spacing:-.01em;color:var(--muted)}
+  #p-solution .mgain .gbox{padding:0 18px;border-radius:14px;background:var(--card,#f5f5f5)}
+  #p-solution .mgain .gi{padding:12px 0 13px}
+  #p-solution .mgain .gi + .gi{border-top:1px solid color-mix(in srgb,var(--fg) 10%,transparent)}
+  #p-solution .mgain .gi h3{margin:0;font-size:17px;font-weight:600;line-height:1.3;letter-spacing:-.03em;color:var(--fg)}
+  #p-solution .mgain .gi p{margin:2px 0 0;font-size:14px;line-height:1.4;letter-spacing:-.02em;color:var(--muted);word-break:keep-all}
+}
+@media (max-width:767px){
+  /* 솔루션 "설계는 누가 하나요?": 검정 띠 제거: 흰 배경으로(다른 챕터와 같은 형식) */
+  #p-solution#p-solution .mdark>.qa:not(.next){background:none;box-shadow:none;clip-path:none;padding:0}
+  #p-solution#p-solution .mdark>.qa:not(.next) .q{color:var(--muted)}
+  #p-solution#p-solution .mdark>.qa:not(.next) h2{color:var(--fg)}
+  #p-solution#p-solution .mdark .card.mcutp{background:none;box-shadow:none;clip-path:none;border:0!important;padding:0}
+  #p-solution#p-solution .mdark .card.mcutp>h3{margin-top:24px;color:var(--fg)}
+}
+@media (max-width:767px){
+  /* 솔루션 흰 카드 링크 2개: 밑줄 없이, 화살표는 ↗로 통일하고 연하게 */
+  #p-solution#p-solution .tlink.nou{border-bottom:0!important;padding-bottom:0}
+  #p-solution#p-solution .tlink.nou .dk{display:none}
+  #p-solution#p-solution .tlink.nou .mo{display:inline}
+  #p-solution#p-solution .tlink.nou .ar{margin-left:2px;opacity:.4}
+}
+@media (max-width:767px){
+  /* 솔루션 "유휴하우스" 묶음: 숨 쉴 틈 더 주기(사진 위·아래, 흰 카드 사이·안쪽) */
+  #p-solution#p-solution .mmore h3.sub-h:first-of-type + .cards .card.wide .strip{margin-top:24px}
+  #p-solution#p-solution .mmore h3.sub-h:first-of-type + .cards .card.wide + .card{margin-top:36px}
+  #p-solution#p-solution .mmore h3.sub-h:first-of-type + .cards .card + .card{padding:22px 20px 24px}
+  #p-solution#p-solution .mmore h3.sub-h:first-of-type + .cards .card + .card + .card{margin-top:14px}
+  #p-solution#p-solution .mmore h3.sub-h:first-of-type + .cards .card + .card p{margin-top:6px}
+  #p-solution#p-solution .mmore h3.sub-h:first-of-type + .cards .card + .card .tlink{margin-top:14px}
+}
+@media (max-width:767px){
+  /* 유휴하우스 사진 줄: 포트폴리오의 유휴하우스 10곳, 천천히 자동으로 넘어감 */
+  #p-solution#p-solution .mmore .card.wide .strip>a.mx{display:block}
+}
+@media (max-width:767px){
+  /* 작은 썸네일 목록 통일: 64px · 12px 라운드 / 라벨 13 · 제목 16 · 설명 14 / 구분선 없이 16px 간격 */
+  #p-solution#p-solution .mwork a{gap:14px}
+  #p-solution#p-solution .cards.mflat .card.mhead .mwork{gap:16px}
+  #p-solution#p-solution .mwork img{width:64px;height:64px;border-radius:12px}
+  #p-solution#p-solution .mwork .m{font-size:13px;font-weight:500;line-height:1.3}
+  #p-solution#p-solution .mwork b{margin-top:2px;font-size:16px;font-weight:700;line-height:1.3;letter-spacing:-.03em}
+  #p-solution#p-solution .cards.mstory .card.photo:not(.wide),#p-impact#p-impact .cards.sol .card.photo{grid-template-columns:64px minmax(0,1fr);column-gap:14px;align-items:start;padding:0;margin:16px 0 0;border:0!important;background:none;border-radius:0}
+  #p-solution#p-solution .cards.mstory .card.photo:first-child,#p-impact#p-impact .cards.sol .card.bg.wide + .card.photo{margin-top:0;border:0!important}
+  #p-impact#p-impact .cards.sol .card.bg.wide + .card.photo{margin-top:22px}
+  #p-solution#p-solution .cards.mstory .card.photo:nth-last-child(2){border:0!important}
+  #p-solution#p-solution .cards.mstory .card.photo:not(.wide)>img.media,#p-impact#p-impact .cards.sol .card.photo>img.media{width:64px;height:64px;border-radius:12px}
+  #p-solution#p-solution .cards.mstory .k,#p-impact#p-impact .cards.sol .card.photo .k{margin:0;font-size:13px;font-weight:500;line-height:1.3;letter-spacing:-.01em;color:var(--muted)}
+  #p-solution#p-solution .cards.mstory .card.photo:not(.wide) h3,#p-impact#p-impact .cards.sol .card.photo h3{margin:2px 0 0;font-size:16px;font-weight:700;line-height:1.3;letter-spacing:-.03em}
+  #p-solution#p-solution .cards.mstory .card.photo:not(.wide) p,#p-impact#p-impact .cards.sol .card.photo p{margin:3px 0 0;font-size:14px;line-height:1.45}
+  #p-solution#p-solution .cards.mstory .card.wide{margin-top:24px}
+  /* 동해 이야기: 사진과 글을 세로 가운데로 맞추고 행 간격을 넉넉히 */
+  #p-solution#p-solution .cards.mstory .card.photo:not(.wide),#p-impact#p-impact .cards.sol .card.photo{align-items:center}
+  #p-solution#p-solution .cards.mstory .card.photo:not(.wide){margin-top:24px}
+  #p-solution#p-solution .cards.mstory .card.photo:first-child{margin-top:0}
+  /* 정리: 왼쪽 글자선 38px 통일 / 카드 제목 700 통일 / 외톨이 줄 방지 */
+  #p-solution#p-solution .cards.mlist .card.bg .t,#p-solution#p-solution .cards.mflat.mops>a.card.bg .t,#p-solution#p-solution .cards.mstory .card.wide>.t{padding-left:18px;padding-right:18px;padding-bottom:18px}
+  #p-solution#p-solution .mmore .card.wide:has(>img.media.tall) h3{margin:0 18px 52px}
+  #p-solution#p-solution .mmore .card.wide:has(>img.media.tall) .tlink{margin:0 18px 18px}
+  #p-solution#p-solution .mmore h3.sub-h:first-of-type + .cards .card + .card{padding:22px 18px 24px}
+  #p-solution#p-solution .cards.mlist .card h3,#p-solution#p-solution .cards.mflat .card.bg h3,#p-solution#p-solution .cards.mone .card h3{font-weight:700}
+  /* 동해 이야기 · 군산/과천 목록: 구분선 유지 (사진-글 세로 가운데) */
+  #p-solution#p-solution .cards.mstory .card.photo:not(.wide),#p-impact#p-impact .cards.sol .card.photo{margin:0;padding:18px 0;border-bottom:1px solid var(--line)!important}
+  #p-solution#p-solution .cards.mstory .card.photo:first-child,#p-impact#p-impact .cards.sol .card.bg.wide + .card.photo{margin:0;border-top:1px solid var(--line)!important}
+  #p-impact#p-impact .cards.sol .card.bg.wide + .card.photo{margin-top:22px}
+  #p-solution#p-solution .cards.mstory .card.photo:nth-last-child(2){border-bottom:1px solid var(--line)!important}
+  #p-solution#p-solution .mmore .card p{text-wrap:balance}
+  /* 유휴 · 유휴하우스 작업 카드: 링크 줄을 없애고 카드 전체를 누르게, 화살표는 오른쪽 */
+  #p-solution#p-solution .mmore h3.sub-h:first-of-type + .cards .card + .card{position:relative;padding:16px 46px 17px 18px}
+  #p-solution#p-solution .mmore h3.sub-h:first-of-type + .cards .card + .card + .card{margin-top:10px}
+  #p-solution#p-solution .mmore h3.sub-h:first-of-type + .cards .card + .card p{margin-top:3px}
+  #p-solution#p-solution .mmore h3.sub-h:first-of-type + .cards .card + .card .tlink{position:static;margin:0;padding:0;border:0;gap:0;font-size:0;line-height:0;min-height:0;display:block}
+  #p-solution#p-solution .mmore h3.sub-h:first-of-type + .cards .card + .card .tlink::after{inset:0;left:0;right:0;top:0;bottom:0}
+  #p-solution#p-solution .mmore h3.sub-h:first-of-type + .cards .card + .card .tlink .mo{font-size:0}
+  #p-solution#p-solution .mmore h3.sub-h:first-of-type + .cards .card + .card .tlink .ar{position:absolute;right:18px;top:50%;transform:translateY(-50%);margin:0;font-size:18px;line-height:1;opacity:.45}
+  /* 글자 링크: 눈에 보이는 모양은 그대로, 터치 영역만 위아래로 넓힘 */
+  #p-solution#p-solution .tlink{position:relative}
+  #p-solution#p-solution .tlink::after{content:"";position:absolute;left:-8px;right:-8px;top:-10px;bottom:-10px}
+  /* 어울리는지 알아보기 사진 카드: 낮고 여유 있게, 세 번째 사진은 앞의 두 장과 톤 맞춤 */
+  #p-solution#p-solution .cards.mlist{gap:16px}
+  #p-solution#p-solution .cards.mlist .card.bg{aspect-ratio:16/9}
+  #p-solution#p-solution .cards.mlist .card.bg.mnew>img{filter:saturate(.6) brightness(.8)}
+  #p-solution#p-solution .cards.mflat .card.bg:has(>img.keep)>.mpill{display:none}
+  /* 작은 썸네일 사진을 못 불러와도 자리 크기는 그대로 */
+  #p-solution#p-solution .mwork .slot,#p-solution#p-solution .cards.mstory .card.photo:not(.wide)>.slot,#p-impact#p-impact .cards.sol .card.photo>.slot{flex:none;width:64px;height:64px;aspect-ratio:1/1;padding:0;margin:0;border-radius:12px}
+  #p-solution#p-solution .cards.mstory .card.photo:not(.wide)>.slot{width:72px;height:72px}
+  #p-solution#p-solution .mwork .slot :is(b,small),#p-solution#p-solution .cards.mstory .card.photo>.slot :is(b,small),#p-impact#p-impact .cards.sol .card.photo>.slot :is(b,small){display:none}
+  #p-solution#p-solution .mmore .card.wide:has(.strip)>h3{font-size:17px;font-weight:600;letter-spacing:-.03em}
+  #p-solution#p-solution .cards.mflat .card.bg:has(>img.keep) .t{padding:0 18px 18px}
+  #p-solution#p-solution .cards.mflat.mops>a.card.mph>h3{margin:0 18px;font-weight:700}
+  #p-solution#p-solution .cards.mflat.mops>a.card.mph>p{margin:4px 18px 18px}
+  #p-solution#p-solution .cards.mstory .card.photo:not(.wide)>img.media{width:72px;height:72px}
+  #p-solution#p-solution .cards.mstory .card.photo:not(.wide){grid-template-columns:72px minmax(0,1fr)}
+}
+@media (max-width:370px){
+  #p-solution#p-solution .cards.voices .quote{font-size:13px;letter-spacing:-.03em}
+}
+@media (max-width:767px){
+  /* 유휴 · 유휴하우스 작업: 상자 대신 선 있는 두 행 */
+  #p-solution#p-solution .mmore h3.sub-h:first-of-type + .cards .card + .card{background:none;border-radius:0;padding:16px 34px 16px 0;margin-top:0;border-bottom:1px solid var(--line)}
+  #p-solution#p-solution .mmore h3.sub-h:first-of-type + .cards .card.wide + .card{margin-top:28px;border-top:1px solid var(--line)}
+  #p-solution#p-solution .mmore h3.sub-h:first-of-type + .cards .card + .card h3{font-size:17px;font-weight:600;letter-spacing:-.03em}
+  #p-solution#p-solution .mmore h3.sub-h:first-of-type + .cards .card + .card p{font-size:14px;margin-top:3px}
+  #p-solution#p-solution .mmore h3.sub-h:first-of-type + .cards .card + .card .tlink .ar{right:2px}
+}
+@media (max-width:767px){
+  /* 대표 프로젝트 박스: 시선 위계 정리 (박스 제목 > 프로젝트 제목 > 링크) */
+  #p-solution#p-solution .mwork b{font-weight:600;color:var(--t2)}
+  #p-solution#p-solution .card.mhead>.tlink,#p-solution#p-solution .card.mhead .tlink{font-size:14px;font-weight:600;color:var(--body);border-bottom-color:color-mix(in srgb,var(--body) 45%,transparent)}
+}
+@media (max-width:767px){
+  /* 글자 규칙 정리 — 섹션 제목 26/800 · 소제목 20/700 · 카드 제목 18/700 · 행/항목 제목 16/600(#2a2a2a) · 본문 15(행 설명 14) · 라벨 13 */
+  #p-solution#p-solution .mprob .cards.c3 .card h3,#p-solution#p-solution .mprob .cards.c3 .card:last-child h3{font-size:18px}
+  #p-solution#p-solution .mmore .card.wide:has(>img.media.tall) h3{font-weight:700}
+  #p-solution#p-solution .mgain .gi h3,#p-solution#p-solution .mmore .card.wide:has(.strip)>h3,#p-solution#p-solution .mmore h3.sub-h:first-of-type + .cards .card + .card h3,#p-solution#p-solution .cards.mstory .card.photo:not(.wide) h3{font-size:16px;font-weight:600;color:var(--t2)}
+  #p-solution#p-solution .qa .lead{font-size:15px}
+  #p-solution#p-solution .cmp .from.to-list div{color:color-mix(in srgb,var(--inv) 90%,var(--on-inv))}
+}
+@media (max-width:767px){
+  /* 줄바꿈 균형 */
+  #p-solution#p-solution h3{text-wrap:balance}
+}
+@media (max-width:767px){
+  /* 홈: 라벨·섹션 제목을 다른 페이지 규칙에 맞추고, 줄바꿈 외톨이 방지 */
+  #p-home#p-home .hstate .eb{font-size:16px;font-weight:600;letter-spacing:-.01em}
+  #p-home#p-home .hstate h2,#p-home#p-home .home-h{font-size:26px}
+  #p-home#p-home .hband .hlead,#p-home#p-home .home-work .card h3{text-wrap:balance}
+}
+@media (max-width:767px){ /* 임팩트: 솔루션 글자 규칙 */
+  #p-impact#p-impact .cards.sol .card.photo h3{font-size:16px;font-weight:600;color:var(--t2)}
+  #p-impact#p-impact .cards.sol .card.bg.wide .tlink{font-size:15px;font-weight:600;color:var(--t2);border-bottom-color:color-mix(in srgb,var(--t2) 45%,transparent)}
+  #p-impact#p-impact .cmp .from.to-list div{color:color-mix(in srgb,var(--inv) 90%,var(--on-inv))}
+  #p-impact#p-impact .cards.sol .card.bg.wide h3{font-size:18px;font-weight:600}
+  #p-impact#p-impact .qa:has(+ h3.sub-h) h2,#p-impact#p-impact .sub-h .kw{text-wrap:balance}
+  #p-impact#p-impact .cards.sol .card.bg.wide>.tlink{position:relative}
+  #p-impact#p-impact .cards.sol .card.bg.wide>.tlink::after,#p-impact#p-impact .cards.sol .card.bg.wide .tlink::after{content:"";position:absolute;inset:-10px -8px}
+}
+@media (max-width:767px){ /* 임팩트 최종 디테일 */
+  #p-impact#p-impact .cards.ptn .card h3{font-size:16px;font-weight:600;color:var(--t2)}
+  #p-impact#p-impact .cards.ptn .card .k{font-weight:500}
+  #p-impact#p-impact a.tlink{font-size:15px;font-weight:600;color:var(--t2);border-bottom-color:color-mix(in srgb,var(--t2) 45%,transparent);position:relative}
+  #p-impact#p-impact a.tlink::after{content:"";position:absolute;inset:-10px -8px}
+}
+@media (max-width:767px){ /* 임팩트 파트너: 눌러서 펼치기 */
+  #p-impact#p-impact .cards.ptn .card{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;padding-right:34px}
+  #p-impact#p-impact .cards.ptn .card::after{content:"";position:absolute;right:4px;top:50%;width:8px;height:8px;margin-top:-6px;border-right:1.6px solid var(--muted);border-bottom:1.6px solid var(--muted);transform:rotate(45deg);transition:transform .25s ease}
+  #p-impact#p-impact .cards.ptn .card.open::after{transform:rotate(-135deg);margin-top:-2px}
+  #p-impact#p-impact .cards.ptn .card.open p{display:block;margin:8px 0 0;font-size:15px;font-weight:400;line-height:1.5;letter-spacing:-.02em;color:var(--muted);word-break:keep-all}
+}
+@media (max-width:767px){ /* 임팩트 번호: PC처럼 {01} 진한 톤 */
+  #p-impact#p-impact .sub-h .n{margin:0 0 8px;font-size:20px;font-weight:700;line-height:1.2;letter-spacing:-.02em;color:var(--fg)}
+  #p-impact#p-impact .sub-h .n::before{content:"{"}
+  #p-impact#p-impact .sub-h .n::after{content:"}"}
+}
+@media (max-width:767px){ #p-impact#p-impact .sub-h .kp{display:none} }
+@media (max-width:767px){ /* 솔루션 '블랭크가 직접 합니다' 구간 위계 정리 */
+  #p-solution#p-solution .mdark .card.mcutp>h3{margin:14px 0 0;font-size:16px;font-weight:500;line-height:1.45;letter-spacing:-.02em;color:var(--body)}
+  #p-solution#p-solution .mdark .card.mcutp>img,#p-solution#p-solution .mdark .card.mcutp>.media{margin-top:16px}
+  #p-solution#p-solution .card.mhead>h3{font-size:18px;font-weight:700}
+}
+@media (max-width:767px){ /* 필요한 만큼만 고르기: 답 글자 톤 다운, 화살표 선 최소 길이 확보 */
+  #p-solution#p-solution .cards.mpick .card h3{font-weight:600;color:var(--t2)}
+  #p-solution#p-solution .cards.mpick .k::after{min-width:28px}
+}
+@media (max-width:767px){ /* 또 다른 일들: 유휴하우스 4단 → 3단 */
+  #p-solution#p-solution .mmore .qa.title + h3.sub-h{font-size:20px;font-weight:700;margin-top:28px}
+  #p-solution#p-solution .mmore .qa.title + h3.sub-h + .cards .card.wide>h3:first-child{font-size:15px;font-weight:400;color:var(--body)}
+}
+@media (max-width:767px){ /* 대표 프로젝트 3행: 위 박스와 같은 가는 구분선 */
+  #p-solution#p-solution .cards.mflat .card.mhead .mwork{gap:0;margin:14px 0 6px}
+  #p-solution#p-solution .mwork a{padding:12px 0}
+  #p-solution#p-solution .mwork a:first-child{padding-top:0}
+  #p-solution#p-solution .mwork a:last-child{padding-bottom:0}
+  #p-solution#p-solution .mwork a + a{border-top:1px solid color-mix(in srgb,var(--fg) 10%,transparent)}
+}
+@media (max-width:767px){ /* 포트폴리오 분류 칩: 4개씩 2줄 격자로 한눈에 */
+  #p-portfolio#p-portfolio .tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:20px 0 0;padding:0;overflow:visible}
+  #p-portfolio#p-portfolio .tabs>.tab{display:flex;align-items:center;justify-content:center;gap:4px;min-height:40px;padding:8px 4px;font-size:14px;white-space:nowrap}
+  #p-portfolio#p-portfolio .tabs>.tab span{margin-left:0;font-size:12px}
+}
+@media (max-width:560px){ /* 포트폴리오 카드: 높이·여백 줄이기 */
+  #p-portfolio#p-portfolio .works .card.photo{padding:12px 12px 14px}
+  #p-portfolio#p-portfolio .works .card.photo>.t{padding:10px 4px 0;gap:2px}
+  #p-portfolio#p-portfolio .works .card.photo .t b{line-height:1.35}
+  #p-portfolio#p-portfolio .works .card.photo .t span{line-height:1.4}
+}
+@media (max-width:767px){ /* 포트폴리오 검색·정렬: 한 줄 */
+  #p-portfolio#p-portfolio .tools{flex-wrap:nowrap;gap:8px;margin-top:12px}
+  #p-portfolio#p-portfolio .tools input{flex:1 1 0;min-width:0}
+  #p-portfolio#p-portfolio .tools select{flex:0 0 auto;width:104px;padding-left:14px;padding-right:8px}
+}
+@media (max-width:767px){ /* 정렬 선택: 글자 크기·화살표 위치 정리 */
+  #p-portfolio#p-portfolio .tools input,#p-portfolio#p-portfolio .tools select{font-size:15px;line-height:1.4;min-height:48px;padding-top:0;padding-bottom:0}
+  #p-portfolio#p-portfolio .tools select{-webkit-appearance:none;appearance:none;width:112px;padding-left:16px;padding-right:34px;font-weight:500;text-align:left;background-color:var(--card);background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none' stroke='%238a8a8a' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M2.5 4.5 6 8l3.5-3.5'/></svg>");background-size:12px 12px;background-position:right 14px center;background-repeat:no-repeat}
+}
+@media (max-width:767px){ /* 검색·정렬을 분류 칩과 같은 알약 톤으로 */
+  #p-portfolio#p-portfolio .tools input,#p-portfolio#p-portfolio .tools select{border-radius:999px;min-height:44px;height:44px;font-size:14px;font-weight:500;letter-spacing:-.01em}
+  #p-portfolio#p-portfolio .tools input{padding-left:18px;padding-right:18px;font-weight:400}
+  #p-portfolio#p-portfolio .tools input::placeholder{color:var(--muted);opacity:1}
+  #p-portfolio#p-portfolio .tools select{width:108px;padding-left:18px;padding-right:32px;background-position:right 13px center;font-weight:600}
+}
+@media (max-width:560px){ /* 포트폴리오 카드 제목 색만 규칙에 맞춤 */
+  #p-portfolio#p-portfolio .works .card.photo .t b{color:var(--t2)}
+}
+.tl-toggle{display:none}
+@media (max-width:767px){ /* 회사소개 연혁: 최근 3개만 보이고 펼쳐보기 */
+  #p-about#p-about #hist.tl-fold .tl-item:nth-child(n+4){display:none}
+  #p-about#p-about #hist.tl-fold .tl-item:nth-child(3){padding-bottom:0}
+  #p-about#p-about #hist.tl-fold .tl-item:nth-child(3) .tl-rail::before{display:none}
+  #p-about#p-about #hist{position:relative}
+  #p-about#p-about #hist.tl-fold::after{content:"";position:absolute;left:0;right:0;bottom:0;height:110px;background:linear-gradient(to bottom,color-mix(in srgb,var(--bg) 0%,transparent),var(--bg) 92%);pointer-events:none}
+  #p-about#p-about .tl-toggle{display:flex;align-items:center;gap:14px;width:100%;min-height:48px;margin-top:-6px;padding:0;border:0;background:none;color:var(--fg);font:600 15px/1.2 var(--sans);letter-spacing:-.02em;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  #p-about#p-about .tl-toggle[hidden]{display:none}
+  #p-about#p-about .tl-toggle .ln{flex:1;height:1px;background:var(--line)}
+  #p-about#p-about .tl-toggle .tx{display:inline-flex;align-items:center;gap:6px}
+  #p-about#p-about .tl-toggle .tx::after{content:"";width:7px;height:7px;margin-top:-3px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg);transition:transform .25s ease}
+  #p-about#p-about .tl-toggle[aria-expanded="true"] .tx::after{transform:rotate(-135deg);margin-top:3px}
+  #p-about#p-about #hist:not(.tl-fold) + .tl-toggle{margin-top:20px}
+}
+@media (max-width:767px){ /* 회사소개 브랜드: 솔루션 '동해 이야기'와 같은 썸네일 목록 */
+  #p-about#p-about .brands{gap:0;margin-top:20px;border-top:1px solid var(--line)}
+  #p-about#p-about .brands .card{display:grid;grid-template-columns:72px minmax(0,1fr);grid-template-rows:auto auto auto;column-gap:14px;align-content:center;align-items:center;aspect-ratio:auto;padding:16px 0;border-radius:0;clip-path:none;background:none;color:var(--fg);isolation:auto;position:static;border-bottom:1px solid var(--line)}
+  #p-about#p-about .brands .card::after{display:none}
+  #p-about#p-about .brands .bd-sym{display:contents}
+  #p-about#p-about .brands .bd-sym b{display:none}
+  #p-about#p-about .brands .bd-sym small{grid-column:2;grid-row:1;align-self:end;font-size:13px;font-weight:500;line-height:1.3;letter-spacing:-.01em;text-transform:none;color:var(--muted)}
+  #p-about#p-about .brands .card .bd-img,#p-about#p-about .brands .card .slot.bd-img{grid-column:1;grid-row:1/4;width:72px;height:72px;aspect-ratio:1/1;border-radius:12px;object-fit:cover;z-index:auto;align-self:center}
+  #p-about#p-about .brands .card h3.bn{display:block;grid-column:2;grid-row:2;margin:2px 0 0;font-size:16px;font-weight:600;line-height:1.3;letter-spacing:-.03em;color:var(--t2)}
+  #p-about#p-about .brands .card p{grid-column:2;grid-row:3;margin:3px 0 0;padding:0;font-size:14px;font-weight:400;line-height:1.45;letter-spacing:-.02em;color:var(--muted);word-break:keep-all}
+  #p-about#p-about .brands .slot.bd-img :is(b,small){display:none}
+}
+@media (max-width:767px){ /* 회사소개 미래: 회색 박스 대신 브랜드와 같은 구분선 목록 */
+  #p-about#p-about .cards.c3.fut{background:var(--card);border-radius:14px;padding:0 18px;margin-top:20px;border-top:0}
+  #p-about#p-about .cards.c3.fut .card{display:block;padding:18px 0;border-bottom:0}
+  #p-about#p-about .cards.c3.fut .card + .card{border-top:1px solid color-mix(in srgb,var(--fg) 10%,transparent)}
+  #p-about#p-about .cards.c3.fut .card .k{display:none}
+  #p-about#p-about .cards.c3.fut .card h3{font-size:18px;font-weight:700;color:var(--fg)}
+  #p-about#p-about .cards.c3.fut .card p{margin:5px 0 0;font-size:14px;color:var(--body);text-wrap:balance}
+}
+
+.ml-pager{grid-column:1/-1;display:flex;justify-content:center;align-items:center;gap:4px;margin-top:28px}
+.ml-pager button{min-width:36px;height:36px;padding:0;border:0;background:none;color:var(--muted);font:500 14px/1 var(--sans);cursor:pointer}
+.ml-pager button[aria-current="page"]{color:var(--fg);font-weight:700}
+.ml-pager button:disabled{opacity:.3;cursor:default}
+.media-list .pg-off{display:none!important}
+@media (max-width:767px){ #p-about#p-about .media-list:not(.open)>:nth-child(n+5){display:flex} #p-about#p-about .media-list .pg-off{display:none!important} #p-about#p-about .ml-pager{margin-top:20px} #p-about#p-about .ml-pager button{min-width:40px;height:44px} }
+@media (max-width:767px){ /* 회사소개 미디어: 글자 14px로 줄여 제목이 한 줄에 들어가게, 항목 높이 축소 */
+  #p-about#p-about .media-list a,#p-about#p-about .media-list .ml{padding:14px 20px 14px 0;gap:3px;font-size:14px;line-height:1.4;letter-spacing:-.035em}
+  #p-about#p-about .media-list small{font-size:12px}
+  #p-about#p-about .media-list a::after{font-size:13px}
+  #p-about#p-about .ml-pager{margin-top:16px}
+}
+#p-about .hero h1>.mo,#p-about .hero .ab-sub{display:none}
+#p-about .hero h1>.dk{display:inline}
+#p-about .ab-id{display:none}
+@media (max-width:767px){ /* 회사소개 앞단: 문제 제기·숫자·일하는 방식은 걷고 정체성 문구로 */
+  #p-about#p-about .ab-drop{display:none}
+  #p-about#p-about .ab-id{display:block;padding-bottom:0}
+  #p-about#p-about .ab-idc{padding:0;border-radius:0;background:none}
+  #p-about#p-about .ab-idc h2{margin:0;font-size:26px;font-weight:800;line-height:1.35;letter-spacing:-.04em;color:var(--fg)}
+  #p-about#p-about .ab-idc h2 .g{color:var(--muted)}
+  #p-about#p-about .ab-idc p{margin:16px 0 0;font-size:15px;font-weight:400;line-height:1.55;letter-spacing:-.02em;color:var(--body)}
+  #p-about#p-about .hero h1>.dk{display:none}
+  #p-about#p-about .hero h1>.mo{display:inline}
+  #p-about#p-about .hero .ab-sub{display:block;margin:14px 0 0;font-size:16px;font-weight:500;line-height:1.5;letter-spacing:-.02em;color:#fff;text-shadow:0 1px 12px rgba(0,0,0,.35)}
+}
+@media (max-width:767px){ /* 회사소개 순서(모바일만): 문구 → 연혁 → 팀 → 브랜드 → 미래 → 미디어 */
+  #p-about#p-about:not([hidden]){display:flex;flex-direction:column}
+  #p-about#p-about>section{width:100%;box-sizing:border-box}
+  #p-about#p-about>.ab-hist{order:1}
+  #p-about#p-about>.ab-team{order:2}
+  #p-about#p-about>.ab-team .eb{display:none}
+  #p-about#p-about>.ab-hist .eb{display:none}
+  #p-about#p-about>section .sec-h>.eb{display:none}
+  #p-about#p-about>section.scene:not(.mcta){padding-top:72px}
+  #p-about#p-about>section:not(.hero):not(.ab-id):not(.ab-drop):not(.ab-hist):not(.ab-team){order:3}
+}
+@media (max-width:767px){ /* 회사소개 팀 카드: 여백은 되살리고 라운딩은 다른 회색 박스와 같게 */
+  #p-about#p-about .cards.team{gap:14px}
+  #p-about#p-about .team .card{padding:24px 20px 10px;gap:0;border-radius:14px}
+  #p-about#p-about .team .card .k{margin:0}
+  #p-about#p-about .team .card h3{margin:6px 0 0;font-size:20px;font-weight:700}
+  #p-about#p-about .team .card>p{margin:6px 0 0;font-size:14px;text-wrap:balance}
+  #p-about#p-about .team ul{margin:16px 0 0}
+  #p-about#p-about .team li{padding:11px 0;gap:2px 12px}
+  #p-about#p-about .team li b{font-size:16px}
+  #p-about#p-about .team li span{font-size:13px;line-height:1.45}
+}
+@media (max-width:767px){ /* 회사소개 최종 점검: 솔루션·임팩트 규칙과 맞춤 */
+  #p-about#p-about .sec-h>p:not(.eb){font-size:15px;line-height:1.55;letter-spacing:-.02em}
+  #p-about#p-about .team .card .k{font-size:13px;letter-spacing:-.01em}
+  #p-about#p-about .team .card>p{font-size:15px}
+  #p-about#p-about .team li b{font-weight:600;color:var(--t2)}
+  #p-about#p-about .team li small{font-size:13px;font-weight:500}
+  #p-about#p-about .media-list a,#p-about#p-about .media-list .ml{color:var(--t2)}
+  #p-about#p-about .cards.c3.fut .card p{font-size:15px}
+}
+@media (max-width:767px){ /* 문구 → 연혁 연결: 간격 축소 */
+  #p-about#p-about>.ab-hist{padding-top:48px}
+}
+@media (max-width:767px){ /* 모바일 최종 통일: 히어로 34/800, 마무리 제목 30/800, 카드 제목 20/700, 섹션 제목 행간 1.35 */
+  #p-home#p-home .hhero h1{font-size:34px;line-height:1.25;letter-spacing:-.04em}
+  #p-home#p-home .hh-body>p{font-size:16px}
+  #p-home#p-home .hband .hq,#p-home#p-home .hcta h2{font-weight:800;line-height:1.3;letter-spacing:-.04em}
+  #p-about#p-about .mcta .inv.cta h2,#p-portfolio#p-portfolio .inv.cta h2{font-weight:800;line-height:1.3;letter-spacing:-.04em}
+  #p-home#p-home .hbel h3,#p-home#p-home .home-work .card h3{font-size:20px}
+  #p-home#p-home .home-h,#p-home#p-home .hstate h2{line-height:1.35}
+  #p-home#p-home .eb{line-height:1.5}
+  #p-portfolio#p-portfolio .qa.title h2{font-size:34px;font-weight:800;line-height:1.25;letter-spacing:-.04em}
+  #p-about#p-about .tl-yr{font-weight:700}
+}
 </style>
 
 <header>
@@ -1461,7 +1814,7 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
       <div class="rv">
         <p class="hq">빈 공간, <br class="m">어떻게 바꿔야 할까요?</p>
         <h2 class="ha"><span class="dk">블랭크는 공간을 사용할 사람과<br>동네를 깊이 들여다봅니다.</span><span class="mo">답은 사람과 동네에 있습니다.</span></h2>
-        <p class="hlead"><span class="dk">2013년 서울 상도동에서 빈 공간을 직접 고치고 운영했던 현장 경험을 바탕으로 새로운 공간의 가치를 만들어 냅니다.</span><span class="mo">2013년 서울 상도동, 빈 공간을 직접 고치고 운영한 <br class="m">현장 경험으로 새로운 공간의 가치를 만들어 냅니다.</span></p>
+        <p class="hlead"><span class="dk">2013년 서울 상도동에서 빈 공간을 직접 고치고 운영했던 현장 경험을 바탕으로 새로운 공간의 가치를 만들어 냅니다.</span><span class="mo">2013년 서울 상도동, 빈 공간을 직접 고치고 운영한 현장 경험으로 새로운 공간의 가치를 만들어 냅니다.</span></p>
       </div>
       <ol class="hbel rv">
         <li><span class="n">{01}</span><h3>사용자 경험을 먼저 고민합니다.</h3><p><span class="dk">누가 이곳에 머물고 어떤 하루를 보내게 될지 묻습니다. 그 답으로부터 프로젝트를 기획합니다.</span><span class="mo">누가 이곳에 머물고 어떤 하루를 보낼지 묻고, <br class="m">그 답으로 프로젝트를 기획합니다.</span></p></li>
@@ -1601,14 +1954,15 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
       <div class="card mskip"><h3>먼저 충분히 듣습니다</h3><p>고민과 기대, 아직 말로 정리되지 않은 이야기까지 듣는 데서 시작합니다.</p></div>
       <div class="card mskip"><h3>정하지 못했어도 괜찮습니다</h3><p>블랭크를 찾는 많은 분들이 같은 자리에서 출발합니다.</p></div>
     </div>
-    <div class="qa next mfirst"><p class="ch"><span class="stp"><i class="on">01 쓰임</i><i>02 설계</i><i>03 시공</i><i>04 운영</i></span></p><p class="q">그 자리에 뭐가 어울리는지는 어떻게 알아요?</p><h2>직접 가서 보고, 걷고, 찾아봅니다.</h2></div>
+    <div class="qa next mfirst"><p class="ch"><span class="stp"><i class="on">01 쓰임</i><i>02 설계</i><i>03 시공</i><i>04 운영</i></span></p><p class="q">그 자리에 뭐가 어울리는지는 어떻게 알아요?</p><h2><span class="dk">직접 가서 보고, 걷고, 찾아봅니다.</span><span class="mo">직접 가서 보고, 걷고, <br class="m">미리 그려 봅니다.</span></h2></div>
     <div class="cards mlist">
       <div class="card bg"><img src="photos/b64c0714856b.webp" alt="철거를 마친 실내를 둘러보는 현장 답사" loading="lazy"><div class="t"><h3>공간을 살핍니다</h3><p><span class="dk">건물의 상태와 구조, 쓸 수 있는 면적과 한계를 확인합니다.</span><span class="mo">건물의 상태와 구조, <br class="m">쓸 수 있는 면적과 한계를 확인합니다.</span></p></div></div>
-      <div class="card bg light"><img class="contain" src="photos/930afc929a6b.webp" alt="대상지 주변을 표시한 흑백 항공사진 분석 지도" loading="lazy"><div class="t"><h3>동네를 걷습니다</h3><p><span class="dk">사람들이 어디로 다니는지, 무엇이 있고 무엇이 모자란지 봅니다.</span><span class="mo">사람들이 어디로 다니는지, <br class="m">무엇이 있고 무엇이 모자란지 봅니다.</span></p></div></div>
-      <div class="card wide"><h3>비슷한 곳을 찾아봅니다</h3><p><span class="dk">다른 지역의 사례와 이 지역의 수요를 살펴 가능성을 넓힙니다.</span><span class="mo">다른 지역의 사례와 수요를 비교해 봅니다.</span></p></div>
+      <div class="card bg light"><img class="contain" src="photos/930afc929a6b.webp" alt="대상지 주변을 표시한 흑백 항공사진 분석 지도" loading="lazy"><div class="t"><h3>동네를 걷습니다</h3><p><span class="dk">사람들이 어디로 다니는지, 무엇이 있고 무엇이 모자란지 봅니다.</span><span class="mo">사람들이 어디로 다니는지, <br class="m">비슷한 지역은 어떤지 봅니다.</span></p></div></div>
+      <div class="card wide mskip"><h3>비슷한 곳을 찾아봅니다</h3><p><span class="dk">다른 지역의 사례와 이 지역의 수요를 살펴 가능성을 넓힙니다.</span><span class="mo">다른 지역의 사례와 수요를 비교해 봅니다.</span></p></div>
+      <div class="card bg mnew"><img src="photos/6b523d575b74.webp" alt="바 카운터에서 진행되는 시음 프로그램" loading="lazy"><div class="t"><h3>문을 연 뒤를 상상합니다</h3><p><span class="mo">누가 오고, 어떻게 운영되고, <br class="m">오래 갈지 따져 봅니다.</span></p></div></div>
     </div>
-    <div class="qa next"><p class="q">그렇게 찾은 쓰임이 정말 맞을까요?</p><h2>공사가 끝난 뒤의 모습까지<br>미리 그려 봅니다.</h2></div>
-    <div class="cards mtwo">
+    <div class="qa next mmerge"><p class="q">그렇게 찾은 쓰임이 정말 맞을까요?</p><h2>공사가 끝난 뒤의 모습까지<br>미리 그려 봅니다.</h2></div>
+    <div class="cards mtwo mmerge">
       <div class="card bg"><img src="photos/6b523d575b74.webp" alt="바 카운터에서 진행되는 시음 프로그램" loading="lazy"><div class="t"><h3>문을 연 뒤를 상상합니다</h3><p><span class="dk">누가 오고, 어떻게 운영되고, 오래 이어질 수 있는지 후보마다 따져 봅니다.</span><span class="mo">누가 오고, 어떻게 운영되고, <br class="m">오래 갈지 따져 봅니다.</span></p></div></div>
       <div class="card bg light mskip"><img src="photos/07f6c9d7b523.webp" alt="평면도 위에 실마다 프로그램 카드를 붙인 기획 보드" loading="lazy"><div class="t"><h3>하나의 컨셉으로 모읍니다</h3><p>기획안을 함께 보며 다듬고, 이것이 이후 모든 일의 기준이 됩니다.</p></div></div>
     </div>
@@ -1629,7 +1983,7 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
       <div class="card mhead"><h3><span class="dk">규모와 성격을 가리지 않습니다</span><span class="mo">동네의 작은 가게부터 공공 공간까지</span></h3><p><span class="dk">동네의 작은 가게부터 공공의 복합문화공간까지.</span><span class="mo">규모는 달라도, 쓰임에 맞게 그리는 방식은 같습니다.</span></p><div class="mwork"><a href="#portfolio" data-work="site-12"><img src="photos/hq/1a8abe4d03ccc.webp" alt="지구샵 홈&베이커리 연남점" loading="lazy"><span class="w"><span class="m">2021 · 연남</span><b>지구샵 홈&베이커리 연남점</b></span></a><a href="#portfolio" data-work="site-14"><img src="photos/hq/233caaa4add27.webp" alt="과천청년공간 비행지구 교류공간" loading="lazy"><span class="w"><span class="m">2021 · 과천</span><b>과천청년공간 ‘비행지구’</b></span></a><a href="#portfolio" data-work="site-15"><img src="photos/hq/9dcf4f0985736.webp" alt="커먼즈필드 춘천 실내" loading="lazy"><span class="w"><span class="m">2020 · 춘천</span><b>커먼즈필드 춘천</b></span></a></div><a class="tlink" href="#portfolio">대표 프로젝트 보기 →</a></div>
     </div>
     <div class="qa next"><p class="q">일반 설계사무소와는 뭐가 달라요?</p><h2>기획하고 운영해 본<br class="m"> 사람이 설계합니다.</h2></div>
-    <div class="cards mflat">
+    <div class="cards mflat mone">
       <div class="card"><h3>쓰임에서 출발하는 설계</h3><p><span class="dk">창 하나, 가구 하나까지 ‘누가 어떻게 쓸지’에서 정해집니다. 막연히 보기 좋은 공간이 아니라, 그 쓰임에 꼭 맞는 공간을 그립니다.</span><span class="mo">창 하나, 가구 하나까지 쓰임에 맞춰 그립니다.</span></p></div>
       <div class="card"><h3>운영을 아는 설계</h3><p><span class="dk">직접 공간을 운영해 본 경험으로, 문을 연 뒤의 동선과 관리까지 도면에 담습니다.</span><span class="mo">문을 연 뒤의 동선과 관리까지 도면에 담습니다.</span></p></div>
       <div class="card bg wide mtile"><img src="photos/4a2287d271e7.webp" alt="도면을 펼쳐 놓고 연필로 짚어 가며 검토하는 설계 회의" style="object-position:center 40%" loading="lazy"><div class="t"><h3>처음 정한 쓰임을 끝까지</h3><p><span class="dk">현장 답사, 기본 설계, 실시 설계를 거치는 동안 기획한 사람이 함께 보며 처음의 방향이 흐려지지 않게 붙잡습니다.</span><span class="mo">기획한 사람이 설계 내내 방향을 붙잡습니다.</span></p></div></div>
@@ -1640,17 +1994,17 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
     <div class="qa"><p class="ch"><span class="stp"><i>01 쓰임</i><i>02 설계</i><i class="on">03 시공</i><i>04 운영</i></span></p><p class="q">시공 업체는 제가 따로 알아봐야 하나요?</p><h2>아니요.<br>고르는 일부터 감리까지 <br class="m">블랭크가 맡습니다.</h2></div>
     <div class="cards mflat">
       <div class="card bg"><img class="keep" src="photos/0fbeaa0eb264.webp" alt="사다리 위에서 천장 작업을 하는 시공 현장" loading="lazy"><span class="mpill"><b>01</b>파트너 선정</span><div class="t"><h3>공간에 맞는 파트너를 고릅니다</h3><p><span class="dk">공간의 성격에 맞는 전문 시공 파트너와 함께합니다.</span><span class="mo">공간의 성격에 맞는 <br class="m">전문 시공 파트너와 함께합니다.</span></p></div></div>
-      <div class="card bg"><img class="keep" src="photos/b55e2706397c.webp" alt="공사 중인 실내를 점검하는 블랭크" loading="lazy"><span class="mpill"><b>02</b>현장 감리</span><div class="t"><h3>현장을 챙깁니다</h3><p><span class="dk">건축사사무소로서 현장 소통과 감리를 직접 맡습니다.</span><span class="mo">건축사사무소로서 <br class="m">현장 소통과 감리를 직접 맡습니다.</span></p></div></div>
+      <div class="card bg"><img class="keep" src="photos/b55e2706397c.webp" alt="공사 중인 실내를 점검하는 블랭크" loading="lazy"><span class="mpill"><b>02</b>현장 감리</span><div class="t"><h3>현장을 챙깁니다</h3><p><span class="dk">건축사사무소로서 현장 소통과 감리를 직접 맡습니다.</span><span class="mo">건축사사무소로서 현장 소통과 <br class="m">감리를 직접 맡습니다.</span></p></div></div>
     </div>
-    <div class="qa next"><p class="q">그러면 뭐가 편해지나요?</p><h2>묻고 답하는 곳이 하나가 됩니다.</h2></div>
-    <div class="cards mflat">
+    <div class="qa next mmv"><p class="q">그러면 뭐가 편해지나요?</p><h2>묻고 답하는 곳이 하나가 됩니다.</h2></div>
+    <div class="cards mflat mmv">
       <div class="card"><h3>혼선이 없습니다</h3><p><span class="dk">창구가 하나라 말이 짧아지고, 방향이 흔들리지 않습니다.</span><span class="mo">창구가 하나라 방향이 흔들리지 않습니다.</span></p></div>
       <div class="card"><h3>비용이 덜 샙니다</h3><p><span class="dk">단계 사이의 실수와 설계 변경이 줄어, 추가 비용을 미리 막습니다.</span><span class="mo">단계 사이의 실수가 줄어, 추가 비용을 막습니다.</span></p></div>
     </div>
   </section>
 
   <section class="scene wrap chap">
-    <div class="qa"><p class="ch"><span class="stp"><i>01 쓰임</i><i>02 설계</i><i>03 시공</i><i class="on">04 운영</i></span></p><p class="q">문 열고 나서가 더 걱정이에요.</p><h2>다시 비지 않도록,<br>문을 연 뒤까지 함께합니다.</h2><p class="lead"><span class="dk">공간은 문을 열어야 진짜 시작입니다. 모두가 카페를 열어 보거나 손님을 받아 본 것은 아니니까요. 블랭크는 직접 만든 공간도, 맡겨 주신 공간도 운영하고 있습니다.</span><span class="mo">공간은 문을 열어야 진짜 시작입니다. 직접 만든 곳도, 맡겨 주신 곳도 운영합니다.</span></p></div>
+    <div class="qa"><p class="ch"><span class="stp"><i>01 쓰임</i><i>02 설계</i><i>03 시공</i><i class="on">04 운영</i></span></p><p class="q">문 열고 나서가 더 걱정이에요.</p><h2>다시 비지 않도록,<br>문을 연 뒤까지 함께합니다.</h2><p class="lead"><span class="dk">공간은 문을 열어야 진짜 시작입니다. 모두가 카페를 열어 보거나 손님을 받아 본 것은 아니니까요. 블랭크는 직접 만든 공간도, 맡겨 주신 공간도 운영하고 있습니다.</span><span class="mo">공간은 문을 열어야 진짜 시작입니다.<br class="m"> 직접 만든 곳도, 맡겨 주신 곳도 운영합니다.</span></p></div>
     <div class="cards c3 mflat mops">
       <a class="card bg tall" href="#portfolio" data-work="web-공집합상도" style="text-decoration:none"><img src="photos/0f3605872c41.webp" alt="{공집합} 상도 밤 외관" loading="lazy"><img class="mimg2" src="photos/hq/5c3a139cbefcb.webp" alt="초록빛 커튼이 비치는 {공집합} 상도 바 내부" loading="lazy"><span class="mpill">직접 운영</span><div class="t"><span class="k">서울 상도동 · 직접 운영</span><h3><span class="dk">직접 운영해 봤습니다</span><span class="mo">{공집합} 상도</span></h3><p><span class="dk">{공집합} 상도처럼 공간을 직접 만들고 꾸려 온 경험이 있습니다.</span><span class="mo">서울 상도동에서 지금도 <br class="m">운영 중인 커뮤니티 바입니다.</span></p><span class="tlink">자세히 보기 →</span></div></a>
       <a class="card mph" href="#portfolio" data-work="site-08" style="text-decoration:none;color:inherit"><img class="mimg2" src="photos/hq/milli-01.webp" alt="붉은 벽돌로 지은 밀리 작가의 집 외관" loading="lazy"><span class="mpill">위탁 운영</span><span class="k">서울 부암동 · 위탁 운영</span><h3>밀리 작가의 집</h3><p><span class="dk">kt 밀리의서재가 신진 소설가를 위해 연 문학 레지던시입니다. 작가들이 머물며 글을 쓰는 집을 블랭크가 맡아 운영합니다.</span><span class="mo">신진 소설가를 위한 <br class="m">문학 레지던시를 운영합니다.</span></p><img class="brand" src="photos/56c54c7d5bb4.webp" alt="밀리 작가의 집 로고" loading="lazy"><span class="tlink">자세히 보기 →</span></a>
@@ -1699,6 +2053,12 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
       <div class="card"><h3>혼선 없는 소통</h3><p><span class="dk">창구가 하나라 말이 짧아지고, 방향이 흔들리지 않습니다.</span><span class="mo">창구가 하나라 말이 짧아집니다.</span></p></div>
       <div class="card"><h3>줄어드는 비용</h3><p><span class="dk">단계 사이의 실수와, 그때마다 불어나는 추가 비용을 미리 막습니다.</span><span class="mo">단계 사이의 실수와 추가 비용을 미리 막습니다.</span></p></div>
     </div>
+    <div class="mgain"><p class="gl">한 번에 맡기면</p>
+      <div class="gbox">
+        <div class="gi"><h3>혼선이 없습니다</h3><p>창구가 하나라 방향이 흔들리지 않습니다.</p></div>
+        <div class="gi"><h3>비용이 덜 샙니다</h3><p>단계 사이의 실수가 줄어, 추가 비용을 막습니다.</p></div>
+      </div>
+    </div>
     <p class="closing"><small>ONE TEAM, ALL IN ONE</small>빈 공간을 채우는 블랭크다운 방법입니다.</p>
   </section>
 
@@ -1707,9 +2067,9 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
     <h3 class="sub-h">유휴하우스</h3>
     <div class="cards">
       <div class="card wide"><h3>이 모든 과정이 녹아든 블랭크의 대표 브랜드</h3><p><span class="dk">블랭크가 빈집을 기획하고, 고치고, 직접 운영합니다. 동해와 전주에서 만날 수 있습니다.</span><span class="mo">빈집을 기획하고, 고치고, 직접 운영합니다.</span></p>
-        <div class="strip"><a class="fig-link" href="#portfolio" data-work="site-24"><figure style="margin:0"><img class="media" src="photos/yh2/jeonju-00.webp" alt="유휴하우스 전주 거실" loading="lazy"><figcaption class="cap">유휴하우스 전주</figcaption></figure></a><a class="fig-link" href="#portfolio" data-work="site-23"><figure style="margin:0"><img class="media" src="photos/yh2/donghae-07.webp" alt="유휴하우스 동해 침실" loading="lazy"><figcaption class="cap">유휴하우스 동해</figcaption></figure></a></div></div>
-      <div class="card"><h3>빈집큐레이션 플랫폼 ‘유휴’</h3><p>새로운 삶을 꿈꾸는 사람과 지역의 빈집을 잇습니다.</p><a class="tlink" href="https://yoohuu.kr" target="_blank" rel="noopener">유휴 홈페이지 ↗</a></div>
-      <div class="card"><h3>빈집에 직접 머물러 보기</h3><p><span class="dk">유휴하우스에서는 그 빈집에서 살아 보듯 머물 수 있습니다.</span><span class="mo">빈집에서 살아 보듯 머물 수 있습니다.</span></p><a class="tlink" href="#portfolio" data-search="유휴하우스">유휴하우스 작업 보기 →</a></div>
+        <div class="strip"><a class="fig-link" href="#portfolio" data-work="site-24"><figure style="margin:0"><img class="media" src="photos/yh2/jeonju-00.webp" alt="유휴하우스 전주 거실" loading="lazy"><figcaption class="cap"><span class="dk">유휴하우스 전주</span><span class="mo">유휴하우스 전주 완산</span></figcaption></figure></a><a class="fig-link mx" href="#portfolio" data-work="yh-yeosu"><figure style="margin:0"><img class="media" src="photos/yh2/yeosu-00.webp" alt="유휴하우스 여수 남산" loading="lazy"><figcaption class="cap">유휴하우스 여수 남산</figcaption></figure></a><a class="fig-link" href="#portfolio" data-work="site-23"><figure style="margin:0"><img class="media" src="photos/yh2/donghae-07.webp" alt="유휴하우스 동해 침실" loading="lazy"><figcaption class="cap"><span class="dk">유휴하우스 동해</span><span class="mo">유휴하우스 동해 묵호</span></figcaption></figure></a><a class="fig-link mx" href="#portfolio" data-work="yh-sangju"><figure style="margin:0"><img class="media" src="photos/yh2/sangju-01.webp" alt="유휴하우스 남해 상주" loading="lazy"><figcaption class="cap">유휴하우스 남해 상주</figcaption></figure></a><a class="fig-link mx" href="#portfolio" data-work="yh-jeju"><figure style="margin:0"><img class="media" src="photos/yh2/jeju-00.webp" alt="유휴하우스 제주 함덕" loading="lazy"><figcaption class="cap">유휴하우스 제주 함덕</figcaption></figure></a><a class="fig-link mx" href="#portfolio" data-work="yh-pildu"><figure style="margin:0"><img class="media" src="photos/yh2/pildu-01.webp" alt="유휴하우스 영주 필두" loading="lazy"><figcaption class="cap">유휴하우스 영주 필두</figcaption></figure></a><a class="fig-link mx" href="#portfolio" data-work="yh-sokcho"><figure style="margin:0"><img class="media" src="photos/yh2/sokcho-00.webp" alt="유휴하우스 속초 금호" loading="lazy"><figcaption class="cap">유휴하우스 속초 금호</figcaption></figure></a><a class="fig-link mx" href="#portfolio" data-work="yh-danyang"><figure style="margin:0"><img class="media" src="photos/yh2/danyang-02.webp" alt="유휴하우스 단양" loading="lazy"><figcaption class="cap">유휴하우스 단양 단성</figcaption></figure></a><a class="fig-link mx" href="#portfolio" data-work="yh-sunheung"><figure style="margin:0"><img class="media" src="photos/yh2/sunheung-01.webp" alt="유휴하우스 영주 순흥" loading="lazy"><figcaption class="cap">유휴하우스 영주 순흥</figcaption></figure></a><a class="fig-link mx" href="#portfolio" data-work="yh-eunmorae"><figure style="margin:0"><img class="media" src="photos/yh2/eunmorae-03.webp" alt="유휴하우스 남해 은모래" loading="lazy"><figcaption class="cap">유휴하우스 남해 은모래</figcaption></figure></a></div></div>
+      <div class="card"><h3>빈집큐레이션 플랫폼 ‘유휴’</h3><p>새로운 삶을 꿈꾸는 사람과 지역의 빈집을 잇습니다.</p><a class="tlink nou" href="https://yoohuu.kr" target="_blank" rel="noopener"><span class="dk">유휴 홈페이지 ↗</span><span class="mo">유휴 홈페이지 <span class="ar">↗</span></span></a></div>
+      <div class="card"><h3>빈집에 직접 머물러 보기</h3><p><span class="dk">유휴하우스에서는 그 빈집에서 살아 보듯 머물 수 있습니다.</span><span class="mo">빈집에서 살아 보듯 머물 수 있습니다.</span></p><a class="tlink nou" href="#portfolio" data-search="유휴하우스"><span class="dk">유휴하우스 작업 보기 →</span><span class="mo">유휴하우스 작업 보기 <span class="ar">↗</span></span></a></div>
     </div>
     <h3 class="sub-h">신축 설계</h3>
     <div class="cards"><div class="card wide"><h3>빈 땅 위에서도 순서는 같습니다</h3><p><span class="dk">무엇이 들어설지, 누가 어떻게 쓸지를 먼저 묻고 그 답에 맞게 그립니다. 기획과 운영을 아는 건축사사무소의 신축 설계입니다.</span><span class="mo">무엇이 들어설지, 누가 쓸지를 먼저 묻고 그 답에 맞게 그립니다.</span></p><img class="media tall" src="photos/hq/acc36206a7d7d.webp" alt="나무 서까래 처마 너머로 데크와 산이 보이는 신축 주택" loading="lazy"><a class="tlink" href="#w-site-07">신축 작업 보기 →</a></div></div>
@@ -1723,7 +2083,7 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
     <div class="qa title"><h2>아직 궁금한 것이 있다면</h2></div>
     <div class="faq">
       <details open><summary><span class="dk">무엇을 할지 아직 정하지 못했는데 상담해도 되나요?</span><span class="mo">무엇을 할지 몰라도 상담할 수 있나요?</span></summary><p>네, 그 단계에서 오시는 분이 가장 많습니다. 공간의 위치와 상태, 지금의 고민만 알려 주시면 그 자리에 어울리는 쓰임을 함께 찾는 것부터 시작합니다.</p></details>
-      <details><summary>지방에 있는 빈집도 상담할 수 있나요?</summary><p>네. 블랭크는 서울과 경북 영주에 본사를 두고 춘천, 동해, 거창, 공주, 세종 등 여러 지역의 공간을 맡아 왔습니다. 빈집 상담만 필요하시다면 빈집큐레이션 플랫폼 유휴에서도 도움을 받으실 수 있습니다.</p></details>
+      <details><summary>지방에 있는 빈집도 상담할 수 있나요?</summary><p>네. 블랭크는 서울과 경북 영주에 본사를 두고 춘천, 동해, 거창, 공주, 세종 등 여러 지역의 공간을 맡아&nbsp;왔습니다. 빈집 상담만 필요하시다면 빈집큐레이션 플랫폼 유휴에서도 도움을 받으실 수 있습니다.</p></details>
       <details><summary>상담은 어떻게 진행되나요?</summary><p>상담하기 페이지에 문의 내용을 남겨 주시면 블랭크가 연락드립니다. 이야기를 나눈 뒤 필요하면 현장을 함께 둘러보고, 어떤 쓰임과 범위가 맞을지 제안드립니다.</p></details>
       <details><summary>비용과 기간은 어느 정도 드나요?</summary><p>공간의 규모와 상태, 맡기시는 범위에 따라 달라 상담 전에 정해 드리기는 어렵습니다. 첫 상담에서 필요한 단계를 정리하면서 대략의 비용과 일정을 함께 안내해 드립니다. 빈집 리모델링이라면 상담하기 페이지의 빈집 AI 견적으로 먼저 가늠해 보실 수 있습니다.</p></details>
       <details><summary>기획만, 또는 설계만 맡겨도 되나요?</summary><p>네. 기획, 설계·공사, 운영 중 필요한 단계만 맡기실 수 있습니다. 다만 처음부터 끝까지 한 팀이 맡으면 단계 사이에서 생기는 설계 변경과 추가 비용을 줄일 수 있습니다.</p></details>
@@ -1795,7 +2155,7 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   </section>
 
   <section class="scene wrap">
-    <div class="qa"><p class="q">구체적으로 어떤 일을 하나요?</p><h2>블랭크는 그동안 현장에서<br>다음과 같은 변화를 만들어 왔습니다.</h2></div>
+    <div class="qa"><p class="q">구체적으로 어떤 일을 하나요?</p><h2><span class="dk">블랭크는 그동안 현장에서<br>다음과 같은 변화를 만들어 왔습니다.</span><span class="mo">블랭크가 그동안 현장에서<br>만들어 온 변화입니다.</span></h2></div>
 
     <h3 class="sub-h"><span class="dk">{01} &nbsp;유휴공간 활용 로컬 창업 생태계 구축</span><span class="mo"><span class="n">01</span><span class="kp">가게는 비고 창업은 막막합니다</span><b class="kw">로컬 창업 생태계</b><span class="kd">빈 상가를 창업가의 첫 무대로</span></span></h3>
     <p class="lead" style="margin-top:12px;max-width:640px;color:var(--body)">비어 있는 상가와 건물을 동네 창업가의 첫 무대로 바꿉니다. 발굴하고, 키우고, 가게를 열 때까지 함께합니다.</p>
@@ -1813,10 +2173,10 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
       <a class="card photo" href="#portfolio" data-work="site-15" style="text-decoration:none"><img class="media" src="photos/hq/6bee813f4fa04.webp" alt="춘천 소통협력공간 커먼즈필드 춘천 외관" loading="lazy"><div class="t"><span class="k">강원 춘천</span><h3>춘천 소통협력공간</h3><p><span class="dk">지역의 혁신가와 활동가가 모여 일하고 만나는 사회혁신 일상공간, 커먼즈필드 춘천을 만들었습니다.</span><span class="mo">혁신가와 활동가가 만나는 공간</span></p><span class="tlink">자세히 보기 →</span></div></a>
     </div>
 
-    <h3 class="sub-h"><span class="dk">{03} &nbsp;인구 감소 지역에 새로운 생활 인구 유입</span><span class="mo"><span class="n">03</span><span class="kp">사람이 떠나고 빈집만 남습니다</span><b class="kw">인구 감소 지역</b><span class="kd">빈집을 사람이 다시 찾아오는 곳으로</span></span></h3>
+    <h3 class="sub-h"><span class="dk">{03} &nbsp;인구 감소 지역에 새로운 생활 인구 유입</span><span class="mo"><span class="n">03</span><span class="kp">사람이 떠나고 빈집만 남습니다</span><b class="kw">새로운 생활 인구 유입</b><span class="kd">빈집을 사람이 다시 찾아오는 곳으로</span></span></h3>
     <p class="lead" style="margin-top:12px;max-width:640px;color:var(--body)">오래 비어 있던 집을 머무는 공간으로 바꿔, 사람이 줄어드는 지역에 다시 찾아오고 살아 볼 이유를 만듭니다.</p>
     <div class="cards sol">
-      <a class="card bg wide" href="#portfolio" data-work="site-09" style="text-decoration:none"><img src="photos/279665be72ad.webp" alt="스테이 달이실" loading="lazy"><div class="t"><span class="k">대표 프로젝트 · 경남 거창</span><h3>거창군 ‘스테이 달이실’</h3><p><span class="dk">오래 비어 있던 농촌 빈집 네 채를 고친 거창군의 ‘경남 별장’입니다. 머무는 숙소이자 농촌 살아보기 공간으로, 블랭크가 맡아 운영하며 도시의 사람들을 거창으로 불러들입니다.</span><span class="mo">농촌 빈집 네 채를 고친 거창군의 ‘경남 별장’입니다.<br>숙소이자 농촌 살아보기 공간으로, 블랭크가 맡아<br>운영하며 도시의 사람들을 불러들입니다.</span></p><span class="tlink">자세히 보기 →</span></div></a>
+      <a class="card bg wide" href="#portfolio" data-work="site-09" style="text-decoration:none"><img src="photos/279665be72ad.webp" alt="스테이 달이실" loading="lazy"><div class="t"><span class="k">대표 프로젝트 · 경남 거창</span><h3>거창군 ‘스테이 달이실’</h3><p><span class="dk">오래 비어 있던 농촌 빈집 네 채를 고친 거창군의 ‘경남 별장’입니다. 머무는 숙소이자 농촌 살아보기 공간으로, 블랭크가 맡아 운영하며 도시의 사람들을 거창으로 불러들입니다.</span><span class="mo">인구감소지역 거창의 빈집 네 채를 고쳤습니다.<br>숙소이자 농촌 살아보기 공간으로, 블랭크가 맡아<br>운영하며 도시의 사람들을 불러들입니다.</span></p><span class="tlink">자세히 보기 →</span></div></a>
       <a class="card photo" href="#portfolio" data-work="site-34" style="text-decoration:none"><img class="media" src="photos/e2f175b5ba95.webp" alt="강진 병영면 마을" loading="lazy"><div class="t"><span class="k">전남 강진</span><h3>병영면 마을호텔 계획 수립</h3><p><span class="dk">마을의 빈집과 유휴 공간을 엮어 마을 전체가 하나의 호텔이 되는 계획을 세웠습니다.</span><span class="mo">마을이 하나의 호텔이 되는 계획</span></p><span class="tlink">자세히 보기 →</span></div></a>
       <a class="card photo" href="#portfolio" data-work="site-35" style="text-decoration:none"><img class="media" src="photos/a7a05370b4c7.webp" alt="장항 아우름스테이" loading="lazy"><div class="t"><span class="k">충남 서천</span><h3>장항 아우름스테이</h3><p><span class="dk">장항의 유휴 공간을 머무는 공간으로 바꿔, 지역을 찾고 머무는 사람을 늘립니다.</span><span class="mo">유휴 공간을 머무는 공간으로</span></p><span class="tlink">자세히 보기 →</span></div></a>
     </div>
@@ -1897,11 +2257,16 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   <img src="photos/58444e0e07f7.webp" alt="블랭크 사람들이 한 테이블에 둘러앉아 함께 밥을 먹는 모습을 그린 손그림">
     <div class="wrap">
       <svg class="mark" viewBox="64.32 68.05 112.25 19.71" role="img" aria-label="BLANK"><path d="M67.3945 71.1328h14.3633v5.2344H67.3945zM81.7578 84.6797H67.3945v-5.2344h14.3633zM64.3203 68.0586v19.6992h20.5156V68.0586z"/> <path d="M90.2969 84.6797V68.0586h-3.0743v19.6992h20.5157v-3.0781z"/> <path d="M150.5898 68.0547v14.5703L136.2266 68.9375v-.8828h-3.0743v19.6992h3.0743V73.1836l14.3632 13.6914v.8789h3.0782V68.0547z"/> <path d="M113.3242 71.1328h14.3633v5.2344h-14.3633zM110.2461 68.0586v19.6992h3.0781v-8.3125h14.3633v8.3125h3.0742V68.0586z"/> <path d="M161.4375 84.6797l14.6563-13.9727-2.1211-2.2266-14.8399 14.1484V68.0586h-3.0781v19.6992h20.5157v-3.0781z"/></svg>
-      <h1>빈 공간의 기획부터<span class="dk"> </span><span class="mo"><br></span>설계, 운영까지<span class="tp">.</span><br><span class="tm">한 팀이 합니다<span class="tp">.</span></span></h1>
+      <h1><span class="dk">빈 공간의 기획부터<span class="dk"> </span><span class="mo"><br></span>설계, 운영까지<span class="tp">.</span><br><span class="tm">한 팀이 합니다<span class="tp">.</span></span></span><span class="mo">우리가 살고<br>싶은 동네를<br>만듭니다.</span></h1>
+      <p class="mo ab-sub">변화를 위한 공간,<br>더 나은 일상을<br>만드는 사람들</p>
     </div>
   </section>
 
-  <section class="scene wrap">
+  <section class="scene wrap ab-id">
+    <div class="ab-idc"><h2><span class="g">비어 있다는 건,</span><br>아직 쓰이지 않았다는 뜻입니다.</h2><p>블랭크는 그 빈칸에 쓰임을 채웁니다.</p></div>
+  </section>
+
+  <section class="scene wrap ab-drop">
     <div class="sec-h"><h2>빈 공간은 늘어 가는데,<br>쓰임을 모르면 다시 비어 갑니다.</h2><p><span class="dk">기획, 설계, 시공, 운영이 따로 움직이면 처음 정한 쓰임은 흐려지고 공간은 고친 뒤에도 비어 갑니다. 블랭크는 이 문제를 직시하는 데서 시작했습니다. 2013년부터 한 팀이 처음부터 끝까지 맡아 왔습니다.</span><span class="mo">기획, 설계, 시공, 운영이 따로 움직이면 쓰임은<br>흐려지고, 고친 공간은 제 역할을 잃습니다.<br>블랭크는 2013년부터 한 팀이 끝까지 맡았습니다.</span></p></div>
     <div class="inv nums">
       <div class="nm"><b>13<small>년+</small></b><span>2013년부터 이어 온 현장</span></div>
@@ -1911,13 +2276,13 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
     </div>
   </section>
 
-  <section class="scene wrap">
+  <section class="scene wrap ab-drop">
     <div class="sec-h"><p class="eb">일하는 방식</p><h2>한 팀이 처음부터 끝까지.<br>블랭크가 일하는 세 가지 방식</h2><p>기획, 설계, 운영을 잇는 수직 통합 모델로 <br class="m">처음 정한 쓰임이 끝까지 이어지게 합니다.</p></div>
     <div class="cards c3 way" id="ab-way"></div>
   </section>
 
-  <section class="scene wrap">
-    <div class="sec-h"><p class="eb">맨파워</p><h2>공간을 그리고 운영하는 사람들</h2><p>기획설계, 사업개발, 운영관리 세 팀의 <br class="m">구성원 9명이 한 팀으로 움직입니다.</p></div>
+  <section class="scene wrap ab-team">
+    <div class="sec-h"><p class="eb"><span class="dk">맨파워</span><span class="mo">팀</span></p><h2><span class="dk">공간을 그리고 운영하는 사람들</span><span class="mo">함께하는 사람들</span></h2><p><span class="dk">기획설계, 사업개발, 운영관리 세 팀의 <br class="m">구성원 9명이 한 팀으로 움직입니다.</span><span class="mo">설계하는 사람도, 운영하는 사람도<br>한 테이블에 앉아 일합니다.</span></p></div>
     <div class="cards c3 team">
       <div class="card"><span class="k">(주)블랭크건축사사무소</span><h3>기획설계</h3><p>변화를 만드는 공간을 기획하고 설계합니다.</p><ul><li><b>김지은</b><span>Co-CEO · 건축사(KIRA) · 서울시공공건축가</span><small>2015~</small></li><li><b>김민보</b><span>Director</span><small>2024~</small></li></ul></div>
       <div class="card"><span class="k">(주)블랭크</span><h3>사업개발</h3><p>유휴공간과 로컬사업을 발굴, 기획합니다.</p><ul><li><b>문승규</b><span>Co-CEO · Co-founder</span><small>2013~</small></li><li><b>김세중</b><span>Director</span><small>2017~</small></li><li><b>엄성진</b><span>Director</span><small>2022~</small></li><li><b>최인영</b><span>Marketer</span><small>2025~</small></li><li><b>박종훈</b><span>Director</span><small>2026~</small></li></ul></div>
@@ -1926,8 +2291,8 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
     </div>
   </section>
 
-  <section class="scene wrap">
-    <div class="sec-h"><p class="eb">연혁</p><h2>우리가 쌓아온 시간</h2></div>
+  <section class="scene wrap ab-hist">
+    <div class="sec-h"><p class="eb">연혁</p><h2><span class="dk">우리가 쌓아온 시간</span><span class="mo">우리가 쌓아온 시간</span></h2></div>
     <div class="tl" id="hist"></div>
   </section>
 
@@ -1958,7 +2323,26 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
       <div class="ml">[프로젝트 리포트] 프로젝트 블랭크<small>대한건축학회 「건축」 · 2019</small></div>
       <a href="https://www.mk.co.kr/premium/life/view/2019/12/27375/" target="_blank" rel="noopener noreferrer">청년 동네건축가들의 현재와 미래<small>매경프리미엄 · 2019</small></a>
       <a href="https://vmspace.com/project/project_view.html?base_seq=MzM5" target="_blank" rel="noopener noreferrer">새로운 시대의 건축가 그룹들<small>월간 SPACE · 2018</small></a>
-    </div><button class="ml-more" type="button" onclick="this.previousElementSibling.classList.add('open');this.hidden=true">미디어 더 보기 <span aria-hidden="true">↓</span></button></div>
+      <a href="http://www.marieclairekorea.com/2019/11/lifestyle/%ED%9B%84%EC%95%94%EB%8F%99-%EA%B3%A8%EB%AA%A9%EA%B8%B8-1/?_N_=01" target="_blank" rel="noopener noreferrer">후암동 골목길<small>마리끌레르</small></a>
+      <a href="http://lonelyplanet.co.kr/magazine/articles/AI_00002862" target="_blank" rel="noopener noreferrer">상도로 골목 여행<small>론리플래닛</small></a>
+      <a href="http://www.donga.com/news/article/all/20191008/97775877/1" target="_blank" rel="noopener noreferrer">낡은 건물 허물고 마을회관 짓자… 주민들 사랑방엔 ‘웃음꽃’<small>동아일보</small></a>
+      <a href="http://topclass.chosun.com/board/view.asp?catecode=R&amp;tnu=201910100004" target="_blank" rel="noopener noreferrer">“우리가 살고 싶은 동네를 디자인합니다”<small>조선 TopClass</small></a>
+      <a href="http://lonelyplanet.co.kr/magazine/articles/AI_00002758" target="_blank" rel="noopener noreferrer">후암로 골목 여행<small>론리플래닛</small></a>
+      <a href="http://www.donga.com/news/article/all/20190619/96057185/1" target="_blank" rel="noopener noreferrer">주택가 골목길 ‘커뮤니티 바’… “소비 아닌 소통을 추구합니다”<small>동아일보</small></a>
+      <a href="http://futurechosun.com/archives/38727" target="_blank" rel="noopener noreferrer">[우리동네 혁신가들] ①공유부엌·공유주택·커뮤니티바까지…소셜벤처 ‘블랭크’<small>퓨처조선</small></a>
+      <a href="http://www.munhwa.com/news/view.html?no=2018120501033312000001" target="_blank" rel="noopener noreferrer">주민들이 투자… 편하게 한잔 나눌 수 있는 ‘동네공간’으로<small>문화일보</small></a>
+      <a href="http://www.lifein.news/news/articleView.html?idxno=3148" target="_blank" rel="noopener noreferrer">[여기 뭐하는 데냐①]청춘플랫폼, 커뮤니티의 서막을 열다<small>라이프인</small></a>
+      <a href="https://blog.naver.com/PostView.nhn?blogId=space-salim&amp;logNo=221438929000" target="_blank" rel="noopener noreferrer">돌봄을 일로 창조하기 &lt;일과 돌봄을 재배치하기3&gt;<small>네이버 블로그</small></a>
+      <a href="http://www.jobnjoy.com/portal/job/hotnews_view.jsp?nidx=250407&amp;depth1=1&amp;depth2=1&amp;depth3=1" target="_blank" rel="noopener noreferrer">‘도시를 살리는 상상력의 힘’...도시재생 스타트업이 뜬다<small>잡앤조이</small></a>
+      <a href="https://ppss.kr/archives/149641" target="_blank" rel="noopener noreferrer">공유 공간이 마을을 되살립니다: 소셜벤처 ‘블랭크’<small></small></a>
+      <a href="http://www.seouland.com/arti/society/society_general/566.html" target="_blank" rel="noopener noreferrer">다른 세상을 꿈꾸는 아시아 청년들의 혁신 잔치<small></small></a>
+      <a href="http://news.donga.com/3/all/20171109/87196216/1" target="_blank" rel="noopener noreferrer">재래시장 살리고 사랑방 열고… 도시재생, 스타트업들이 뛴다<small>동아일보</small></a>
+      <a href="http://www.seouland.com/arti/society/society_general/2425.html" target="_blank" rel="noopener noreferrer">‘성대골’ 살리기 나선 청년들, ‘마을살이’ 실험 5년<small></small></a>
+      <a href="http://platum.kr/archives/86869" target="_blank" rel="noopener noreferrer">코워킹 스페이스를 기획한 청년 창업가들<small>플래텀</small></a>
+      <a href="http://news.hankyung.com/article/2018011652981" target="_blank" rel="noopener noreferrer">마장동 우시장·동대문 원단시장 확 바꾼 스타트업들<small>한국경제</small></a>
+      <a href="http://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0002249099" target="_blank" rel="noopener noreferrer">30년째 같은 간판 쓰는 주인장의 속내<small>오마이뉴스</small></a>
+      <a href="http://www.hani.co.kr/arti/society/society_general/728671.html" target="_blank" rel="noopener noreferrer">청년에게 공정한 출발선을 ⑨ 청년 스스로 전환을 실험한다<small>한겨레</small></a>
+    </div><nav class="ml-pager" aria-label="미디어 페이지"></nav></div>
   </section>
 
   <section class="scene wrap mcta">
@@ -2568,6 +2952,47 @@ try{new MutationObserver(ms=>{for(const m of ms)for(const a of m.addedNodes){if(
     st.addEventListener('dragstart',function(e){e.preventDefault()});
     upd();
   });
+})();
+</script>
+<script>/* 모바일: 임팩트 파트너 카드 펼치기 */(function(){try{var mq=window.matchMedia("(max-width:767px)");var cs=document.querySelectorAll("#p-impact .cards.ptn .card");function sync(){for(var i=0;i<cs.length;i++){var c=cs[i];if(mq.matches){c.setAttribute("role","button");c.setAttribute("tabindex","0");c.setAttribute("aria-expanded",c.classList.contains("open")?"true":"false")}else{c.removeAttribute("role");c.removeAttribute("tabindex");c.removeAttribute("aria-expanded");c.classList.remove("open")}}}
+function tog(c){if(!mq.matches)return;var o=c.classList.toggle("open");c.setAttribute("aria-expanded",o?"true":"false")}
+for(var i=0;i<cs.length;i++){(function(c){c.addEventListener("click",function(){tog(c)});c.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();tog(c)}})})(cs[i])}
+sync();if(mq.addEventListener)mq.addEventListener("change",sync)}catch(e){}})();</script>
+<script>/* 모바일: 회사소개 연혁 펼쳐보기 */(function(){try{var h=document.getElementById("hist");if(!h)return;var mq=window.matchMedia("(max-width:767px)");var b=document.createElement("button");b.type="button";b.className="tl-toggle";b.setAttribute("aria-controls","hist");h.parentNode.insertBefore(b,h.nextSibling);var n=h.querySelectorAll(".tl-item");var lbl=n.length>3?(n[n.length-1].querySelector(".tl-yr").textContent.split("–")[0]+"년까지 모두 보기"):"";function set(open){h.classList.toggle("tl-fold",!open&&mq.matches);b.setAttribute("aria-expanded",open?"true":"false");b.innerHTML='<i class="ln"></i><span class="tx">'+(open?"접기":lbl)+'</span><i class="ln"></i>'}
+b.addEventListener("click",function(){var o=b.getAttribute("aria-expanded")!=="true";set(o);if(!o){h.scrollIntoView({block:"start"})}});b.setAttribute("aria-expanded","false");function sync(){b.hidden=!mq.matches||n.length<=3;set(b.getAttribute("aria-expanded")==="true")}sync();if(mq.addEventListener)mq.addEventListener("change",sync)}catch(e){}})();</script>
+<script>/* 회사소개 미디어: 5개씩 페이지 넘김 */
+(function(){var l=document.querySelector('#p-about .media-list'),n=document.querySelector('#p-about .ml-pager');if(!l||!n)return;
+var it=[].slice.call(l.children),per=5,tot=Math.ceil(it.length/per),cur=1;
+function draw(go){it.forEach(function(e,i){e.classList.toggle('pg-off',Math.floor(i/per)+1!==cur)});
+n.innerHTML='';function b(t,p,lab){var x=document.createElement('button');x.type='button';x.textContent=t;x.setAttribute('aria-label',lab||p+'페이지');
+if(p===cur&&!lab)x.setAttribute('aria-current','page');if(lab&&(p<1||p>tot))x.disabled=true;x.onclick=function(){if(p<1||p>tot||p===cur)return;cur=p;draw(true)};n.appendChild(x)}
+b('‹',cur-1,'이전');for(var p=1;p<=tot;p++)b(p,p);b('›',cur+1,'다음');
+if(go){var r=l.getBoundingClientRect();if(r.top<0)window.scrollTo({top:scrollY+r.top-90})}}
+if(tot>1)draw(false)})();
+</script>
+<script>/* 모바일: 솔루션 자주 묻는 질문은 모두 접힌 채로 시작 */(function(){try{if(window.matchMedia("(max-width:767px)").matches){var d=document.querySelectorAll("#p-solution .mfaq .faq details[open]");for(var i=0;i<d.length;i++)d[i].removeAttribute("open")}}catch(e){}})();</script>
+<script>
+/* 솔루션 유휴하우스 사진 줄(모바일): 천천히 자동으로 넘어감. 손으로 만지면 잠시 멈춤, 화면 밖이면 멈춤, 움직임 줄이기 설정이면 안 함 */
+(function(){
+  var st=document.querySelector('#p-solution .mmore .card.wide .strip');
+  if(!st)return;
+  var mq=window.matchMedia('(max-width:767px)'),rm=window.matchMedia('(prefers-reduced-motion:reduce)');
+  var timer=0,paused=0,inView=false,idx=0;
+  function items(){return [].slice.call(st.children).filter(function(c){return getComputedStyle(c).display!=='none'})}
+  function go(){
+    if(!mq.matches||rm.matches||!inView||Date.now()<paused||document.hidden)return;
+    var it=items();if(it.length<2)return;
+    var base=it[0].offsetLeft,x=st.scrollLeft,best=0,bd=1e9;
+    it.forEach(function(c,i){var d=Math.abs(c.offsetLeft-base-x);if(d<bd){bd=d;best=i}});
+    idx=(best+1)%it.length;
+    try{st.scrollTo({left:it[idx].offsetLeft-base,behavior:'smooth'})}catch(e){st.scrollLeft=it[idx].offsetLeft-base}
+  }
+  function hold(){paused=Date.now()+9000}
+  ['touchstart','pointerdown','wheel','keydown'].forEach(function(ev){st.addEventListener(ev,hold,{passive:true})});
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){inView=es[0].isIntersecting},{threshold:.5}).observe(st);
+  }else inView=true;
+  timer=setInterval(go,4200);
 })();
 </script>
 </body></html>
