@@ -1771,6 +1771,40 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   #p-portfolio#p-portfolio .qa.title h2{font-size:34px;font-weight:800;line-height:1.25;letter-spacing:-.04em}
   #p-about#p-about .tl-yr{font-weight:700}
 }
+@media (max-width:767px){ /* 회사소개 히어로: 솔루션·임팩트와 제목·설명 위치를 같게 */
+  #p-about#p-about .hero{padding-bottom:162px}
+  #p-about#p-about .hero .ab-sub{margin-top:16px}
+}
+@media (max-width:767px){ /* 회사소개 정체성 문구: 검정 배경으로 꽉 채움 */
+  #p-about#p-about>section.ab-id.scene{padding:80px 20px 84px;background:var(--inv);color:var(--on-inv)}
+  #p-about#p-about>.ab-hist.scene{padding-top:72px}
+  #p-about#p-about .ab-idc h2{color:var(--on-inv)}
+  #p-about#p-about .ab-idc h2 .g{color:color-mix(in srgb,var(--on-inv) 55%,transparent)}
+  #p-about#p-about .ab-idc p{margin-top:24px;font-size:18px;font-weight:500;line-height:1.5;letter-spacing:-.03em;color:color-mix(in srgb,var(--on-inv) 60%,transparent)}
+}
+
+@media (max-width:767px){
+  /* 선 정리: 리스트 행 사이 선만 남김 */
+  #p-about#p-about .tl-body li{border-bottom:0}
+  #p-about#p-about .cards.c4.brands{border-top:0}
+  #p-about#p-about .cards.c4.brands>.card:last-child{border-bottom:0}
+  #p-about#p-about .media-list{border-top:0}
+  #p-about#p-about .media-list>:last-child{border-bottom:0}
+  .cards.mflat.mstory>.card.photo:first-child{border-top:0}
+  .cards.sol>a.card.photo{border-bottom:0}
+  .cards.c3.ptn>.card:last-child{border-bottom:0}
+}
+
+@media (max-width:767px){
+  #p-home#p-home .hbel li{border-top:0!important;padding-top:0}
+  #p-home#p-home .ai-box{border-top:0!important;border-bottom:0!important}
+  #p-solution#p-solution .mwork>a{border:0!important}
+  #p-solution#p-solution .mwork>a+a{margin-top:8px}
+  #p-solution#p-solution .cards.mflat.mstory>.card.photo{border-top:0!important;border-bottom:0!important}
+  #p-solution#p-solution .cards.mflat.mstory>.card.photo+.card.photo{margin-top:4px}
+  #p-about#p-about .cards.c4.brands>.card{border-top:0!important;border-bottom:0!important}
+  #p-about#p-about .cards.c4.brands>.card+.card{margin-top:4px}
+}
 </style>
 
 <header>
