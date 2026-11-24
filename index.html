@@ -1719,7 +1719,7 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   #p-about#p-about .ab-drop{display:none}
   #p-about#p-about .ab-id{display:block;padding-bottom:0}
   #p-about#p-about .ab-idc{padding:0;border-radius:0;background:none}
-  #p-about#p-about .ab-idc h2{margin:0;font-size:26px;font-weight:800;line-height:1.35;letter-spacing:-.04em;color:var(--fg)}
+  #p-about#p-about .ab-idc h2{margin:0;font-size:30px;font-weight:800;line-height:1.25;letter-spacing:-.04em;color:var(--fg)}
   #p-about#p-about .ab-idc h2 .g{color:var(--muted)}
   #p-about#p-about .ab-idc p{margin:16px 0 0;font-size:15px;font-weight:400;line-height:1.55;letter-spacing:-.02em;color:var(--body)}
   #p-about#p-about .hero h1>.dk{display:none}
@@ -1772,15 +1772,16 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   #p-about#p-about .tl-yr{font-weight:700}
 }
 @media (max-width:767px){ /* 회사소개 히어로: 솔루션·임팩트와 제목·설명 위치를 같게 */
-  #p-about#p-about .hero{padding-bottom:162px}
+  #p-about#p-about .hero{padding-bottom:98px}
   #p-about#p-about .hero .ab-sub{margin-top:16px}
 }
 @media (max-width:767px){ /* 회사소개 정체성 문구: 검정 배경으로 꽉 채움 */
-  #p-about#p-about>section.ab-id.scene{padding:80px 20px 84px;background:var(--inv);color:var(--on-inv)}
+  #p-about#p-about>section.ab-id.scene{padding:56px 20px 60px;background:var(--inv);color:var(--on-inv)}
   #p-about#p-about>.ab-hist.scene{padding-top:72px}
   #p-about#p-about .ab-idc h2{color:var(--on-inv)}
-  #p-about#p-about .ab-idc h2 .g{color:color-mix(in srgb,var(--on-inv) 55%,transparent)}
-  #p-about#p-about .ab-idc p{margin-top:24px;font-size:18px;font-weight:500;line-height:1.5;letter-spacing:-.03em;color:color-mix(in srgb,var(--on-inv) 60%,transparent)}
+  #p-about#p-about .ab-idc h2 .g{color:var(--on-inv)}
+  #p-about#p-about .ab-idc p::before{content:"";display:block;width:24px;height:2px;margin:0 0 18px;background:var(--on-inv)}
+  #p-about#p-about .ab-idc p{margin-top:28px;font-size:18px;font-weight:500;line-height:1.5;letter-spacing:-.03em;color:color-mix(in srgb,var(--on-inv) 60%,transparent)}
 }
 
 @media (max-width:767px){
@@ -1796,14 +1797,17 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
 }
 
 @media (max-width:767px){
-  #p-home#p-home .hbel li{border-top:0!important;padding-top:0}
-  #p-home#p-home .ai-box{border-top:0!important;border-bottom:0!important}
   #p-solution#p-solution .mwork>a{border:0!important}
   #p-solution#p-solution .mwork>a+a{margin-top:8px}
   #p-solution#p-solution .cards.mflat.mstory>.card.photo{border-top:0!important;border-bottom:0!important}
   #p-solution#p-solution .cards.mflat.mstory>.card.photo+.card.photo{margin-top:4px}
-  #p-about#p-about .cards.c4.brands>.card{border-top:0!important;border-bottom:0!important}
-  #p-about#p-about .cards.c4.brands>.card+.card{margin-top:4px}
+}
+
+#p-about .hero .pill.mhero{display:none}
+@media (max-width:767px){
+  #p-about#p-about .hero .pill.mhero{display:inline-block;position:relative;min-height:0;margin-top:28px;padding:0 0 5px;line-height:1.35;border:0;border-bottom:2px solid #f7f5f2;border-radius:0;background:none;color:#f7f5f2;font-size:20px;font-weight:700;box-shadow:none}
+  #p-about#p-about .hero .pill.mhero::after{content:"";position:absolute;left:-8px;right:-8px;top:-10px;bottom:-10px}
+  #p-about#p-about .hero .mark{display:none}
 }
 </style>
 
@@ -2297,7 +2301,7 @@ footer .ftag{display:block;margin:6px 0 18px;color:var(--fg);font-weight:500}
   </section>
 
   <section class="scene wrap ab-id">
-    <div class="ab-idc"><h2><span class="g">비어 있다는 건,</span><br>아직 쓰이지 않았다는 뜻입니다.</h2><p>블랭크는 그 빈칸에 쓰임을 채웁니다.</p></div>
+    <div class="ab-idc"><h2><span class="g">비어 있다는 건,</span><br>아직 쓰이지<br>않았다는 뜻입니다.</h2><p>블랭크는 그 빈칸에 쓰임을 채웁니다.</p></div>
   </section>
 
   <section class="scene wrap ab-drop">
